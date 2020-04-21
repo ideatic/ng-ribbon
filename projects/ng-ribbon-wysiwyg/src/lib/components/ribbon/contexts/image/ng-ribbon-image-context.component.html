@@ -1,0 +1,47 @@
+<ng-ribbon-context name="Imagen" i18n-name color="#f0f182">
+  <ng-ribbon-tab name="Formato" i18n-name>
+    <ng-ribbon-group name="Ajustar" i18n-name>
+      <!-- Posición -->
+      <button class="xl" mat-button [matMenuTriggerFor]="positionMenu"
+              title="Zoom aplicado a la chuleta" i18n-title>
+        <img src="{{ ribbon.settings.assetsURL }}/images/contexts/image/position.png"/>
+        <div i18n>Posición</div>
+        <mat-icon class="drop-down-icon">arrow_drop_down</mat-icon>
+        <mat-menu #positionMenu>
+          <button mat-menu-item class="xl flex-center"
+                  [class.active]="position == ImagePosition.Left"
+                  (click)="position = ImagePosition.Left">
+            <img src="{{ ribbon.settings.assetsURL }}/images/contexts/image/position-left.png"/>
+            <ng-container i18n>Izquierda</ng-container>
+          </button>
+          <button mat-menu-item class="xl flex-center"
+                  [class.active]="position == ImagePosition.Inline"
+                  (click)="position = ImagePosition.Inline">
+            <img src="{{ ribbon.settings.assetsURL }}/images/contexts/image/position-inline.png"/>
+            <ng-container i18n>En línea</ng-container>
+          </button>
+          <button mat-menu-item class="xl flex-center"
+                  [class.active]="position == ImagePosition.Right"
+                  (click)="position = ImagePosition.Right">
+            <img src="{{ ribbon.settings.assetsURL }}/images/contexts/image/position-right.png"/>
+            <ng-container i18n>Derecha</ng-container>
+          </button>
+        </mat-menu>
+      </button>
+
+      <!-- Posición -->
+      <button class="xl" mat-button (click)="replace()"
+              title="Cambia la imagen seleccionada por una diferente" i18n-title>
+        <img src="{{ ribbon.settings.assetsURL }}/images/contexts/image/replace.png"/>
+        <div i18n>Reemplazar</div>
+      </button>
+
+      <!-- Borrar -->
+      <button class="xl" mat-button (click)="delete()"
+              title="Elimina la imagen del documento" i18n-title>
+        <img src="{{ ribbon.settings.assetsURL }}/images/contexts/image/delete.png"/>
+        <div i18n>Borrar</div>
+      </button>
+    </ng-ribbon-group>
+  </ng-ribbon-tab>
+</ng-ribbon-context>

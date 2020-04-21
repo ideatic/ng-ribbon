@@ -1,0 +1,29 @@
+:host {
+  justify-content: flex-start;
+  display: flex;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  padding: 0;
+}
+
+mat-list {
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+}
+
+
+.btn-color-preview {
+  width: 100%;
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+
+  & > div {
+    width: 20px;
+    height: 5px;
+    margin: 0 auto;
+  }
+}
