@@ -6,9 +6,10 @@ export class NgRibbonWysiwygSettings extends NgRibbonSettings {
 
   public assetsURL = '/assets/ribbon';
 
-  public fontFamilies = ["Arial", "Calibri", "Cambria", "Segoe UI",
-    "Courier New", "Georgia", "Times New Roman",
-    "Trebuchet MS", "Verdana", "Tahoma", "Microsoft Sans Serif"];
+  public font = {
+    families: ["Arial", "Calibri", "Cambria", "Segoe UI", "Courier New", "Georgia", "Times New Roman", "Trebuchet MS", "Verdana", "Tahoma", "Microsoft Sans Serif"],
+    sizes: [8, 10, 12, 14, 18, 24, 36]
+  };
 
   constructor(settings?: Partial<NgRibbonWysiwygSettings>) {
     super(settings);

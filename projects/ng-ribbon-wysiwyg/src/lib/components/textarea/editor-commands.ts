@@ -14,8 +14,6 @@ export enum EditorCommands {
   contentReadOnly = 'contentReadOnly',
   /** Copia la selección actual en el portapapeles. Capacidad del Portapapeles debe estar habilitado en el archivo de preferencias user.js. Vea*/
   copy = 'copy',
-  /** Crea un vínculo de anclaje a partir de la selección, sólo si hay una selección. Esto requiere la cadena HREF URI que se pasa como un argumento de valor. El URI debe contener al menos un solo carácter, el cual puede ser un espacio en blanco. (Internet Explorer creará un enlace con un nulo valor URI.)*/
-  createLink = 'createLink',
   /** Corta la selección y lo copia en el portapapeles actual. Capacidad del Portapapeles debe estar habilitado en el archivo de preferencias user.js. Vea*/
   cut = 'cut',
   /** Añade una etiqueta SMALL alrededor de la selección o en el punto de inserción. (No es compatible con Internet Explorer.)*/
@@ -100,4 +98,6 @@ export enum EditorCommands {
   mceTitleCase = 'mceTitleCase',
   SearchReplace = 'SearchReplace',
   codeEditor = 'mceCodeEditor',
+  /** Crea un vínculo de anclaje a partir de la selección, sólo si hay una selección. Esto requiere la cadena HREF URI que se pasa como un argumento de valor. El URI debe contener al menos un solo carácter, el cual puede ser un espacio en blanco. (Internet Explorer creará un enlace con un nulo valor URI.)*/
+  createLink = 'mceLink',
 }

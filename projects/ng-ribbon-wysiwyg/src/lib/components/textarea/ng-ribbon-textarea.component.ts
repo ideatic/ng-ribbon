@@ -38,12 +38,12 @@ import 'tinymce/plugins/code';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NgRibbonTextareaComponent),
+      useExisting: forwardRef(() => NgRibbonTextAreaComponent),
       multi: true
     }
   ]
 })
-export class NgRibbonTextareaComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() editorCSS: string;
   @Input() tinyMceSettings: Settings;
   @Output() updateUI = new EventEmitter();
@@ -79,25 +79,27 @@ export class NgRibbonTextareaComponent implements OnInit, OnDestroy, ControlValu
 
         this._tinyMCE = editor;
 
-        if (self._html) {
-          editor.setContent(self._html);
-        }
         this.setDisabledState(this._disabled);
-
         this.focus();
 
-        editor.on('blur', () => this._ngZone.run(() => this._onTouched()));
+        this._ngZone.runOutsideAngular(() => {
+          if (self._html) {
+            editor.setContent(self._html);
+          }
 
-        editor.on('change keyup undo redo', () => {
-          this._ngZone.run(() => {
-            this._html = editor.getContent();
-            this._propagateChange(this._html);
+          editor.on('blur', () => this._ngZone.run(() => this._onTouched()));
+
+          editor.on('change keyup undo redo', () => {
+            this._ngZone.run(() => {
+              this._html = editor.getContent();
+              this._propagateChange(this._html);
+            });
           });
-        });
 
-        editor.on('NodeChange', () => {
-          this._ngZone.run(() => {
-            this.updateUI.emit();
+          editor.on('NodeChange', () => {
+            this._ngZone.run(() => {
+              this.updateUI.emit();
+            });
           });
         });
       });
@@ -111,15 +113,12 @@ export class NgRibbonTextareaComponent implements OnInit, OnDestroy, ControlValu
     const settings: (Settings & {
       contextmenu: boolean,
       quickbars_insert_toolbar: boolean,
-      quickbars_selection_toolbar: string,
-      powerpaste_word_import: string,
-      powerpaste_html_import: string,
+      quickbars_selection_toolbar: string
     }) = {
       target: this._host.nativeElement,
       base_url: '/assets/ribbon/vendor/tinymce',
       directionality: getLocaleDirection(this._locale),
       language: this._locale,
-      //inline:true,
       content_style: this.editorCSS,
       browser_spellcheck: true,
       min_height: '100%',
@@ -138,9 +137,6 @@ export class NgRibbonTextareaComponent implements OnInit, OnDestroy, ControlValu
       // Tooltips contextuales
       quickbars_insert_toolbar: false, // No mostrar barra contextual en nuevas líneas
       quickbars_selection_toolbar: 'bold italic underline | formatselect | backcolor forecolor',
-      // Powerpaste
-      powerpaste_word_import: 'merge',
-      powerpaste_html_import: 'merge',
       ...extraSettings
     };
 
@@ -229,7 +225,8 @@ export class NgRibbonTextareaComponent implements OnInit, OnDestroy, ControlValu
   }
 
   public get fontSize(): number {
-    return parseInt(this.queryValue(EditorCommands.fontSize), 10);
+    const fontSize = this.queryValue(EditorCommands.fontSize);
+    return fontSize || fontSize === '0' ? parseInt(fontSize, 10) : null;
   }
 
   public set fontSize(value: number) {

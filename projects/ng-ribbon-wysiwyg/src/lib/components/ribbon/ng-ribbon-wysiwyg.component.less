@@ -29,10 +29,11 @@
       white-space: normal;
       max-width: 90px;
 
-      img {
+      img, mat-icon {
         margin: 5px;
         width: 32px;
         height: 32px;
+        line-height: 32px;
       }
     }
 
@@ -44,4 +45,10 @@
       background-color: #c6c6c6;
     }
   }
+}
+
+
+:host ::ng-deep .drop-down-icon{
+  height: 10px !important;
+  line-height: 10px !important;
 }

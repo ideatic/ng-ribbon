@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NgRibbonWysiwygComponent} from "../ng-ribbon-wysiwyg.component";
 import {EditorCommands} from "../../textarea/editor-commands";
+import {IconsService} from "../../../services/icons.service";
 
 @Component({
     selector: 'ng-ribbon-home-tab',

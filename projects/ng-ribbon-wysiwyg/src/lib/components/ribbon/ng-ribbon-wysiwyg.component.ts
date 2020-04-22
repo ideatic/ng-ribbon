@@ -1,11 +1,12 @@
 import {ChangeDetectorRef, Component, ContentChild, Input, OnChanges, SimpleChanges, TemplateRef, ViewChild} from '@angular/core';
-import {NgRibbonTextareaComponent} from "../textarea/ng-ribbon-textarea.component";
+import {NgRibbonTextAreaComponent} from "../textarea/ng-ribbon-textarea.component";
 import {EditorCommands} from "../textarea/editor-commands";
 import {noop, Subscription} from "rxjs";
 import {NgRibbonComponent} from "../../../../../ng-ribbon/src/lib/components/ng-ribbon/ng-ribbon.component";
 import {NgRibbonWysiwygSettings} from "./ng-ribbon-wysiwyg-settings";
 import {NgRibbonContextComponent} from "../../../../../ng-ribbon/src/lib/components/ng-ribbon-context/ng-ribbon-context.component";
 import {DomUtilsService} from "../../services/dom-utils.service";
+import {IconsService} from "../../services/icons.service";
 
 @Component({
   selector: 'ng-ribbon-wysiwyg',
@@ -13,7 +14,7 @@ import {DomUtilsService} from "../../services/dom-utils.service";
   styleUrls: ['ng-ribbon-wysiwyg.component.less']
 })
 export class NgRibbonWysiwygComponent implements OnChanges {
-  @Input() public editor: NgRibbonTextareaComponent;
+  @Input() public editor: NgRibbonTextAreaComponent;
   @Input() public settings = new NgRibbonWysiwygSettings();
 
   @ViewChild(NgRibbonComponent, {static: true}) public ribbon: NgRibbonComponent;
@@ -41,7 +42,9 @@ export class NgRibbonWysiwygComponent implements OnChanges {
   public readonly Commands = EditorCommands;
 
   constructor(private _cd: ChangeDetectorRef,
-              private _domUtils: DomUtilsService) {
+              private _domUtils: DomUtilsService,
+              iconsSvc: IconsService) {
+    iconsSvc.configure();
   }
 
   public ngOnChanges(change: SimpleChanges) {

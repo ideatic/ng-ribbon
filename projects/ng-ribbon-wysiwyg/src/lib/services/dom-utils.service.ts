@@ -13,12 +13,12 @@ export class DomUtilsService {
   constructor() {
   }
 
-  public readFile(file: FileList, readAs: ReadAs): Promise<{ name: string, content: string }> {
+  public readFile(file: FileList, readAs: ReadAs): Promise<{ fileName: string, content: string }> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
 
       reader.onloadend = () => resolve({
-        name: file[0].name,
+        fileName: file[0].name,
         content: reader.result as string
       });
       reader.onerror = (e) => reject(e);
@@ -40,7 +40,7 @@ export class DomUtilsService {
       input.click();
       input.addEventListener('change', () => {
         if (input.files) {
-          return this.readFile(input.files, type);
+          this.readFile(input.files, type).then(resolve, reject);
         } else {
           reject('no files');
         }

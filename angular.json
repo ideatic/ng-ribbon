@@ -33,6 +33,21 @@
               "src/assets",
               {
                 "glob": "**/*",
+                "input": "./node_modules/tinymce/skins",
+                "output": "./assets/ribbon/vendor/tinymce/skins"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/tinymce/themes",
+                "output": "./assets/ribbon/vendor/tinymce/themes"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/tinymce-i18n/langs5",
+                "output": "./assets/ribbon/vendor/tinymce/langs"
+              },
+              {
+                "glob": "**/*",
                 "input": "projects/ng-ribbon-wysiwyg/src/assets",
                 "output": "./assets/ribbon/"
               }
@@ -166,7 +181,29 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/ng-ribbon-wysiwyg/tsconfig.lib.json",
-            "project": "projects/ng-ribbon-wysiwyg/ng-package.json"
+            "project": "projects/ng-ribbon-wysiwyg/ng-package.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "./node_modules/tinymce/skins",
+                "output": "./assets/ribbon/vendor/tinymce/skins"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/tinymce/themes",
+                "output": "./assets/ribbon/vendor/tinymce/themes"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/tinymce-i18n/langs5",
+                "output": "./assets/ribbon/vendor/tinymce/langs"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/ng-ribbon-wysiwyg/src/assets",
+                "output": "./assets/ribbon/"
+              }
+            ]
           },
           "configurations": {
             "production": {

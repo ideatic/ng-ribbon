@@ -20,7 +20,7 @@
       <ng-ribbon-group name="Elementos" i18n-name>
         <button class="xl" mat-button (click)="execute(Commands.insertHTML, defaultTable)" [disabled]="isDisabled(Commands.insertHTML)"
                 matTooltip="Inserta una tabla al documento." i18n-matTooltip>
-          <img src="{{ settings.assetsURL }}/images/table.png"/>
+          <mat-icon svgIcon="table"></mat-icon>
           <div i18n>Tabla</div>
         </button>
 
@@ -28,6 +28,12 @@
                 matTooltip="Incluye una imagen al documento desde un archivo local." i18n-matTooltip>
           <img src="{{ settings.assetsURL }}/images/picture.png"/>
           <div i18n>Imagen</div>
+        </button>
+
+        <button class="xl" mat-button (click)="execute(Commands.createLink)" [disabled]="isDisabled(Commands.createLink)"
+                matTooltip="Crea un vínculo en el documento para el acceso rápido a páginas web y otros archivos." i18n-matTooltip>
+          <img src="{{ settings.assetsURL }}/images/link.png"/>
+          <div i18n>Enlace</div>
         </button>
 
         <!--  <button class="xl" mat-button (click)="insertChart()"
