@@ -1,7 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 mklinks.bat
-projects/ng-ribbon-wysiwyg/src/assets/vendor
 
 # compiled output
 /dist
@@ -48,4 +47,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-/src/app/shared/

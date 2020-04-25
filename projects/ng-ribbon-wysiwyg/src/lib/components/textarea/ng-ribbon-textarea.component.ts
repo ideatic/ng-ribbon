@@ -31,7 +31,7 @@ import 'tinymce/plugins/code';
       height: 100%;
     }
 
-    ::ng-deep .tox-tinymce {
+    :host ::ng-deep .tox-tinymce {
       border: none !important;
     }
   `],
@@ -115,10 +115,10 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
       quickbars_insert_toolbar: boolean,
       quickbars_selection_toolbar: string
     }) = {
-      target: this._host.nativeElement,
+      target: this._host.nativeElement.appendChild(document.createElement('textarea')),
       base_url: '/assets/ribbon/vendor/tinymce',
-      directionality: getLocaleDirection(this._locale),
       language: this._locale,
+      directionality: getLocaleDirection(this._locale),
       content_style: this.editorCSS,
       browser_spellcheck: true,
       min_height: '100%',

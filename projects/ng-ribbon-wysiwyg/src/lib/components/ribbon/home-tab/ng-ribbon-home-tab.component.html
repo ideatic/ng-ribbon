@@ -26,11 +26,13 @@
       <mat-option *ngFor="let size of ribbon.settings.font.sizes" [value]="size">{{ size | number }}</mat-option>
     </mat-autocomplete>
 
-    <button class="sm" mat-button matTooltip="Aumentar tamaño de la fuente" i18n-matTooltip (click)="ribbon.editor.fontSize = ribbon.editor.fontSize + 1">
+    <button class="sm" mat-button matTooltip="Aumentar tamaño de la fuente" i18n-matTooltip (click)="ribbon.editor.fontSize = ribbon.editor.fontSize + 1"
+            [disabled]="isDisabled(Commands.fontSize)">
       <mat-icon svgIcon="format"></mat-icon>
       <mat-icon class="font-size-arrow">arrow_drop_up</mat-icon>
     </button>
-    <button class="sm" mat-button matTooltip="Reducir tamaño de la fuente" i18n-matTooltip (click)="ribbon.editor.fontSize = ribbon.editor.fontSize - 1">
+    <button class="sm" mat-button matTooltip="Reducir tamaño de la fuente" i18n-matTooltip (click)="ribbon.editor.fontSize = ribbon.editor.fontSize - 1"
+            [disabled]="isDisabled(Commands.fontSize)">
       <mat-icon svgIcon="format"></mat-icon>
       <mat-icon class="font-size-arrow">arrow_drop_down</mat-icon>
     </button>
