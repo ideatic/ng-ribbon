@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 import {NgRibbonSettings} from "./ng-ribbon-settings";
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
@@ -43,7 +43,7 @@ export class NgRibbonComponent {
   public selectTab(tab: NgRibbonTabComponent) {
     // Enable tab
     tab.showed = true;
-    this.contexts.forEach(context => context.tabs.forEach(t => t.active = t == tab));
+    this.contexts.forEach(c => c.tabs.forEach(t => t.active = t == tab));
     this.selectedTab = tab;
 
     // Fire events
@@ -70,6 +70,39 @@ export class NgRibbonComponent {
       if (!hasActiveTab && this.contexts.length && this.contexts[0].tabs.length) {
         this.selectTab(this.contexts[0].tabs[0]);
       }
+    }
+  }
+
+  @HostListener('wheel', ['$event'])
+  public onWheel($event: WheelEvent) {
+    if (this.settings.mouseWheelTabs) {
+      if ($event.deltaY > 0) { // Select next tab
+        let selectCurrentTab = false;
+        this.contexts.forEach(c => c.tabs.forEach(t => {
+          if (t == this.selectedTab) {
+            selectCurrentTab = true;
+          } else if (selectCurrentTab) {
+            this.selectTab(t);
+            selectCurrentTab = false;
+          }
+        }));
+      } else if ($event.deltaY < 0) { // Select previous tab
+        let prevTab = null;
+        let selectTab = null;
+        this.contexts.forEach(c => c.tabs.forEach(t => {
+          if (t == this.selectedTab) {
+            selectTab = prevTab;
+          }
+          prevTab = t;
+        }));
+
+        if (selectTab) {
+          this.selectTab(selectTab);
+        }
+      }
+
+      $event.preventDefault();
+      $event.stopPropagation();
     }
   }
 }

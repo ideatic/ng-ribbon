@@ -47,6 +47,11 @@ import {Title} from "@angular/platform-browser";
         height: 100%;
       }
 
+      :host ::ng-deep ng-ribbon-group {
+        height: 105px;
+      }
+
+
       .textarea-wrapper {
         width: 100%;
         flex-grow: 1;
