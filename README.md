@@ -6,7 +6,36 @@ Windows-like ribbon interface for you Angular apps + WYSIWYG implementation usin
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Clone this repo
+2. Run `npm install`
+3. Include this in your project's `angular.json`
+
+        "assets": [
+                              ...
+                              {
+                                "glob": "**/*",
+                                "input": "./node_modules/tinymce/skins",
+                                "output": "./assets/ribbon/vendor/tinymce/skins"
+                              },
+                              {
+                                "glob": "**/*",
+                                "input": "./node_modules/tinymce/themes",
+                                "output": "./assets/ribbon/vendor/tinymce/themes"
+                              },
+                              {
+                                "glob": "**/*",
+                                "input": "./node_modules/tinymce-i18n/langs5",
+                                "output": "./assets/ribbon/vendor/tinymce/langs"
+                              },
+                              {
+                                "glob": "**/*",
+                                "input": "projects/ng-ribbon-wysiwyg/src/assets",
+                                "output": "./assets/ribbon/"
+                              }
+                            ]
+
+4. Run `ng serve` for a dev server.
+5. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build
 
