@@ -73,8 +73,8 @@ import {environment} from "../../environments/environment";
 })
 export class AppComponent implements OnInit {
   public documentTitle = $localize`Demo`;
-  public html = `<h1>Welcome to <em>ng-ribbon</em></h1>
-<h3>Windows-like ribbon interface for you Angular apps + WYSIWYG implementation using TinyMCE</h3>
+  public html = `<h1>Welcome to <em>NgRibbon</em></h1>
+<h3>Windows-like ribbon interface for Angular apps + WYSIWYG implementation using TinyMCE</h3>
 
 <h4>Usage</h4>
 <ol>
