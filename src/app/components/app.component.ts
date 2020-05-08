@@ -71,8 +71,42 @@ import {Title} from "@angular/platform-browser";
   ]
 })
 export class AppComponent implements OnInit {
-  public documentTitle = $localize`Sin título`;
-  public html = `<h1>¡Bienvenido a <em>ng-ribbon</em>!</h1>`;
+  public documentTitle = $localize`Demo`;
+  public html = `<h1>Welcome to <em>ng-ribbon</em></h1>
+<h3>Windows-like ribbon interface for you Angular apps + WYSIWYG implementation using TinyMCE</h3>
+
+<h4>Usage</h4>
+<ol>
+<li>Clone this repo: <a href="https://github.com/ideatic/ng-ribbon" target="_blank">https://github.com/ideatic/ng-ribbon</a></li>
+<li>Run <code>npm install</code></li>
+<li>Include this in your project's <code>angular.json</code><br/>
+<pre>
+    "assets": [
+              ...
+              {
+                "glob": "**/*",
+                "input": "./node_modules/tinymce/skins",
+                "output": "./assets/ribbon/vendor/tinymce/skins"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/tinymce/themes",
+                "output": "./assets/ribbon/vendor/tinymce/themes"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/tinymce-i18n/langs5",
+                "output": "./assets/ribbon/vendor/tinymce/langs"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/ng-ribbon-wysiwyg/src/assets",
+                "output": "./assets/ribbon/"
+              }
+            ]
+</pre>
+</li>
+</ol>`;
 
   public showImageContext = false;
 

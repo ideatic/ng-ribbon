@@ -27,7 +27,7 @@
     </mat-autocomplete>
 
     <button class="sm" mat-button matTooltip="Aumentar tamaño de la fuente" i18n-matTooltip (click)="ribbon.editor.fontSize = ribbon.editor.fontSize + 1"
-            [disabled]="isDisabled(Commands.fontSize)">
+            [disabled]="isDisabled(Commands.fontSize)" style="padding-left: 0">
       <mat-icon svgIcon="format"></mat-icon>
       <mat-icon class="font-size-arrow">arrow_drop_up</mat-icon>
     </button>

@@ -2,6 +2,8 @@
 
 Windows-like ribbon interface for you Angular apps + WYSIWYG implementation using TinyMCE
 
+[Demo](https://ideatic.github.io/ng-ribbon/)
+
 ![Alt text](screenshot.png?raw=true)
 
 ## Development server

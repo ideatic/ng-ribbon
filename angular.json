@@ -13,21 +13,18 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
-      "i18n": {
-        "sourceLocale": "es"
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-ribbon-example",
+            "outputPath": "demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "preserveSymlinks": true,
             "aot": true,
-            "localize": true,
+            "localize": false,
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -74,6 +71,7 @@
               "vendorChunk": false,
               "commonChunk": false,
               "buildOptimizer": true,
+              "deployUrl": "/ng-ribbon/demo/",
               "budgets": [
                 {
                   "type": "initial",

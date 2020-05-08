@@ -29,6 +29,7 @@ import 'tinymce/plugins/code';
       overflow: hidden;
       width: 100%;
       height: 100%;
+      min-height: 100%;
     }
 
     :host ::ng-deep .tox-tinymce {
@@ -44,9 +45,9 @@ import 'tinymce/plugins/code';
   ]
 })
 export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  @Input() editorCSS: string;
-  @Input() tinyMceSettings: Settings;
-  @Output() updateUI = new EventEmitter();
+  @Input() public editorCSS: string;
+  @Input() public tinyMceSettings: Settings;
+  @Output() public updateUI = new EventEmitter();
 
   // Estado
   private _tinyMCE: Editor;
@@ -121,9 +122,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
       directionality: getLocaleDirection(this._locale),
       content_style: this.editorCSS,
       browser_spellcheck: true,
-      min_height: '100%',
       height: '100%',
-      min_width: '100%',
       width: '100%',
       contextmenu: false, // Usar menú del navegador
       custom_ui_selector: 'ng-ribbon', // Evitar que pierda la selección al seleccionar este elemento
