@@ -5,6 +5,7 @@ import {ComponentPortal} from "@angular/cdk/portal";
 import {FileMenuComponent} from "./file-menu.component";
 import {Title} from "@angular/platform-browser";
 import {environment} from "../../environments/environment";
+import {Settings} from "tinymce";
 
 
 @Component({
@@ -36,7 +37,7 @@ import {environment} from "../../environments/environment";
     <!-- Editor -->
     <div class="textarea-wrapper">
       <div class="textarea">
-        <ng-ribbon-textarea #editor [(ngModel)]="html"></ng-ribbon-textarea>
+        <ng-ribbon-textarea #editor [(ngModel)]="html" [tinyMceSettings]="tinyMceSettings"></ng-ribbon-textarea>
       </div>
     </div>
   `,
@@ -119,6 +120,10 @@ export class AppComponent implements OnInit {
     onMainTabActive: (element) => this._showFileMenu(element)
   });
 
+  public tinyMceSettings: Settings = {
+    base_url: environment.assetsURL + '/vendor/tinymce'
+  };
+
   constructor(private _overlaySvc: Overlay,
               private _titleSvc: Title) {
   }
@@ -130,7 +135,7 @@ export class AppComponent implements OnInit {
   }
 
   public onTitleUpdated() {
-    this._titleSvc.setTitle(`${this.documentTitle} - ng-ribbon`);
+    this._titleSvc.setTitle(`${this.documentTitle} - NgRibbon`);
   }
 
   private _showFileMenu(element: HTMLElement) {

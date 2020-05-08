@@ -118,7 +118,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
     }) = {
       target: this._host.nativeElement.appendChild(document.createElement('textarea')),
       base_url: '/assets/ribbon/vendor/tinymce',
-      language: this._locale == 'pt' ? 'pt_PT' : this._locale,
+      language: (this._locale == 'pt' ? 'pt_PT' : this._locale).replace('-', '_'),
       directionality: getLocaleDirection(this._locale),
       content_style: this.editorCSS,
       browser_spellcheck: true,
