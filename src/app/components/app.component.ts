@@ -4,6 +4,7 @@ import {ConnectionPositionPair, Overlay} from "@angular/cdk/overlay";
 import {ComponentPortal} from "@angular/cdk/portal";
 import {FileMenuComponent} from "./file-menu.component";
 import {Title} from "@angular/platform-browser";
+import {environment} from "../../environments/environment";
 
 
 @Component({
@@ -106,12 +107,15 @@ export class AppComponent implements OnInit {
             ]
 </pre>
 </li>
+<li>Run <code>ng serve</code> for a dev server</li>
+<li>Navigate to http://localhost:4200/</li>
 </ol>`;
 
   public showImageContext = false;
 
   public ribbonSettings = new NgRibbonWysiwygSettings({
     mainTabName: $localize`Archivo`,
+    assetsURL: environment.assetsURL,
     onMainTabActive: (element) => this._showFileMenu(element)
   });
 
