@@ -13,11 +13,25 @@ import {Settings} from "tinymce";
   template: `
     <!-- Ribbon -->
     <ng-ribbon-wysiwyg #ribbon [settings]="ribbonSettings" [editor]="editor">
-      <ng-template #mainContextHeader>
+      <ng-template *ngIf="mainContextVisible" #mainContextHeader>
         <div contenteditable [textContent]="documentTitle"
              (input)="documentTitle = $any($event.target).textContent; onTitleUpdated();"
              style="outline: none"></div>
       </ng-template>
+
+
+      <ng-container ngProjectAs="homeTabGroup3">
+        <ng-ribbon-group name="Demo">
+          <button class="xl animate-pulse" mat-button (click)="mainContextVisible = !mainContextVisible">
+            <img src="{{ environment.assetsURL }}/images/toggle.png"/>
+            <div i18n>Toggle main context</div>
+          </button>
+          <button class="xl animate-pulse" mat-button (click)="showImageContext = !showImageContext">
+            <img src="{{ environment.assetsURL }}/images/toggle.png"/>
+            <div i18n>Toggle image context</div>
+          </button>
+        </ng-ribbon-group>
+      </ng-container>
 
       <ng-ribbon-context *ngIf="showImageContext" name="Imagen" i18n-name color="#f0f182" [ribbon]="ribbon.ribbon">
         <ng-ribbon-tab name="Formato" i18n-name>
@@ -25,7 +39,7 @@ import {Settings} from "tinymce";
             <!-- Posición -->
             <button class="xl" mat-button
                     title="Cambia la imagen seleccionada por una diferente" i18n-title>
-              <img src="/assets/ribbon/images/picture.png"/>
+              <img src="{{ environment.assetsURL }}/images/picture.png"/>
               <div i18n>Reemplazar</div>
             </button>
           </ng-ribbon-group>
@@ -112,17 +126,20 @@ export class AppComponent implements OnInit {
 <li>Navigate to http://localhost:4200/</li>
 </ol>`;
 
+  public mainContextVisible = true;
   public showImageContext = false;
 
   public ribbonSettings = new NgRibbonWysiwygSettings({
     mainTabName: $localize`Archivo`,
-    assetsURL: environment.assetsURL,
+    assetsURL: environment.assetsURL + '/ribbon',
     onMainTabActive: (element) => this._showFileMenu(element)
   });
 
   public tinyMceSettings: Settings = {
-    base_url: environment.assetsURL + '/vendor/tinymce'
+    base_url: environment.assetsURL + '/ribbon/vendor/tinymce'
   };
+
+  public readonly environment = environment;
 
   constructor(private _overlaySvc: Overlay,
               private _titleSvc: Title) {
