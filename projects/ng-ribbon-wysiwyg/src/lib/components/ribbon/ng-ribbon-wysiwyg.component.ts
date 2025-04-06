@@ -7,20 +7,20 @@ import {NgRibbonWysiwygSettings} from "./ng-ribbon-wysiwyg-settings";
 import {NgRibbonContextComponent} from "../../../../../ng-ribbon/src/lib/components/ng-ribbon-context/ng-ribbon-context.component";
 import {DomUtilsService} from "../../services/dom-utils.service";
 import {IconsService} from "../../services/icons.service";
-import { NgTemplateOutlet } from '@angular/common';
-import { NgRibbonTabComponent } from '../../../../../ng-ribbon/src/lib/components/ng-ribbon-tab/ng-ribbon-tab.component';
-import { NgRibbonHomeTabComponent } from './home-tab/ng-ribbon-home-tab.component';
-import { NgRibbonGroupComponent } from '../../../../../ng-ribbon/src/lib/components/ng-ribbon-group/ng-ribbon-group.component';
-import { MatButton } from '@angular/material/button';
-import { MatTooltip } from '@angular/material/tooltip';
-import { MatIcon } from '@angular/material/icon';
-import { SymbolListComponent } from './components/symbol-list.component';
+import {NgTemplateOutlet} from '@angular/common';
+import {NgRibbonTabComponent} from '../../../../../ng-ribbon/src/lib/components/ng-ribbon-tab/ng-ribbon-tab.component';
+import {NgRibbonHomeTabComponent} from './home-tab/ng-ribbon-home-tab.component';
+import {NgRibbonGroupComponent} from '../../../../../ng-ribbon/src/lib/components/ng-ribbon-group/ng-ribbon-group.component';
+import {MatButton} from '@angular/material/button';
+import {MatTooltip} from '@angular/material/tooltip';
+import {MatIcon} from '@angular/material/icon';
+import {SymbolListComponent} from './components/symbol-list.component';
 
 @Component({
-    selector: 'ng-ribbon-wysiwyg',
-    templateUrl: './ng-ribbon-wysiwyg.component.html',
-    styleUrls: ['ng-ribbon-wysiwyg.component.less'],
-    imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgRibbonTabComponent, NgRibbonHomeTabComponent, NgRibbonGroupComponent, MatButton, MatTooltip, MatIcon, SymbolListComponent]
+  selector: 'ng-ribbon-wysiwyg',
+  templateUrl: './ng-ribbon-wysiwyg.component.html',
+  styleUrls: ['ng-ribbon-wysiwyg.component.less'],
+  imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgRibbonTabComponent, NgRibbonHomeTabComponent, NgRibbonGroupComponent, MatButton, MatTooltip, MatIcon, SymbolListComponent]
 })
 export class NgRibbonWysiwygComponent implements OnChanges {
   private _cd = inject(ChangeDetectorRef);

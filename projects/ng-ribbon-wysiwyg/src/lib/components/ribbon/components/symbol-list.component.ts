@@ -1,9 +1,9 @@
 import {Component, output, input} from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 
 @Component({
-    selector: 'app-symbol-list',
-    template: `
+  selector: 'app-symbol-list',
+  template: `
     @for (category of symbols; track category) {
       <div>
         <h3>{{ category.name }}</h3>
@@ -14,7 +14,7 @@ import { MatButton } from '@angular/material/button';
       </div>
     }
     `,
-    styles: [`
+  styles: [`
     :host {
       display: block;
       max-height: 75px;
@@ -45,7 +45,7 @@ import { MatButton } from '@angular/material/button';
       max-width: 40px;
     }
   `],
-    imports: [MatButton]
+  imports: [MatButton]
 })
 export class SymbolListComponent {
   public readonly disabled = input(false);

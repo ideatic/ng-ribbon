@@ -1,12 +1,12 @@
 import {Component, TemplateRef, output, input} from '@angular/core';
-import { MatMenu, MatMenuTrigger } from "@angular/material/menu";
-import { MatButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { MenuTriggerDirective } from '../../../directives/menu-trigger.directive';
+import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
+import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {MenuTriggerDirective} from '../../../directives/menu-trigger.directive';
 
 @Component({
-    selector: 'app-split-button',
-    template: `
+  selector: 'app-split-button',
+  template: `
     <button class="sm" mat-button (click)="mainBtnClick.emit($event)" [class.active]="isActive()" [disabled]="disabled()">
       <ng-content></ng-content>
     </button>
@@ -21,7 +21,7 @@ import { MenuTriggerDirective } from '../../../directives/menu-trigger.directive
       </button>
     }
     `,
-    styles: [`
+  styles: [`
       .split-button {
         padding: 0 5px 0 0;
         margin-left: -5px;
@@ -33,7 +33,7 @@ import { MenuTriggerDirective } from '../../../directives/menu-trigger.directive
         width: 20px !important;
       }
     `],
-    imports: [MatButton, MatMenuTrigger, MatIcon, MenuTriggerDirective]
+  imports: [MatButton, MatMenuTrigger, MatIcon, MenuTriggerDirective]
 })
 export class SplitButtonComponent {
   public readonly disabled = input(false);

@@ -1,4 +1,4 @@
-import { Injectable, LOCALE_ID, inject } from '@angular/core';
+import {Injectable, LOCALE_ID, inject} from '@angular/core';
 import {getLocaleDirection} from "@angular/common";
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from "@angular/platform-browser";

@@ -1,12 +1,12 @@
 import {Component, output, input} from '@angular/core';
 
 @Component({
-    selector: 'ng-ribbon-group',
-    template: `
-    <ng-content />
+  selector: 'ng-ribbon-group',
+  template: `
+    <ng-content/>
     <div class="title">
       {{ name() }}
-    
+
       @if (dialogLauncher()) {
         <button mat-button (click)="showDialog.emit()">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
@@ -15,8 +15,8 @@ import {Component, output, input} from '@angular/core';
         </button>
       }
     </div>
-    `,
-    styleUrls: ['ng-ribbon-group.component.less']
+  `,
+  styleUrls: ['ng-ribbon-group.component.less']
 })
 export class NgRibbonGroupComponent {
   // Bindings

@@ -1,15 +1,15 @@
-import { Component, Input, OnDestroy, OnInit, TemplateRef, inject, contentChild, input } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, TemplateRef, inject, contentChild, input} from '@angular/core';
 import {NgRibbonComponent} from "../ng-ribbon/ng-ribbon.component";
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 
 @Component({
-    selector: 'ng-ribbon-context',
-    template: '<ng-content />',
-    styles: [
-        `:host {
+  selector: 'ng-ribbon-context',
+  template: '<ng-content />',
+  styles: [
+    `:host {
       display: block;
     }`
-    ]
+  ]
 })
 export class NgRibbonContextComponent implements OnInit, OnDestroy {
   public readonly name = input<string>(undefined);
@@ -21,7 +21,7 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
   public tabs: NgRibbonTabComponent[] = [];
 
   constructor() {
-    const ribbon = inject(NgRibbonComponent, { optional: true })!;
+    const ribbon = inject(NgRibbonComponent, {optional: true})!;
 
     this.ribbon = ribbon;
   }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, LOCALE_ID, NgZone, OnDestroy, OnInit, inject, output, input } from '@angular/core';
+import {Component, ElementRef, forwardRef, LOCALE_ID, NgZone, OnDestroy, OnInit, inject, output, input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {noop} from "rxjs";
 import {EditorCommands} from "./editor-commands";
@@ -19,9 +19,9 @@ import 'tinymce/plugins/searchreplace';
 import 'tinymce/plugins/code';
 
 @Component({
-    selector: 'ng-ribbon-textarea',
-    template: '',
-    styles: [`
+  selector: 'ng-ribbon-textarea',
+  template: '',
+  styles: [`
     :host {
       display: block;
       outline: none;
@@ -36,13 +36,13 @@ import 'tinymce/plugins/code';
       border: none !important;
     }
   `],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => NgRibbonTextAreaComponent),
-            multi: true
-        }
-    ]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NgRibbonTextAreaComponent),
+      multi: true
+    }
+  ]
 })
 export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValueAccessor {
   private _host = inject<ElementRef<HTMLElement>>(ElementRef);

@@ -5,7 +5,7 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 ## Code scaffolding
 
 Run `ng generate component component-name --project ng-ribbon-wysiwyg` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-ribbon-wysiwyg`.
-> Note: Don't forget to add `--project ng-ribbon-wysiwyg` or else it will be added to the default project in your `angular.json` file. 
+> Note: Don't forget to add `--project ng-ribbon-wysiwyg` or else it will be added to the default project in your `angular.json` file.
 
 ## Build
 

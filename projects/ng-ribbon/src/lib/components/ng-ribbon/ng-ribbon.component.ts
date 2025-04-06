@@ -2,11 +2,11 @@ import {Component, HostListener, Input, output} from '@angular/core';
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 import {NgRibbonSettings} from "./ng-ribbon-settings";
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import {NgStyle, NgTemplateOutlet} from '@angular/common';
 
 @Component({
-    selector: 'ng-ribbon',
-    template: `
+  selector: 'ng-ribbon',
+  template: `
     <div class="contexts" [ngStyle]="{borderColor: selectedTab?.context.color() || '#dadbdc'}">
       @for (context of contexts; track context; let firstContext = $first) {
         <div class="context" [ngStyle]="{backgroundColor: context.color()}">
@@ -40,9 +40,9 @@ import { NgStyle, NgTemplateOutlet } from '@angular/common';
     <div class="ribbon-content">
       <ng-content></ng-content>
     </div>
-    `,
-    styleUrls: ['ng-ribbon.component.less'],
-    imports: [NgStyle, NgTemplateOutlet]
+  `,
+  styleUrls: ['ng-ribbon.component.less'],
+  imports: [NgStyle, NgTemplateOutlet]
 })
 export class NgRibbonComponent {
   @Input() public settings = new NgRibbonSettings();

@@ -15,7 +15,7 @@ import {IconsService} from "./services/icons.service";
 
 
 @NgModule({
-    imports: [
+  imports: [
     CommonModule,
     FormsModule,
     ColorSketchModule,
@@ -26,14 +26,14 @@ import {IconsService} from "./services/icons.service";
     SymbolListComponent,
     ListButtonsComponent,
     MenuTriggerDirective
-],
-    providers: [
-        IconsService
-    ],
-    exports: [
-        NgRibbonWysiwygComponent,
-        NgRibbonTextAreaComponent
-    ]
+  ],
+  providers: [
+    IconsService
+  ],
+  exports: [
+    NgRibbonWysiwygComponent,
+    NgRibbonTextAreaComponent
+  ]
 })
 export class NgRibbonWysiwygModule {
 

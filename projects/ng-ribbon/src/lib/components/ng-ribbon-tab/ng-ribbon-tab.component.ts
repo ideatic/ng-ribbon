@@ -1,13 +1,13 @@
-import { Component, HostBinding, Input, OnDestroy, OnInit, inject, output, input } from '@angular/core';
+import {Component, HostBinding, Input, OnDestroy, OnInit, inject, output, input} from '@angular/core';
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
 
 @Component({
-    selector: 'ng-ribbon-tab',
-    template: '<ng-content />',
-    host: {
-        role: 'tabpanel'
-    },
-    styleUrls: ['ng-ribbon-tab.component.less']
+  selector: 'ng-ribbon-tab',
+  template: '<ng-content />',
+  host: {
+    role: 'tabpanel'
+  },
+  styleUrls: ['ng-ribbon-tab.component.less']
 })
 export class NgRibbonTabComponent implements OnInit, OnDestroy {
   // Bindings
@@ -26,7 +26,7 @@ export class NgRibbonTabComponent implements OnInit, OnDestroy {
   public showed = false;
 
   constructor() {
-    const context = inject(NgRibbonContextComponent, { optional: true })!;
+    const context = inject(NgRibbonContextComponent, {optional: true})!;
 
     this.context = context;
   }

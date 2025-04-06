@@ -19,7 +19,7 @@ export enum EditorCommands {
   /** Añade una etiqueta SMALL alrededor de la selección o en el punto de inserción. (No es compatible con Internet Explorer.)*/
   decreaseFontSize = 'decreaseFontSize',
   /** Elimina la selección actual.*/
-    delete = 'delete',
+  delete = 'delete',
   /** Activa o desactiva la fila de la tabla y los controles de inserción y supresión de columna. (No es compatible con Internet Explorer.)*/
   enableInlineTableEditing = 'enableInlineTableEditing',
   /** Activa o desactiva los controladores de tamaño en imágenes y otros objetos de tamaño variable. (No es compatible con Internet Explorer.)*/

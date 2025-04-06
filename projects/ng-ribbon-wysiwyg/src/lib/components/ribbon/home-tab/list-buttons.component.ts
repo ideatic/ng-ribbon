@@ -1,14 +1,14 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {EditorCommands} from "../../textarea/editor-commands";
 import {NgRibbonHomeTabComponent} from "./ng-ribbon-home-tab.component";
-import { SplitButtonComponent } from '../components/split-button.component';
-import { MatTooltip } from '@angular/material/tooltip';
-import { MatIcon } from '@angular/material/icon';
-import { MatButton } from '@angular/material/button';
+import {SplitButtonComponent} from '../components/split-button.component';
+import {MatTooltip} from '@angular/material/tooltip';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton} from '@angular/material/button';
 
 @Component({
-    selector: 'app-list-buttons',
-    template: `
+  selector: 'app-list-buttons',
+  template: `
     <!-- Listas desordenadas -->
     <app-split-button
       matTooltip="Lista" i18n-matTooltip class="sm"
@@ -78,7 +78,7 @@ import { MatButton } from '@angular/material/button';
       </ng-template>
     </app-split-button>
   `,
-    styles: [`
+  styles: [`
     .list-type-menu {
       background: white;
       padding: 4px;
@@ -93,7 +93,7 @@ import { MatButton } from '@angular/material/button';
       height: 48px;
     }
   `],
-    imports: [SplitButtonComponent, MatTooltip, MatIcon, MatButton]
+  imports: [SplitButtonComponent, MatTooltip, MatIcon, MatButton]
 })
 export class ListButtonsComponent {
   homeTab = inject(NgRibbonHomeTabComponent);

@@ -1,8 +1,8 @@
 import {Component, HostListener} from '@angular/core';
 
 @Component({
-    template: '<p>File menu</p>',
-    styles: [`
+  template: '<p>File menu</p>',
+  styles: [`
     :host {
       display: block;
       background: white;
