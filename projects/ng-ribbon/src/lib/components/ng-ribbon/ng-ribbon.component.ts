@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
+import {Component, HostListener, Input, output} from '@angular/core';
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 import {NgRibbonSettings} from "./ng-ribbon-settings";
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
@@ -7,16 +7,16 @@ import { NgStyle, NgTemplateOutlet } from '@angular/common';
 @Component({
     selector: 'ng-ribbon',
     template: `
-    <div class="contexts" [ngStyle]="{borderColor: selectedTab?.context.color || '#dadbdc'}">
+    <div class="contexts" [ngStyle]="{borderColor: selectedTab?.context.color() || '#dadbdc'}">
       @for (context of contexts; track context; let firstContext = $first) {
-        <div class="context" [ngStyle]="{backgroundColor: context.color}">
+        <div class="context" [ngStyle]="{backgroundColor: context.color()}">
           @if (settings.useContexts) {
             <div class="context-header">
-              @if (context.headerTemplate) {
-                <ng-template [ngTemplateOutlet]="context.headerTemplate"
+              @if (context.headerTemplate()) {
+                <ng-template [ngTemplateOutlet]="context.headerTemplate()"
                 ></ng-template>
               } @else {
-                {{ context.name }}
+                {{ context.name() }}
               }
             </div>
           }
@@ -30,7 +30,7 @@ import { NgStyle, NgTemplateOutlet } from '@angular/common';
               <li
                 role="tab" [attr.aria-selected]="tab.active"
                 [class.active]="tab.active">
-                <a (click)="selectTab(tab)">{{ tab.name }}</a>
+                <a (click)="selectTab(tab)">{{ tab.name() }}</a>
               </li>
             }
           </ul>
@@ -46,7 +46,7 @@ import { NgStyle, NgTemplateOutlet } from '@angular/common';
 })
 export class NgRibbonComponent {
   @Input() public settings = new NgRibbonSettings();
-  @Output() public tabSelected: EventEmitter<NgRibbonTabComponent> = new EventEmitter();
+  public readonly tabSelected = output<NgRibbonTabComponent>();
 
   public contexts: NgRibbonContextComponent[] = [];
 

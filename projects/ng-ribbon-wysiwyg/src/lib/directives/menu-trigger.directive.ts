@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EmbeddedViewRef, HostListener, Input, OnDestroy, TemplateRef, ViewContainerRef, inject } from '@angular/core';
+import { Directive, ElementRef, EmbeddedViewRef, HostListener, OnDestroy, TemplateRef, ViewContainerRef, inject, input } from '@angular/core';
 import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {TemplatePortal} from "@angular/cdk/portal";
 
@@ -8,7 +8,7 @@ export class MenuTriggerDirective implements OnDestroy {
   private _host = inject<ElementRef<HTMLElement>>(ElementRef);
   private _viewContainerRef = inject(ViewContainerRef);
 
-  @Input() public menuTriggerFor: TemplateRef<any>;
+  public readonly menuTriggerFor = input<TemplateRef<any>>(undefined);
 
   private _overlayRef: OverlayRef;
   private _embeddedViewRef: EmbeddedViewRef<any>;
@@ -29,7 +29,7 @@ export class MenuTriggerDirective implements OnDestroy {
     );
     overlayRef.backdropClick().subscribe(() => overlayRef.dispose());
 
-    const templatePortal = new TemplatePortal(this.menuTriggerFor, this._viewContainerRef);
+    const templatePortal = new TemplatePortal(this.menuTriggerFor(), this._viewContainerRef);
     this._embeddedViewRef = overlayRef.attach(templatePortal);
   }
 

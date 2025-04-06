@@ -3,7 +3,7 @@
     <!-- Cabecera del ribbon -->
     <ng-template #header>
       @if (settings.useContexts) {
-        <ng-template [ngTemplateOutlet]="mainContextHeader"></ng-template>
+        <ng-template [ngTemplateOutlet]="mainContextHeader" />
       }
     </ng-template>
 
@@ -12,10 +12,10 @@
       <ng-ribbon-tab name="Inicio" i18n-name [active]="true" [order]="1">
         @if (editor) {
           <ng-ribbon-home-tab>
-            <ng-content ngProjectAs="homeTabGroup0" select="homeTabGroup0"></ng-content>
-            <ng-content ngProjectAs="homeTabGroup1" select="homeTabGroup1"></ng-content>
-            <ng-content ngProjectAs="homeTabGroup2" select="homeTabGroup2"></ng-content>
-            <ng-content ngProjectAs="homeTabGroup3" select="homeTabGroup3"></ng-content>
+            <ng-content ngProjectAs="homeTabGroup0" select="homeTabGroup0" />
+            <ng-content ngProjectAs="homeTabGroup1" select="homeTabGroup1" />
+            <ng-content ngProjectAs="homeTabGroup2" select="homeTabGroup2" />
+            <ng-content ngProjectAs="homeTabGroup3" select="homeTabGroup3" />
           </ng-ribbon-home-tab>
         }
       </ng-ribbon-tab>
@@ -58,13 +58,13 @@
       </ng-ribbon-group>
       @if (insertTab.showed) {
         <ng-ribbon-group name="Símbolos" i18n-name>
-          <app-symbol-list (symbolSelected)="execute(Commands.insertText, $event)" [disabled]="isDisabled(Commands.insertText)"></app-symbol-list>
+          <app-symbol-list (symbolSelected)="execute(Commands.insertText, $event)" [disabled]="isDisabled(Commands.insertText)" />
         </ng-ribbon-group>
       }
     </ng-ribbon-tab>
   }
 
-  <ng-content></ng-content>
+  <ng-content />
 </ng-ribbon-context>
 
 <!-- Contextos

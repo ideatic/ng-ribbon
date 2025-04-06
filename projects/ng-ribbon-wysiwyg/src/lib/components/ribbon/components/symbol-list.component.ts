@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, output, input} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 
 @Component({
@@ -9,7 +9,7 @@ import { MatButton } from '@angular/material/button';
         <h3>{{ category.name }}</h3>
         @for (symbol of category.symbols; track symbol) {
           <button
-          mat-button (click)="symbolSelected.emit(symbol)" [disabled]="disabled">{{ symbol }}</button>
+          mat-button (click)="symbolSelected.emit(symbol)" [disabled]="disabled()">{{ symbol }}</button>
         }
       </div>
     }
@@ -48,8 +48,8 @@ import { MatButton } from '@angular/material/button';
     imports: [MatButton]
 })
 export class SymbolListComponent {
-  @Input() public disabled = false;
-  @Output() public symbolSelected = new EventEmitter<string>();
+  public readonly disabled = input(false);
+  public readonly symbolSelected = output<string>();
 
   public readonly symbols = [
     {

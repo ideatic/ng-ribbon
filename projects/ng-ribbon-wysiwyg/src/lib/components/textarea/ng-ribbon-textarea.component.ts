@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, LOCALE_ID, NgZone, OnDestroy, OnInit, Output, inject } from '@angular/core';
+import { Component, ElementRef, forwardRef, LOCALE_ID, NgZone, OnDestroy, OnInit, inject, output, input } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {noop} from "rxjs";
 import {EditorCommands} from "./editor-commands";
@@ -49,9 +49,9 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
   private _locale = inject(LOCALE_ID);
   private _ngZone = inject(NgZone);
 
-  @Input() public editorCSS: string;
-  @Input() public tinyMceSettings: RawEditorSettings;
-  @Output() public updateUI = new EventEmitter();
+  public readonly editorCSS = input<string>(undefined);
+  public readonly tinyMceSettings = input<RawEditorSettings>(undefined);
+  public readonly updateUI = output();
 
   // Estado
   private _tinyMCE: Editor;
@@ -65,7 +65,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
     // Configurar TinyMCE
     const self = this;
 
-    const extraSettings = this.tinyMceSettings || {};
+    const extraSettings = this.tinyMceSettings() || {};
 
     // Método setup
     const prevSetup = extraSettings.setup;
@@ -117,7 +117,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
       base_url: '/assets/ribbon/vendor/tinymce',
       language: (this._locale == 'pt' ? 'pt_PT' : this._locale).replace('-', '_'),
       directionality: getLocaleDirection(this._locale),
-      content_style: this.editorCSS,
+      content_style: this.editorCSS(),
       browser_spellcheck: true,
       height: '100%',
       width: '100%',

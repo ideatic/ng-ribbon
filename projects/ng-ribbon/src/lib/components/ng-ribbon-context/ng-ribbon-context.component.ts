@@ -1,10 +1,10 @@
-import { Component, ContentChild, Input, OnDestroy, OnInit, TemplateRef, inject } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, TemplateRef, inject, contentChild, input } from '@angular/core';
 import {NgRibbonComponent} from "../ng-ribbon/ng-ribbon.component";
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 
 @Component({
     selector: 'ng-ribbon-context',
-    template: '<ng-content></ng-content>',
+    template: '<ng-content />',
     styles: [
         `:host {
       display: block;
@@ -12,11 +12,11 @@ import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
     ]
 })
 export class NgRibbonContextComponent implements OnInit, OnDestroy {
-  @Input() public name: string;
-  @Input() public color: string;
+  public readonly name = input<string>(undefined);
+  public readonly color = input<string>(undefined);
   @Input() public ribbon: NgRibbonComponent;
 
-  @ContentChild('header') public headerTemplate: TemplateRef<void>;
+  public readonly headerTemplate = contentChild<TemplateRef<void>>('header');
 
   public tabs: NgRibbonTabComponent[] = [];
 
@@ -28,7 +28,7 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     if (!this.ribbon) {
-      throw new Error(`Parent ribbon not found for context '${this.name}'`);
+      throw new Error(`Parent ribbon not found for context '${this.name()}'`);
     }
 
     this.ribbon.addContext(this);
@@ -41,7 +41,7 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
   public addTab(tab: NgRibbonTabComponent) {
     this.tabs.push(tab);
 
-    this.tabs = this.tabs.sort((a, b) => a.order - b.order);
+    this.tabs = this.tabs.sort((a, b) => a.order() - b.order());
 
     if (tab.active) {
       this.ribbon.selectTab(tab);

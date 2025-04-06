@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ContentChild, Input, OnChanges, SimpleChanges, TemplateRef, ViewChild, inject } from '@angular/core';
+import {ChangeDetectorRef, Component, ContentChild, Input, OnChanges, SimpleChanges, TemplateRef, ViewChild, inject, OutputRefSubscription} from '@angular/core';
 import {NgRibbonTextAreaComponent} from "../textarea/ng-ribbon-textarea.component";
 import {EditorCommands} from "../textarea/editor-commands";
 import {noop, Subscription} from "rxjs";
@@ -35,7 +35,7 @@ export class NgRibbonWysiwygComponent implements OnChanges {
   @ContentChild('mainContextHeader') public mainContextHeader: TemplateRef<void>;
 
   // Estado
-  private _subscription: Subscription;
+  private _subscription: OutputRefSubscription;
 
   // Valores
   public readonly defaultTable = `<table>

@@ -17,7 +17,7 @@ import { MatButton } from '@angular/material/button';
       [isActive]="homeTab.isActive(Commands.insertUnorderedList)"
       [disabled]="homeTab.isDisabled(Commands.insertUnorderedList)"
     >
-      <mat-icon svgIcon="unordered-list"></mat-icon>
+      <mat-icon svgIcon="unordered-list" />
       <ng-template #listMenu>
         <div class="list-type-menu">
           <button mat-button (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'disc'})">
@@ -44,7 +44,7 @@ import { MatButton } from '@angular/material/button';
       [isActive]="homeTab.isActive(Commands.insertOrderedList)"
       [disabled]="homeTab.isDisabled(Commands.insertOrderedList)"
     >
-      <mat-icon svgIcon="ordered-list"></mat-icon>
+      <mat-icon svgIcon="ordered-list" />
       <ng-template #orderedListMenu>
         <div class="list-type-menu">
           <div>

@@ -1,4 +1,4 @@
-<ng-content select="homeTabGroup0"></ng-content>
+<ng-content select="homeTabGroup0" />
 
 <!-- Fuente -->
 <ng-ribbon-group name="Fuente" i18n-name class="column">
@@ -41,14 +41,14 @@
       <mat-icon class="font-size-arrow">arrow_drop_down</mat-icon>
     </button>
 
-    <mat-divider class="vertical-divider" [vertical]="true"></mat-divider>
+    <mat-divider class="vertical-divider" [vertical]="true" />
 
     <!-- Borrar Formato -->
     <button matTooltip="Borrar formato" i18n-matTooltip class="sm" mat-button (click)="execute(Commands.removeFormat)" [disabled]="isDisabled(Commands.removeFormat)">
       <mat-icon svgIcon="remove-formatting"></mat-icon>
     </button>
 
-    <mat-divider class="vertical-divider" [vertical]="true"></mat-divider>
+    <mat-divider class="vertical-divider" [vertical]="true" />
 
     <!-- Cambiar mayúsculas -->
     <button mat-button [matMenuTriggerFor]="caseMenu" class="sm" [disabled]="isDisabled(Commands.mceLowerCase)">
@@ -97,7 +97,7 @@
       <mat-icon svgIcon="superscript"></mat-icon>
     </button>
 
-    <mat-divider class="vertical-divider" [vertical]="true"></mat-divider>
+    <mat-divider class="vertical-divider" [vertical]="true" />
 
     <!-- Color de fondo -->
     <app-split-button
@@ -105,14 +105,14 @@
       (mainBtnClick)="execute(Commands.hiliteColor, backColor)"
       [dropDownMenu]="bgColorMenu"
       [disabled]="isDisabled(Commands.hiliteColor)">
-      <mat-icon svgIcon="highlight-bg-color"></mat-icon>
+      <mat-icon svgIcon="highlight-bg-color" />
       <div class="btn-color-preview">
         <div [ngStyle]="{background: backColor}"></div>
       </div>
       <ng-template #bgColorMenu>
         <color-sketch style="width: 220px"
           [color]="backColor"
-        (onChangeComplete)="backColor =  $event.color.hex; execute(Commands.hiliteColor, backColor)"></color-sketch>
+        (onChangeComplete)="backColor =  $event.color.hex; execute(Commands.hiliteColor, backColor)" />
       </ng-template>
     </app-split-button>
 
@@ -122,20 +122,20 @@
       (mainBtnClick)="execute(Commands.foreColor, foreColor)"
       [dropDownMenu]="foreColorMenu"
       [disabled]="isDisabled(Commands.foreColor)">
-    <mat-icon svgIcon="text-color"></mat-icon>
+    <mat-icon svgIcon="text-color" />
     <div class="btn-color-preview">
       <div [ngStyle]="{background: foreColor}"></div>
     </div>
     <ng-template #foreColorMenu>
       <color-sketch style="width: 220px"
         [color]="foreColor"
-      (onChangeComplete)="foreColor =  $event.color.hex; execute(Commands.foreColor, foreColor)"></color-sketch>
+      (onChangeComplete)="foreColor =  $event.color.hex; execute(Commands.foreColor, foreColor)" />
     </ng-template>
   </app-split-button>
 </mat-list>
 </ng-ribbon-group>
 
-<ng-content select="homeTabGroup1"></ng-content>
+<ng-content select="homeTabGroup1" />
 
 <!-- Párrafo -->
 <ng-ribbon-group name="Párrafo" i18n-name class="column">
@@ -155,10 +155,10 @@
     </mat-menu>
   </app-split-button>
 
-  <mat-divider class="vertical-divider" [vertical]="true"></mat-divider>
+  <mat-divider class="vertical-divider" [vertical]="true" />
 
   <!-- Listas -->
-  <app-list-buttons></app-list-buttons>
+  <app-list-buttons />
 </mat-list>
 
 <mat-list>
@@ -188,7 +188,7 @@
     <mat-icon svgIcon="align-justify"></mat-icon>
   </button>
 
-  <mat-divider class="vertical-divider" [vertical]="true"></mat-divider>
+  <mat-divider class="vertical-divider" [vertical]="true" />
 
   <!-- Identación -->
   <button matTooltip="Disminuir sangría" i18n-matTooltip class="sm" mat-button (click)="execute(Commands.outdent)"
@@ -202,7 +202,7 @@
 </mat-list>
 </ng-ribbon-group>
 
-<ng-content select="homeTabGroup2"></ng-content>
+<ng-content select="homeTabGroup2" />
 
 <!-- Edición -->
 <ng-ribbon-group name="Edición" i18n-name>
@@ -249,4 +249,4 @@
   </div>
 </ng-ribbon-group>
 
-<ng-content select="homeTabGroup3"></ng-content>
+<ng-content select="homeTabGroup3" />
