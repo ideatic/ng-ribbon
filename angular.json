@@ -147,14 +147,6 @@
             }
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ng-ribbon/src/test.ts",
-            "tsConfig": "projects/ng-ribbon/tsconfig.spec.json",
-            "karmaConfig": "projects/ng-ribbon/karma.conf.js"
-          }
-        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -187,14 +179,6 @@
             }
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ng-ribbon-wysiwyg/src/test.ts",
-            "tsConfig": "projects/ng-ribbon-wysiwyg/tsconfig.spec.json",
-            "karmaConfig": "projects/ng-ribbon-wysiwyg/karma.conf.js"
-          }
-        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -209,6 +193,5 @@
         }
       }
     }
-  },
-  "defaultProject": "ng-ribbon-example"
+  }
 }

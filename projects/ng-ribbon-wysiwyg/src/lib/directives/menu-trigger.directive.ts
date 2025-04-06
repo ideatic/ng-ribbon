@@ -1,7 +1,6 @@
 import {Directive, ElementRef, EmbeddedViewRef, HostListener, Input, OnDestroy, TemplateRef, ViewContainerRef} from '@angular/core';
-import {ConnectionPositionPair, Overlay} from "@angular/cdk/overlay";
+import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {TemplatePortal} from "@angular/cdk/portal";
-import {OverlayRef} from "@angular/cdk/overlay/overlay-ref";
 
 @Directive({
   selector: '[menuTriggerFor]'
