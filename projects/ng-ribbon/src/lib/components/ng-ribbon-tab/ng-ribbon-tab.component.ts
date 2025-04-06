@@ -1,20 +1,36 @@
-import {Component, HostBinding, Input, OnDestroy, OnInit, inject, output, input} from '@angular/core';
+import {Component, HostBinding, OnDestroy, OnInit, inject, output, input, model} from '@angular/core';
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
 
 @Component({
   selector: 'ng-ribbon-tab',
   template: '<ng-content />',
   host: {
-    role: 'tabpanel'
+    role: 'tabpanel',
+    '[class.active]': 'active()'
   },
-  styleUrls: ['ng-ribbon-tab.component.less']
+  styles: `
+    @import "../theme";
+
+    :host {
+      border-bottom: 1px solid @borderColor;
+      justify-content: flex-start;
+      padding: 4px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scrollbar-width: thin;
+
+      &.active {
+        display: block;
+        display: flex;
+      }
+    }
+  `
 })
 export class NgRibbonTabComponent implements OnInit, OnDestroy {
   // Bindings
-  @HostBinding('class.active')
-  @Input() public active: boolean;
-  public readonly name = input<string>(undefined);
-  @Input() public context: NgRibbonContextComponent;
+  public readonly active = model<boolean>();
+  public readonly name = input<string>();
+  public readonly context = input<NgRibbonContextComponent>(inject(NgRibbonContextComponent, {optional: true}));
   public readonly order = input(0);
 
   // Events
@@ -25,22 +41,17 @@ export class NgRibbonTabComponent implements OnInit, OnDestroy {
    */
   public showed = false;
 
-  constructor() {
-    const context = inject(NgRibbonContextComponent, {optional: true})!;
-
-    this.context = context;
-  }
-
   public ngOnInit() {
-    if (!this.context) {
+    const context = this.context();
+    if (!context) {
       throw new Error(`Parent context not found for tab '${this.name()}'`);
     }
 
-    this.context.addTab(this);
+    context.addTab(this);
   }
 
   public ngOnDestroy() {
-    this.context.removeTab(this);
+    this.context().removeTab(this);
   }
 }
 

@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, output} from '@angular/core';
+import {Component, HostListener, output, input} from '@angular/core';
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 import {NgRibbonSettings} from "./ng-ribbon-settings";
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
@@ -7,10 +7,10 @@ import {NgStyle, NgTemplateOutlet} from '@angular/common';
 @Component({
   selector: 'ng-ribbon',
   template: `
-    <div class="contexts" [ngStyle]="{borderColor: selectedTab?.context.color() || '#dadbdc'}">
+    <div class="contexts" [ngStyle]="{borderColor: selectedTab?.context().color() || '#dadbdc'}">
       @for (context of contexts; track context; let firstContext = $first) {
         <div class="context" [ngStyle]="{backgroundColor: context.color()}">
-          @if (settings.useContexts) {
+          @if (settings().useContexts) {
             <div class="context-header">
               @if (context.headerTemplate()) {
                 <ng-template [ngTemplateOutlet]="context.headerTemplate()"
@@ -21,15 +21,15 @@ import {NgStyle, NgTemplateOutlet} from '@angular/common';
             </div>
           }
           <ul role="tablist">
-            @if (firstContext && settings.mainTabName) {
+            @if (firstContext && settings().mainTabName) {
               <li #mainTab role="button" class="main">
-                <a (click)="settings.onMainTabActive(mainTab)">{{ settings.mainTabName }}</a>
+                <a (click)="settings().onMainTabActive(mainTab)">{{ settings().mainTabName }}</a>
               </li>
             }
             @for (tab of context.tabs; track tab) {
               <li
-                role="tab" [attr.aria-selected]="tab.active"
-                [class.active]="tab.active">
+                role="tab" [attr.aria-selected]="tab.active()"
+                [class.active]="tab.active()">
                 <a (click)="selectTab(tab)">{{ tab.name() }}</a>
               </li>
             }
@@ -45,7 +45,7 @@ import {NgStyle, NgTemplateOutlet} from '@angular/common';
   imports: [NgStyle, NgTemplateOutlet]
 })
 export class NgRibbonComponent {
-  @Input() public settings = new NgRibbonSettings();
+  public readonly settings = input(new NgRibbonSettings());
   public readonly tabSelected = output<NgRibbonTabComponent>();
 
   public contexts: NgRibbonContextComponent[] = [];
@@ -55,7 +55,7 @@ export class NgRibbonComponent {
   public selectTab(tab: NgRibbonTabComponent) {
     // Enable tab
     tab.showed = true;
-    this.contexts.forEach(c => c.tabs.forEach(t => t.active = t == tab));
+    this.contexts.forEach(c => c.tabs.forEach(t => t.active.set(t == tab)));
     this.selectedTab = tab;
 
     // Fire events
@@ -78,7 +78,7 @@ export class NgRibbonComponent {
     if (index >= 0) {
       this.contexts.splice(index, 1);
 
-      const hasActiveTab = this.contexts.find(context => context.tabs.find(t => t.active));
+      const hasActiveTab = this.contexts.find(context => context.tabs.find(t => t.active()));
       if (!hasActiveTab && this.contexts.length && this.contexts[0].tabs.length) {
         this.selectTab(this.contexts[0].tabs[0]);
       }
@@ -87,7 +87,7 @@ export class NgRibbonComponent {
 
   @HostListener('wheel', ['$event'])
   public onWheel($event: WheelEvent) {
-    if (this.settings.mouseWheelTabs) {
+    if (this.settings().mouseWheelTabs) {
       if ($event.deltaY > 0) { // Select next tab
         let selectCurrentTab = false;
         this.contexts.forEach(c => c.tabs.forEach(t => {

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ContentChild, Input, OnChanges, SimpleChanges, TemplateRef, ViewChild, inject, OutputRefSubscription} from '@angular/core';
+import {ChangeDetectorRef, Component, ContentChild, OnChanges, SimpleChanges, TemplateRef, ViewChild, inject, OutputRefSubscription, input} from '@angular/core';
 import {NgRibbonTextAreaComponent} from "../textarea/ng-ribbon-textarea.component";
 import {EditorCommands} from "../textarea/editor-commands";
 import {noop, Subscription} from "rxjs";
@@ -26,8 +26,8 @@ export class NgRibbonWysiwygComponent implements OnChanges {
   private _cd = inject(ChangeDetectorRef);
   private _domUtils = inject(DomUtilsService);
 
-  @Input() public editor: NgRibbonTextAreaComponent;
-  @Input() public settings = new NgRibbonWysiwygSettings();
+  public readonly editor = input<NgRibbonTextAreaComponent>(undefined);
+  public readonly settings = input(new NgRibbonWysiwygSettings());
 
   @ViewChild(NgRibbonComponent, {static: true}) public ribbon: NgRibbonComponent;
   @ViewChild('mainContext', {static: true}) public mainContext: NgRibbonContextComponent;
@@ -66,8 +66,9 @@ export class NgRibbonWysiwygComponent implements OnChanges {
       }
 
       // Actualizar estado de los botones cuando cambia el documento
-      if (this.editor) {
-        this._subscription = this.editor.updateUI.subscribe(() => this.updateUI());
+      const editor = this.editor();
+      if (editor) {
+        this._subscription = editor.updateUI.subscribe(() => this.updateUI());
         this.updateUI();
       }
     }
@@ -82,12 +83,13 @@ export class NgRibbonWysiwygComponent implements OnChanges {
   }
 
   public execute(command: EditorCommands, value?: string) {
-    this.editor.execute(command, value);
+    this.editor().execute(command, value);
   }
 
 
   public isDisabled(command: EditorCommands): boolean {
-    return !this.editor || !this.editor.isCommandSupported(command);
+    const editor = this.editor();
+    return !editor || !editor.isCommandSupported(command);
   }
 
   public insertImage() {

@@ -33,14 +33,14 @@ export class NgRibbonHomeTabComponent {
   public readonly Commands = EditorCommands;
 
   public execute(command: EditorCommands, value?: any) {
-    this.ribbon.editor.execute(command, value);
+    this.ribbon.editor().execute(command, value);
   }
 
   public isActive(command: EditorCommands): boolean {
-    return this.ribbon.editor.queryBooleanValue(command);
+    return this.ribbon.editor().queryBooleanValue(command);
   }
 
   public isDisabled(command: EditorCommands): boolean {
-    return !this.ribbon.editor.isCommandSupported(command);
+    return !this.ribbon.editor().isCommandSupported(command);
   }
 }
