@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
 import {EditorCommands} from "../../textarea/editor-commands";
 import {NgRibbonHomeTabComponent} from "./ng-ribbon-home-tab.component";
+import { SplitButtonComponent } from '../components/split-button.component';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'app-list-buttons',
@@ -89,7 +93,7 @@ import {NgRibbonHomeTabComponent} from "./ng-ribbon-home-tab.component";
       height: 48px;
     }
   `],
-    standalone: false
+    imports: [SplitButtonComponent, MatTooltip, MatIcon, MatButton]
 })
 export class ListButtonsComponent {
   // Importar tipos

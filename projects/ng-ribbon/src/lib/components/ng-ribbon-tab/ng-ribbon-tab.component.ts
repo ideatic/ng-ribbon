@@ -7,8 +7,7 @@ import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.c
     host: {
         role: 'tabpanel'
     },
-    styleUrls: ['ng-ribbon-tab.component.less'],
-    standalone: false
+    styleUrls: ['ng-ribbon-tab.component.less']
 })
 export class NgRibbonTabComponent implements OnInit, OnDestroy {
   // Bindings

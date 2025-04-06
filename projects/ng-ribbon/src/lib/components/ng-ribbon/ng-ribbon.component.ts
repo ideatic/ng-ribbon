@@ -2,6 +2,7 @@ import {Component, EventEmitter, HostListener, Input, Output} from '@angular/cor
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 import {NgRibbonSettings} from "./ng-ribbon-settings";
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
+import { NgStyle, NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'ng-ribbon',
@@ -41,7 +42,7 @@ import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.c
     </div>
     `,
     styleUrls: ['ng-ribbon.component.less'],
-    standalone: false
+    imports: [NgStyle, NgTemplateOutlet]
 })
 export class NgRibbonComponent {
   @Input() public settings = new NgRibbonSettings();

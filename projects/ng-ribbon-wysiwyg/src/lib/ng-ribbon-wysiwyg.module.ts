@@ -4,8 +4,8 @@ import {NgRibbonWysiwygComponent} from "./components/ribbon/ng-ribbon-wysiwyg.co
 import {NgRibbonTextAreaComponent} from "./components/textarea/ng-ribbon-textarea.component";
 import {NgRibbonHomeTabComponent} from "./components/ribbon/home-tab/ng-ribbon-home-tab.component";
 import {SymbolListComponent} from "./components/ribbon/components/symbol-list.component";
-import {NgRibbonModule} from "../../../ng-ribbon/src/lib/ng-ribbon.module";
-import {MaterialModule} from "./material.module";
+
+
 import {FormsModule} from "@angular/forms";
 import {MenuTriggerDirective} from "./directives/menu-trigger.directive";
 import {ColorSketchModule} from "ngx-color/sketch";
@@ -15,17 +15,10 @@ import {IconsService} from "./services/icons.service";
 
 
 @NgModule({
-  imports: [
+    imports: [
     CommonModule,
     FormsModule,
-    NgRibbonModule,
-    MaterialModule,
-    ColorSketchModule
-  ],
-  providers: [
-    IconsService
-  ],
-  declarations: [
+    ColorSketchModule,
     NgRibbonWysiwygComponent,
     NgRibbonTextAreaComponent,
     NgRibbonHomeTabComponent,
@@ -33,11 +26,14 @@ import {IconsService} from "./services/icons.service";
     SymbolListComponent,
     ListButtonsComponent,
     MenuTriggerDirective
-  ],
-  exports: [
-    NgRibbonWysiwygComponent,
-    NgRibbonTextAreaComponent
-  ]
+],
+    providers: [
+        IconsService
+    ],
+    exports: [
+        NgRibbonWysiwygComponent,
+        NgRibbonTextAreaComponent
+    ]
 })
 export class NgRibbonWysiwygModule {
 

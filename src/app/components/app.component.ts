@@ -6,22 +6,27 @@ import {FileMenuComponent} from "./file-menu.component";
 import {Title} from "@angular/platform-browser";
 import {environment} from "../../environments/environment";
 import {RawEditorSettings} from "tinymce";
+import {NgRibbonWysiwygComponent} from '../../../projects/ng-ribbon-wysiwyg/src/lib/components/ribbon/ng-ribbon-wysiwyg.component';
+import {NgRibbonTextAreaComponent} from '../../../projects/ng-ribbon-wysiwyg/src/lib/components/textarea/ng-ribbon-textarea.component';
+import {FormsModule} from '@angular/forms';
+import {NgRibbonContextComponent, NgRibbonGroupComponent, NgRibbonTabComponent} from "../../../projects/ng-ribbon/src/public-api";
 
 
 @Component({
-    selector: 'app-root',
-    template: `
+  selector: 'app-root',
+  imports: [NgRibbonWysiwygComponent, NgRibbonGroupComponent, NgRibbonContextComponent, NgRibbonTabComponent, NgRibbonTextAreaComponent, FormsModule],
+  template: `
     <!-- Ribbon -->
     <ng-ribbon-wysiwyg #ribbon [settings]="ribbonSettings" [editor]="editor">
       @if (mainContextVisible) {
         <ng-template #mainContextHeader>
           <div contenteditable [textContent]="documentTitle"
-            (input)="documentTitle = $any($event.target).textContent; onTitleUpdated();"
-          style="outline: none"></div>
+               (input)="documentTitle = $any($event.target).textContent; onTitleUpdated();"
+               style="outline: none"></div>
         </ng-template>
       }
-    
-    
+
+
       <ng-container ngProjectAs="homeTabGroup3">
         <ng-ribbon-group name="Demo">
           <button class="xl animate-pulse" mat-button (click)="mainContextVisible = !mainContextVisible">
@@ -34,14 +39,14 @@ import {RawEditorSettings} from "tinymce";
           </button>
         </ng-ribbon-group>
       </ng-container>
-    
+
       @if (showImageContext) {
         <ng-ribbon-context name="Imagen" i18n-name color="#f0f182" [ribbon]="ribbon.ribbon">
           <ng-ribbon-tab name="Formato" i18n-name>
             <ng-ribbon-group name="Ajustar" i18n-name>
               <!-- Posición -->
               <button class="xl" mat-button
-                title="Cambia la imagen seleccionada por una diferente" i18n-title>
+                      title="Cambia la imagen seleccionada por una diferente" i18n-title>
                 <img src="{{ environment.assetsURL }}/images/picture.png"/>
                 <div i18n>Reemplazar</div>
               </button>
@@ -49,18 +54,18 @@ import {RawEditorSettings} from "tinymce";
           </ng-ribbon-tab>
         </ng-ribbon-context>
       }
-    
+
     </ng-ribbon-wysiwyg>
-    
+
     <!-- Editor -->
     <div class="textarea-wrapper">
       <div class="textarea">
         <ng-ribbon-textarea #editor [(ngModel)]="html" [tinyMceSettings]="tinyMceSettings"></ng-ribbon-textarea>
       </div>
     </div>
-    `,
-    styles: [
-        `
+  `,
+  styles: [
+    `
       :host {
         display: flex;
         flex-direction: column;
@@ -88,8 +93,7 @@ import {RawEditorSettings} from "tinymce";
         margin: 0 auto;
       }
     `
-    ],
-    standalone: false
+  ]
 })
 export class AppComponent implements OnInit {
   public documentTitle = $localize`Demo`;

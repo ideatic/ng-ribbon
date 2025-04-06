@@ -2,10 +2,7 @@ import {Directive, ElementRef, EmbeddedViewRef, HostListener, Input, OnDestroy, 
 import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {TemplatePortal} from "@angular/cdk/portal";
 
-@Directive({
-    selector: '[menuTriggerFor]',
-    standalone: false
-})
+@Directive({ selector: '[menuTriggerFor]' })
 export class MenuTriggerDirective implements OnDestroy {
   @Input() public menuTriggerFor: TemplateRef<any>;
 

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'app-symbol-list',
@@ -44,7 +45,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
       max-width: 40px;
     }
   `],
-    standalone: false
+    imports: [MatButton]
 })
 export class SymbolListComponent {
   @Input() public disabled = false;

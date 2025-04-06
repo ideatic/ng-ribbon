@@ -9,8 +9,7 @@ import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
         `:host {
       display: block;
     }`
-    ],
-    standalone: false
+    ]
 })
 export class NgRibbonContextComponent implements OnInit, OnDestroy {
   @Input() public name: string;

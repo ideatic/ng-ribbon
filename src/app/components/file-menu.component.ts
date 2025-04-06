@@ -10,8 +10,7 @@ import {Component, HostListener} from '@angular/core';
       width: 615px;
       border: 1px solid #c9d5e7;
     }
-  `],
-    standalone: false
+  `]
 })
 export class FileMenuComponent {
 

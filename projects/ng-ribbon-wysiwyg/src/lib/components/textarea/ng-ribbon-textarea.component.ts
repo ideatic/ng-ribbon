@@ -42,8 +42,7 @@ import 'tinymce/plugins/code';
             useExisting: forwardRef(() => NgRibbonTextAreaComponent),
             multi: true
         }
-    ],
-    standalone: false
+    ]
 })
 export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() public editorCSS: string;

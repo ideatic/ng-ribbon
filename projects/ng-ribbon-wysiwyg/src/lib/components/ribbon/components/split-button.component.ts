@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, Output, TemplateRef} from '@angular/core';
-import {MatMenu} from "@angular/material/menu";
+import { MatMenu, MatMenuTrigger } from "@angular/material/menu";
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MenuTriggerDirective } from '../../../directives/menu-trigger.directive';
 
 @Component({
     selector: 'app-split-button',
@@ -30,7 +33,7 @@ import {MatMenu} from "@angular/material/menu";
         width: 20px !important;
       }
     `],
-    standalone: false
+    imports: [MatButton, MatMenuTrigger, MatIcon, MenuTriggerDirective]
 })
 export class SplitButtonComponent {
   @Input() public disabled = false;

@@ -3,6 +3,12 @@ import {DomUtilsService} from "../../../../services/dom-utils.service";
 import {noop} from "rxjs";
 import {NgRibbonWysiwygContext} from "../ng-ribbon-wysiwyg-context";
 import {NgRibbonWysiwygComponent} from "../../ng-ribbon-wysiwyg.component";
+import { NgRibbonContextComponent } from '../../../../../../../ng-ribbon/src/lib/components/ng-ribbon-context/ng-ribbon-context.component';
+import { NgRibbonTabComponent } from '../../../../../../../ng-ribbon/src/lib/components/ng-ribbon-tab/ng-ribbon-tab.component';
+import { NgRibbonGroupComponent } from '../../../../../../../ng-ribbon/src/lib/components/ng-ribbon-group/ng-ribbon-group.component';
+import { MatButton } from '@angular/material/button';
+import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
+import { MatIcon } from '@angular/material/icon';
 
 enum ImagePosition {
   Inline,
@@ -17,7 +23,7 @@ enum ImagePosition {
       display: block;
     }`
     ],
-    standalone: false
+    imports: [NgRibbonContextComponent, NgRibbonTabComponent, NgRibbonGroupComponent, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem]
 })
 export class NgRibbonImageContextComponent implements NgRibbonWysiwygContext {
   @Input() public ribbon: NgRibbonWysiwygComponent;

@@ -16,8 +16,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
       }
     </div>
     `,
-    styleUrls: ['ng-ribbon-group.component.less'],
-    standalone: false
+    styleUrls: ['ng-ribbon-group.component.less']
 })
 export class NgRibbonGroupComponent {
   // Bindings
