@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ContentChild, Input, OnChanges, SimpleChanges, TemplateRef, ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, ContentChild, Input, OnChanges, SimpleChanges, TemplateRef, ViewChild, inject } from '@angular/core';
 import {NgRibbonTextAreaComponent} from "../textarea/ng-ribbon-textarea.component";
 import {EditorCommands} from "../textarea/editor-commands";
 import {noop, Subscription} from "rxjs";
@@ -23,6 +23,9 @@ import { SymbolListComponent } from './components/symbol-list.component';
     imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgRibbonTabComponent, NgRibbonHomeTabComponent, NgRibbonGroupComponent, MatButton, MatTooltip, MatIcon, SymbolListComponent]
 })
 export class NgRibbonWysiwygComponent implements OnChanges {
+  private _cd = inject(ChangeDetectorRef);
+  private _domUtils = inject(DomUtilsService);
+
   @Input() public editor: NgRibbonTextAreaComponent;
   @Input() public settings = new NgRibbonWysiwygSettings();
 
@@ -50,9 +53,9 @@ export class NgRibbonWysiwygComponent implements OnChanges {
   // Importar tipos en la plantilla
   public readonly Commands = EditorCommands;
 
-  constructor(private _cd: ChangeDetectorRef,
-              private _domUtils: DomUtilsService,
-              iconsSvc: IconsService) {
+  constructor() {
+    const iconsSvc = inject(IconsService);
+
     iconsSvc.configure();
   }
 

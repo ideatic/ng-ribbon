@@ -1,18 +1,17 @@
-import {Directive, ElementRef, EmbeddedViewRef, HostListener, Input, OnDestroy, TemplateRef, ViewContainerRef} from '@angular/core';
+import { Directive, ElementRef, EmbeddedViewRef, HostListener, Input, OnDestroy, TemplateRef, ViewContainerRef, inject } from '@angular/core';
 import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {TemplatePortal} from "@angular/cdk/portal";
 
 @Directive({ selector: '[menuTriggerFor]' })
 export class MenuTriggerDirective implements OnDestroy {
+  private _overlaySvc = inject(Overlay);
+  private _host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private _viewContainerRef = inject(ViewContainerRef);
+
   @Input() public menuTriggerFor: TemplateRef<any>;
 
   private _overlayRef: OverlayRef;
   private _embeddedViewRef: EmbeddedViewRef<any>;
-
-  constructor(private _overlaySvc: Overlay,
-              private _host: ElementRef<HTMLElement>,
-              private _viewContainerRef: ViewContainerRef) {
-  }
 
   @HostListener('click')
   public onClick() {

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Optional, Output} from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output, inject } from '@angular/core';
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
 
 @Component({
@@ -25,7 +25,9 @@ export class NgRibbonTabComponent implements OnInit, OnDestroy {
    */
   public showed = false;
 
-  constructor(@Optional() context: NgRibbonContextComponent) {
+  constructor() {
+    const context = inject(NgRibbonContextComponent, { optional: true })!;
+
     this.context = context;
   }
 

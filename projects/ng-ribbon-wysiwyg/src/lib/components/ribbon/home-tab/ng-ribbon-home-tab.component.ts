@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {NgRibbonWysiwygComponent} from "../ng-ribbon-wysiwyg.component";
 import {EditorCommands} from "../../textarea/editor-commands";
 import {IconsService} from "../../../services/icons.service";
@@ -24,14 +24,13 @@ import { ListButtonsComponent } from './list-buttons.component';
     imports: [NgRibbonGroupComponent, MatList, MatInput, FormsModule, MatAutocompleteTrigger, MatTooltip, MatAutocomplete, MatOption, NgStyle, MatButton, MatIcon, MatDivider, MatMenuTrigger, MatMenu, MatMenuItem, SplitButtonComponent, ColorSketchModule, ListButtonsComponent, DecimalPipe]
 })
 export class NgRibbonHomeTabComponent {
+    ribbon = inject(NgRibbonWysiwygComponent);
+
     public backColor = 'yellow';
     public foreColor = 'red';
 
     // Importar tipos
     public readonly Commands = EditorCommands;
-
-    constructor(public ribbon: NgRibbonWysiwygComponent) {
-    }
 
     public execute(command: EditorCommands, value?: any) {
         this.ribbon.editor.execute(command, value);

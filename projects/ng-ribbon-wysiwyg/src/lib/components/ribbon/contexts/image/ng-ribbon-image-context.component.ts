@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import {DomUtilsService} from "../../../../services/dom-utils.service";
 import {noop} from "rxjs";
 import {NgRibbonWysiwygContext} from "../ng-ribbon-wysiwyg-context";
@@ -26,14 +26,13 @@ enum ImagePosition {
     imports: [NgRibbonContextComponent, NgRibbonTabComponent, NgRibbonGroupComponent, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem]
 })
 export class NgRibbonImageContextComponent implements NgRibbonWysiwygContext {
+  private _domUtils = inject(DomUtilsService);
+
   @Input() public ribbon: NgRibbonWysiwygComponent;
   @Input() public element: HTMLImageElement;
 
   // Importar tipos
   public readonly ImagePosition = ImagePosition;
-
-  constructor(private _domUtils: DomUtilsService) {
-  }
 
   public get position(): ImagePosition {
     if (this.element.style.float == 'left') {

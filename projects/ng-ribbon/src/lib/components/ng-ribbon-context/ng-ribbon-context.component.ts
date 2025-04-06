@@ -1,4 +1,4 @@
-import {Component, ContentChild, Input, OnDestroy, OnInit, Optional, TemplateRef} from '@angular/core';
+import { Component, ContentChild, Input, OnDestroy, OnInit, TemplateRef, inject } from '@angular/core';
 import {NgRibbonComponent} from "../ng-ribbon/ng-ribbon.component";
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 
@@ -20,7 +20,9 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
 
   public tabs: NgRibbonTabComponent[] = [];
 
-  constructor(@Optional() ribbon: NgRibbonComponent) {
+  constructor() {
+    const ribbon = inject(NgRibbonComponent, { optional: true })!;
+
     this.ribbon = ribbon;
   }
 

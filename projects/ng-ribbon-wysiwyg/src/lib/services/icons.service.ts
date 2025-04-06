@@ -1,4 +1,4 @@
-import {Inject, Injectable, LOCALE_ID} from '@angular/core';
+import { Injectable, LOCALE_ID, inject } from '@angular/core';
 import {getLocaleDirection} from "@angular/common";
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from "@angular/platform-browser";
@@ -7,13 +7,12 @@ import {DomSanitizer} from "@angular/platform-browser";
   providedIn: 'root'
 })
 export class IconsService {
+  private _locale = inject(LOCALE_ID);
+  private _iconRegistry = inject(MatIconRegistry);
+  private _sanitizer = inject(DomSanitizer);
+
 
   private _initialized = false;
-
-  constructor(@Inject(LOCALE_ID) private _locale: string,
-              private _iconRegistry: MatIconRegistry,
-              private _sanitizer: DomSanitizer) {
-  }
 
   public configure() {
     if (this._initialized) {

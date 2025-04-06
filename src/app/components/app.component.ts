@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {NgRibbonWysiwygSettings} from "../../../projects/ng-ribbon-wysiwyg/src/lib/components/ribbon/ng-ribbon-wysiwyg-settings";
 import {ConnectionPositionPair, Overlay} from "@angular/cdk/overlay";
 import {ComponentPortal} from "@angular/cdk/portal";
@@ -96,6 +96,9 @@ import {NgRibbonContextComponent, NgRibbonGroupComponent, NgRibbonTabComponent} 
   ]
 })
 export class AppComponent implements OnInit {
+  private _overlaySvc = inject(Overlay);
+  private _titleSvc = inject(Title);
+
   public documentTitle = $localize`Demo`;
   public html = `<h1>Welcome to <em>NgRibbon</em></h1>
 <h3>Windows-like ribbon interface for Angular apps + WYSIWYG implementation using TinyMCE</h3>
@@ -149,10 +152,6 @@ export class AppComponent implements OnInit {
   };
 
   public readonly environment = environment;
-
-  constructor(private _overlaySvc: Overlay,
-              private _titleSvc: Title) {
-  }
 
   public ngOnInit() {
     setTimeout(() => this.showImageContext = true, 1000);

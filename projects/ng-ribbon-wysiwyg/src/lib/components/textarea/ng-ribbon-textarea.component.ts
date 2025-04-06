@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, forwardRef, Inject, Input, LOCALE_ID, NgZone, OnDestroy, OnInit, Output} from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, LOCALE_ID, NgZone, OnDestroy, OnInit, Output, inject } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {noop} from "rxjs";
 import {EditorCommands} from "./editor-commands";
@@ -45,6 +45,10 @@ import 'tinymce/plugins/code';
     ]
 })
 export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValueAccessor {
+  private _host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private _locale = inject(LOCALE_ID);
+  private _ngZone = inject(NgZone);
+
   @Input() public editorCSS: string;
   @Input() public tinyMceSettings: RawEditorSettings;
   @Output() public updateUI = new EventEmitter();
@@ -56,12 +60,6 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
   private _onTouched: () => void = noop;
 
   private _disabled: boolean;
-
-  constructor(private _host: ElementRef<HTMLElement>,
-              @Inject(LOCALE_ID) private _locale: string,
-              private _ngZone: NgZone) {
-
-  }
 
   public ngOnInit() {
     // Configurar TinyMCE

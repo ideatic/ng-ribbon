@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {EditorCommands} from "../../textarea/editor-commands";
 import {NgRibbonHomeTabComponent} from "./ng-ribbon-home-tab.component";
 import { SplitButtonComponent } from '../components/split-button.component';
@@ -96,10 +96,8 @@ import { MatButton } from '@angular/material/button';
     imports: [SplitButtonComponent, MatTooltip, MatIcon, MatButton]
 })
 export class ListButtonsComponent {
+  homeTab = inject(NgRibbonHomeTabComponent);
+
   // Importar tipos
   public readonly Commands = EditorCommands;
-
-  constructor(public homeTab: NgRibbonHomeTabComponent) {
-
-  }
 }
