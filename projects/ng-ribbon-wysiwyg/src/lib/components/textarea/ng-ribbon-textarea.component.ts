@@ -2,12 +2,12 @@ import {Component, ElementRef, EventEmitter, forwardRef, Inject, Input, LOCALE_I
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {noop} from "rxjs";
 import {EditorCommands} from "./editor-commands";
-import {HtmlToolsService} from "../../services/html-tools.service";
 import {getLocaleDirection} from "@angular/common";
 // Import TinyMCE
-import {Editor, Settings} from 'tinymce';
+import {Editor, RawEditorSettings} from 'tinymce';
 import tinymce from 'tinymce/tinymce';
 import 'tinymce/themes/silver';
+import 'tinymce/icons/default';
 import 'tinymce/plugins/lists';
 import 'tinymce/plugins/link';
 import 'tinymce/plugins/image';
@@ -46,7 +46,7 @@ import 'tinymce/plugins/code';
 })
 export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() public editorCSS: string;
-  @Input() public tinyMceSettings: Settings;
+  @Input() public tinyMceSettings: RawEditorSettings;
   @Output() public updateUI = new EventEmitter();
 
   // Estado
@@ -59,7 +59,6 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
 
   constructor(private _host: ElementRef<HTMLElement>,
               @Inject(LOCALE_ID) private _locale: string,
-              private _htmlToolsSvc: HtmlToolsService,
               private _ngZone: NgZone) {
 
   }
@@ -111,7 +110,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
     };
 
     // Configuraciones
-    const settings: (Settings & {
+    const settings: (RawEditorSettings & {
       contextmenu: boolean,
       quickbars_insert_toolbar: boolean,
       quickbars_selection_toolbar: string
@@ -124,7 +123,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
       browser_spellcheck: true,
       height: '100%',
       width: '100%',
-      contextmenu: false, // Usar menú del navegador
+      contextmenu: false as any, // Usar menú del navegador
       custom_ui_selector: 'ng-ribbon', // Evitar que pierda la selección al seleccionar este elemento
       plugins: 'lists link image table paste imagetools quickbars searchreplace code',
       menubar: false,

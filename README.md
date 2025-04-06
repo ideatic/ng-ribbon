@@ -24,6 +24,11 @@ Windows-like ribbon interface for Angular apps + WYSIWYG implementation using Ti
                               },
                               {
                                 "glob": "**/*",
+                                "input": "./node_modules/tinymce/icons",
+                                "output": "./assets/ribbon/vendor/tinymce/icons"
+                              },
+                              {
+                                "glob": "**/*",
                                 "input": "./node_modules/tinymce-i18n/langs5",
                                 "output": "./assets/ribbon/vendor/tinymce/langs"
                               },

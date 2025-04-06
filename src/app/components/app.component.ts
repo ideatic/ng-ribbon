@@ -5,7 +5,7 @@ import {ComponentPortal} from "@angular/cdk/portal";
 import {FileMenuComponent} from "./file-menu.component";
 import {Title} from "@angular/platform-browser";
 import {environment} from "../../environments/environment";
-import {Settings} from "tinymce";
+import {RawEditorSettings} from "tinymce";
 
 
 @Component({
@@ -135,7 +135,7 @@ export class AppComponent implements OnInit {
     onMainTabActive: (element) => this._showFileMenu(element)
   });
 
-  public tinyMceSettings: Settings = {
+  public tinyMceSettings: RawEditorSettings = {
     base_url: environment.assetsURL + '/ribbon/vendor/tinymce'
   };
 
