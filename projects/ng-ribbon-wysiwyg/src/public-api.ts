@@ -2,4 +2,5 @@
  * Public API Surface of ng-ribbon-wysiwyg
  */
 
-export * from './lib/ng-ribbon-wysiwyg.module';
+export {NgRibbonWysiwygComponent} from "./lib/components/ribbon/ng-ribbon-wysiwyg.component";
+export {NgRibbonTextAreaComponent} from "./lib/components/textarea/ng-ribbon-textarea.component";
