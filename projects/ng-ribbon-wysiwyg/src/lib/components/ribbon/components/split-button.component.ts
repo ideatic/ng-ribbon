@@ -7,16 +7,17 @@ import {MatMenu} from "@angular/material/menu";
     <button class="sm" mat-button (click)="mainBtnClick.emit($event)" [class.active]="isActive" [disabled]="disabled">
       <ng-content></ng-content>
     </button>
-    <button *ngIf="isMatMenu; else renderDropDownMenu"
-            mat-button class="split-button" [matMenuTriggerFor]="$any(dropDownMenu)" [class.active]="isActive" [disabled]="disabled">
-      <mat-icon class="drop-down-icon">arrow_drop_down</mat-icon>
-    </button>
-    <ng-template #renderDropDownMenu>
+    @if (isMatMenu) {
+      <button
+        mat-button class="split-button" [matMenuTriggerFor]="$any(dropDownMenu)" [class.active]="isActive" [disabled]="disabled">
+        <mat-icon class="drop-down-icon">arrow_drop_down</mat-icon>
+      </button>
+    } @else {
       <button mat-button class="split-button" [menuTriggerFor]="$any(dropDownMenu)" [class.active]="isActive" [disabled]="disabled">
         <mat-icon class="drop-down-icon">arrow_drop_down</mat-icon>
       </button>
-    </ng-template>
-  `,
+    }
+    `,
     styles: [`
       .split-button {
         padding: 0 5px 0 0;

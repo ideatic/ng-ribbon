@@ -13,13 +13,15 @@ import {RawEditorSettings} from "tinymce";
     template: `
     <!-- Ribbon -->
     <ng-ribbon-wysiwyg #ribbon [settings]="ribbonSettings" [editor]="editor">
-      <ng-template *ngIf="mainContextVisible" #mainContextHeader>
-        <div contenteditable [textContent]="documentTitle"
-             (input)="documentTitle = $any($event.target).textContent; onTitleUpdated();"
-             style="outline: none"></div>
-      </ng-template>
-
-
+      @if (mainContextVisible) {
+        <ng-template #mainContextHeader>
+          <div contenteditable [textContent]="documentTitle"
+            (input)="documentTitle = $any($event.target).textContent; onTitleUpdated();"
+          style="outline: none"></div>
+        </ng-template>
+      }
+    
+    
       <ng-container ngProjectAs="homeTabGroup3">
         <ng-ribbon-group name="Demo">
           <button class="xl animate-pulse" mat-button (click)="mainContextVisible = !mainContextVisible">
@@ -32,29 +34,31 @@ import {RawEditorSettings} from "tinymce";
           </button>
         </ng-ribbon-group>
       </ng-container>
-
-      <ng-ribbon-context *ngIf="showImageContext" name="Imagen" i18n-name color="#f0f182" [ribbon]="ribbon.ribbon">
-        <ng-ribbon-tab name="Formato" i18n-name>
-          <ng-ribbon-group name="Ajustar" i18n-name>
-            <!-- Posición -->
-            <button class="xl" mat-button
-                    title="Cambia la imagen seleccionada por una diferente" i18n-title>
-              <img src="{{ environment.assetsURL }}/images/picture.png"/>
-              <div i18n>Reemplazar</div>
-            </button>
-          </ng-ribbon-group>
-        </ng-ribbon-tab>
-      </ng-ribbon-context>
-
+    
+      @if (showImageContext) {
+        <ng-ribbon-context name="Imagen" i18n-name color="#f0f182" [ribbon]="ribbon.ribbon">
+          <ng-ribbon-tab name="Formato" i18n-name>
+            <ng-ribbon-group name="Ajustar" i18n-name>
+              <!-- Posición -->
+              <button class="xl" mat-button
+                title="Cambia la imagen seleccionada por una diferente" i18n-title>
+                <img src="{{ environment.assetsURL }}/images/picture.png"/>
+                <div i18n>Reemplazar</div>
+              </button>
+            </ng-ribbon-group>
+          </ng-ribbon-tab>
+        </ng-ribbon-context>
+      }
+    
     </ng-ribbon-wysiwyg>
-
+    
     <!-- Editor -->
     <div class="textarea-wrapper">
       <div class="textarea">
         <ng-ribbon-textarea #editor [(ngModel)]="html" [tinyMceSettings]="tinyMceSettings"></ng-ribbon-textarea>
       </div>
     </div>
-  `,
+    `,
     styles: [
         `
       :host {

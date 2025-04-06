@@ -4,35 +4,39 @@
 <ng-ribbon-group name="Fuente" i18n-name class="column">
   <mat-list>
     <input type="text"
-           [(ngModel)]="ribbon.editor.fontFamily"
-           matTooltip="Fuente" i18n-matTooltip
-           matInput
-           style="width: 90px; margin: 0 1px"
-           [matAutocomplete]="fontFamilies"
-           [disabled]="isDisabled(Commands.fontName)">
+      [(ngModel)]="ribbon.editor.fontFamily"
+      matTooltip="Fuente" i18n-matTooltip
+      matInput
+      style="width: 90px; margin: 0 1px"
+      [matAutocomplete]="fontFamilies"
+      [disabled]="isDisabled(Commands.fontName)">
     <mat-autocomplete #fontFamilies>
-      <mat-option *ngFor="let family of ribbon.settings.font.families" [value]="family" [ngStyle]="{fontFamily: family}">{{ family }}</mat-option>
+      @for (family of ribbon.settings.font.families; track family) {
+        <mat-option [value]="family" [ngStyle]="{fontFamily: family}">{{ family }}</mat-option>
+      }
     </mat-autocomplete>
 
     <!-- Tamaño de fuente -->
     <input type="text"
-           [(ngModel)]="ribbon.editor.fontSize"
-           matTooltip="Tamaño de la fuente" i18n-matTooltip
-           matInput
-           style="width: 35px"
-           [matAutocomplete]="fontSizes"
-           [disabled]="isDisabled(Commands.fontSize)">
+      [(ngModel)]="ribbon.editor.fontSize"
+      matTooltip="Tamaño de la fuente" i18n-matTooltip
+      matInput
+      style="width: 35px"
+      [matAutocomplete]="fontSizes"
+      [disabled]="isDisabled(Commands.fontSize)">
     <mat-autocomplete #fontSizes>
-      <mat-option *ngFor="let size of ribbon.settings.font.sizes" [value]="size">{{ size | number }}</mat-option>
+      @for (size of ribbon.settings.font.sizes; track size) {
+        <mat-option [value]="size">{{ size | number }}</mat-option>
+      }
     </mat-autocomplete>
 
     <button class="sm" mat-button matTooltip="Aumentar tamaño de la fuente" i18n-matTooltip (click)="ribbon.editor.fontSize = ribbon.editor.fontSize + 1"
-            [disabled]="isDisabled(Commands.fontSize)" style="padding-left: 0">
+      [disabled]="isDisabled(Commands.fontSize)" style="padding-left: 0">
       <mat-icon svgIcon="format"></mat-icon>
       <mat-icon class="font-size-arrow">arrow_drop_up</mat-icon>
     </button>
     <button class="sm" mat-button matTooltip="Reducir tamaño de la fuente" i18n-matTooltip (click)="ribbon.editor.fontSize = ribbon.editor.fontSize - 1"
-            [disabled]="isDisabled(Commands.fontSize)">
+      [disabled]="isDisabled(Commands.fontSize)">
       <mat-icon svgIcon="format"></mat-icon>
       <mat-icon class="font-size-arrow">arrow_drop_down</mat-icon>
     </button>
@@ -63,33 +67,33 @@
   <mat-list>
     <!-- Formato -->
     <button matTooltip="Negrita" i18n-matTooltip class="sm" mat-button tabindex="-1"
-            (click)="execute(Commands.bold)"
-            [disabled]="isDisabled(Commands.bold)"
-            [class.active]="isActive(Commands.bold)">
+      (click)="execute(Commands.bold)"
+      [disabled]="isDisabled(Commands.bold)"
+      [class.active]="isActive(Commands.bold)">
       <mat-icon svgIcon="bold"></mat-icon>
     </button>
     <button matTooltip="Cursiva" i18n-matTooltip class="sm" mat-button
-            (click)="execute(Commands.italic)"
-            [disabled]="isDisabled(Commands.italic)"
-            [class.active]="isActive(Commands.italic)">
+      (click)="execute(Commands.italic)"
+      [disabled]="isDisabled(Commands.italic)"
+      [class.active]="isActive(Commands.italic)">
       <mat-icon svgIcon="italic"></mat-icon>
     </button>
     <button matTooltip="Subrayado" i18n-matTooltip class="sm" mat-button
-            (click)="execute(Commands.underline)"
-            [disabled]="isDisabled(Commands.underline)"
-            [class.active]="isActive(Commands.underline)">
+      (click)="execute(Commands.underline)"
+      [disabled]="isDisabled(Commands.underline)"
+      [class.active]="isActive(Commands.underline)">
       <mat-icon svgIcon="underline"></mat-icon>
     </button>
     <button matTooltip="Subíndice" i18n-matTooltip class="sm" mat-button
-            (click)="execute(Commands.subscript)"
-            [disabled]="isDisabled(Commands.subscript)"
-            [class.active]="isActive(Commands.subscript)">
+      (click)="execute(Commands.subscript)"
+      [disabled]="isDisabled(Commands.subscript)"
+      [class.active]="isActive(Commands.subscript)">
       <mat-icon svgIcon="subscript"></mat-icon>
     </button>
     <button matTooltip="Superíndice" i18n-matTooltip class="sm" mat-button
-            (click)="execute(Commands.superscript)"
-            [disabled]="isDisabled(Commands.superscript)"
-            [class.active]="isActive(Commands.superscript)">
+      (click)="execute(Commands.superscript)"
+      [disabled]="isDisabled(Commands.superscript)"
+      [class.active]="isActive(Commands.superscript)">
       <mat-icon svgIcon="superscript"></mat-icon>
     </button>
 
@@ -107,8 +111,8 @@
       </div>
       <ng-template #bgColorMenu>
         <color-sketch style="width: 220px"
-                      [color]="backColor"
-                      (onChangeComplete)="backColor =  $event.color.hex; execute(Commands.hiliteColor, backColor)"></color-sketch>
+          [color]="backColor"
+        (onChangeComplete)="backColor =  $event.color.hex; execute(Commands.hiliteColor, backColor)"></color-sketch>
       </ng-template>
     </app-split-button>
 
@@ -118,17 +122,17 @@
       (mainBtnClick)="execute(Commands.foreColor, foreColor)"
       [dropDownMenu]="foreColorMenu"
       [disabled]="isDisabled(Commands.foreColor)">
-      <mat-icon svgIcon="text-color"></mat-icon>
-      <div class="btn-color-preview">
-        <div [ngStyle]="{background: foreColor}"></div>
-      </div>
-      <ng-template #foreColorMenu>
-        <color-sketch style="width: 220px"
-                      [color]="foreColor"
-                      (onChangeComplete)="foreColor =  $event.color.hex; execute(Commands.foreColor, foreColor)"></color-sketch>
-      </ng-template>
-    </app-split-button>
-  </mat-list>
+    <mat-icon svgIcon="text-color"></mat-icon>
+    <div class="btn-color-preview">
+      <div [ngStyle]="{background: foreColor}"></div>
+    </div>
+    <ng-template #foreColorMenu>
+      <color-sketch style="width: 220px"
+        [color]="foreColor"
+      (onChangeComplete)="foreColor =  $event.color.hex; execute(Commands.foreColor, foreColor)"></color-sketch>
+    </ng-template>
+  </app-split-button>
+</mat-list>
 </ng-ribbon-group>
 
 <ng-content select="homeTabGroup1"></ng-content>
@@ -140,62 +144,62 @@
       (mainBtnClick)="execute(Commands.formatBlock,'h2')"
       [dropDownMenu]="titleMenu"
       [disabled]="isDisabled(Commands.formatBlock)"
-    >
-      <mat-icon>text_fields</mat-icon>
-      <span i18n>Título</span>
-      <mat-menu #titleMenu>
-        <button mat-menu-item (click)="execute(Commands.formatBlock,'h1')" i18n>Título principal</button>
-        <button mat-menu-item (click)="execute(Commands.formatBlock,'h2')" i18n>Título secundario</button>
-        <button mat-menu-item (click)="execute(Commands.formatBlock,'h3')" i18n>Subtítulo</button>
-        <button mat-menu-item (click)="execute(Commands.formatBlock, 'p')" i18n>Párrafo</button>
-      </mat-menu>
-    </app-split-button>
+      >
+    <mat-icon>text_fields</mat-icon>
+    <span i18n>Título</span>
+    <mat-menu #titleMenu>
+      <button mat-menu-item (click)="execute(Commands.formatBlock,'h1')" i18n>Título principal</button>
+      <button mat-menu-item (click)="execute(Commands.formatBlock,'h2')" i18n>Título secundario</button>
+      <button mat-menu-item (click)="execute(Commands.formatBlock,'h3')" i18n>Subtítulo</button>
+      <button mat-menu-item (click)="execute(Commands.formatBlock, 'p')" i18n>Párrafo</button>
+    </mat-menu>
+  </app-split-button>
 
-    <mat-divider class="vertical-divider" [vertical]="true"></mat-divider>
+  <mat-divider class="vertical-divider" [vertical]="true"></mat-divider>
 
-    <!-- Listas -->
-    <app-list-buttons></app-list-buttons>
-  </mat-list>
+  <!-- Listas -->
+  <app-list-buttons></app-list-buttons>
+</mat-list>
 
-  <mat-list>
-    <!-- Alineado -->
-    <button matTooltip="Alinear texto a la izquierda" i18n-matTooltip class="sm" mat-button
-            (click)="execute(Commands.justifyLeft)"
-            [class.active]="isActive(Commands.justifyLeft)"
-            [disabled]="isDisabled(Commands.justifyLeft)">
-      <mat-icon svgIcon="align-left"></mat-icon>
-    </button>
-    <button matTooltip="Centrar texto" i18n-matTooltip class="sm" mat-button
-            (click)="execute(Commands.justifyCenter)"
-            [class.active]="isActive(Commands.justifyCenter)"
-            [disabled]="isDisabled(Commands.justifyCenter)">
-      <mat-icon svgIcon="align-center"></mat-icon>
-    </button>
-    <button matTooltip="Alinear texto a la derecha" i18n-matTooltip class="sm" mat-button
-            (click)="execute(Commands.justifyRight)"
-            [class.active]="isActive(Commands.justifyRight)"
-            [disabled]="isDisabled(Commands.justifyRight)">
-      <mat-icon svgIcon="align-right"></mat-icon>
-    </button>
-    <button matTooltip="Justificar el texto para ocupar todo el ancho disponible" i18n-matTooltip class="sm" mat-button
-            (click)="execute(Commands.justifyFull)"
-            [class.active]="isActive(Commands.justifyFull)"
-            [disabled]="isDisabled(Commands.justifyFull)">
-      <mat-icon svgIcon="align-justify"></mat-icon>
-    </button>
+<mat-list>
+  <!-- Alineado -->
+  <button matTooltip="Alinear texto a la izquierda" i18n-matTooltip class="sm" mat-button
+    (click)="execute(Commands.justifyLeft)"
+    [class.active]="isActive(Commands.justifyLeft)"
+    [disabled]="isDisabled(Commands.justifyLeft)">
+    <mat-icon svgIcon="align-left"></mat-icon>
+  </button>
+  <button matTooltip="Centrar texto" i18n-matTooltip class="sm" mat-button
+    (click)="execute(Commands.justifyCenter)"
+    [class.active]="isActive(Commands.justifyCenter)"
+    [disabled]="isDisabled(Commands.justifyCenter)">
+    <mat-icon svgIcon="align-center"></mat-icon>
+  </button>
+  <button matTooltip="Alinear texto a la derecha" i18n-matTooltip class="sm" mat-button
+    (click)="execute(Commands.justifyRight)"
+    [class.active]="isActive(Commands.justifyRight)"
+    [disabled]="isDisabled(Commands.justifyRight)">
+    <mat-icon svgIcon="align-right"></mat-icon>
+  </button>
+  <button matTooltip="Justificar el texto para ocupar todo el ancho disponible" i18n-matTooltip class="sm" mat-button
+    (click)="execute(Commands.justifyFull)"
+    [class.active]="isActive(Commands.justifyFull)"
+    [disabled]="isDisabled(Commands.justifyFull)">
+    <mat-icon svgIcon="align-justify"></mat-icon>
+  </button>
 
-    <mat-divider class="vertical-divider" [vertical]="true"></mat-divider>
+  <mat-divider class="vertical-divider" [vertical]="true"></mat-divider>
 
-    <!-- Identación -->
-    <button matTooltip="Disminuir sangría" i18n-matTooltip class="sm" mat-button (click)="execute(Commands.outdent)"
-            [disabled]="isDisabled(Commands.outdent)">
-      <mat-icon svgIcon="outdent"></mat-icon>
-    </button>
-    <button matTooltip="Aumentar sangría" i18n-matTooltip class="sm" mat-button (click)="execute(Commands.indent)"
-            [disabled]="isDisabled(Commands.indent)">
-      <mat-icon svgIcon="indent"></mat-icon>
-    </button>
-  </mat-list>
+  <!-- Identación -->
+  <button matTooltip="Disminuir sangría" i18n-matTooltip class="sm" mat-button (click)="execute(Commands.outdent)"
+    [disabled]="isDisabled(Commands.outdent)">
+    <mat-icon svgIcon="outdent"></mat-icon>
+  </button>
+  <button matTooltip="Aumentar sangría" i18n-matTooltip class="sm" mat-button (click)="execute(Commands.indent)"
+    [disabled]="isDisabled(Commands.indent)">
+    <mat-icon svgIcon="indent"></mat-icon>
+  </button>
+</mat-list>
 </ng-ribbon-group>
 
 <ng-content select="homeTabGroup2"></ng-content>
@@ -204,17 +208,17 @@
 <ng-ribbon-group name="Edición" i18n-name>
   <div class="column">
     <button mat-button class="sm flex-center" style="line-height: 28px"
-            (click)="execute(Commands.copy)" [disabled]="isDisabled(Commands.copy)">
+      (click)="execute(Commands.copy)" [disabled]="isDisabled(Commands.copy)">
       <mat-icon svgIcon="copy" class="sm"></mat-icon>
       <span i18n>Copiar</span>
     </button>
     <button mat-button class="sm flex-center" style="line-height: 28px"
-            (click)="execute(Commands.cut)" [disabled]="isDisabled(Commands.cut)">
+      (click)="execute(Commands.cut)" [disabled]="isDisabled(Commands.cut)">
       <mat-icon svgIcon="cut" class="sm"></mat-icon>
       <span i18n>Cortar</span>
     </button>
     <button mat-button class="sm flex-center" style="line-height: 28px"
-            (click)="execute(Commands.paste)" [disabled]="isDisabled(Commands.paste)">
+      (click)="execute(Commands.paste)" [disabled]="isDisabled(Commands.paste)">
       <mat-icon svgIcon="paste" class="sm"></mat-icon>
       <span i18n>Pegar</span>
     </button>
@@ -228,17 +232,17 @@
     <!-- Deshacer / rehacer -->
     <div>
       <button matTooltip="Deshacer" i18n-matTooltip class="sm undo" mat-button
-              (click)="execute(Commands.undo)" [disabled]="isDisabled(Commands.undo)">
+        (click)="execute(Commands.undo)" [disabled]="isDisabled(Commands.undo)">
         <mat-icon svgIcon="undo"></mat-icon>
       </button>
       <button matTooltip="Rehacer" i18n-matTooltip class="sm redo" mat-button
-              (click)="execute(Commands.redo)"
-              [disabled]="isDisabled(Commands.redo)">
+        (click)="execute(Commands.redo)"
+        [disabled]="isDisabled(Commands.redo)">
         <mat-icon svgIcon="redo"></mat-icon>
       </button>
 
       <button matTooltip="Editar código HTML" i18n-matTooltip class="sm" mat-button
-              (click)="execute(Commands.codeEditor)" [disabled]="isDisabled(Commands.codeEditor)">
+        (click)="execute(Commands.codeEditor)" [disabled]="isDisabled(Commands.codeEditor)">
         <mat-icon svgIcon="sourcecode"></mat-icon>
       </button>
     </div>

@@ -3,12 +3,16 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 @Component({
     selector: 'app-symbol-list',
     template: `
-    <div *ngFor="let category of symbols">
-      <h3>{{ category.name }}</h3>
-      <button *ngFor="let symbol of category.symbols"
-              mat-button (click)="symbolSelected.emit(symbol)" [disabled]="disabled">{{ symbol }}</button>
-    </div>
-  `,
+    @for (category of symbols; track category) {
+      <div>
+        <h3>{{ category.name }}</h3>
+        @for (symbol of category.symbols; track symbol) {
+          <button
+          mat-button (click)="symbolSelected.emit(symbol)" [disabled]="disabled">{{ symbol }}</button>
+        }
+      </div>
+    }
+    `,
     styles: [`
     :host {
       display: block;
