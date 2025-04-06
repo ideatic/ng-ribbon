@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
-import {MatLegacyButtonModule as MatButtonModule} from "@angular/material/legacy-button";
 import {OverlayModule} from "@angular/cdk/overlay";
+import {MatButtonModule} from "@angular/material/button";
 
 /**
  * NgModule that includes all Material modules that are required to serve the app.
