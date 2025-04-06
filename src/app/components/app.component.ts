@@ -9,8 +9,8 @@ import {RawEditorSettings} from "tinymce";
 
 
 @Component({
-  selector: 'app-root',
-  template: `
+    selector: 'app-root',
+    template: `
     <!-- Ribbon -->
     <ng-ribbon-wysiwyg #ribbon [settings]="ribbonSettings" [editor]="editor">
       <ng-template *ngIf="mainContextVisible" #mainContextHeader>
@@ -55,8 +55,8 @@ import {RawEditorSettings} from "tinymce";
       </div>
     </div>
   `,
-  styles: [
-      `
+    styles: [
+        `
       :host {
         display: flex;
         flex-direction: column;
@@ -84,7 +84,8 @@ import {RawEditorSettings} from "tinymce";
         margin: 0 auto;
       }
     `
-  ]
+    ],
+    standalone: false
 })
 export class AppComponent implements OnInit {
   public documentTitle = $localize`Demo`;

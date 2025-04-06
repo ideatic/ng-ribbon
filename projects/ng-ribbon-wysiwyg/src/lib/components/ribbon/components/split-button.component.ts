@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, Output, TemplateRef} from '@angular/core
 import {MatMenu} from "@angular/material/menu";
 
 @Component({
-  selector: 'app-split-button',
-  template: `
+    selector: 'app-split-button',
+    template: `
     <button class="sm" mat-button (click)="mainBtnClick.emit($event)" [class.active]="isActive" [disabled]="disabled">
       <ng-content></ng-content>
     </button>
@@ -17,18 +17,19 @@ import {MatMenu} from "@angular/material/menu";
       </button>
     </ng-template>
   `,
-  styles: [`
-    .split-button {
-      padding: 0 5px 0 0;
-      margin-left: -5px;
-      min-width: auto;
-      font-weight: normal;
-    }
+    styles: [`
+      .split-button {
+        padding: 0 5px 0 0;
+        margin-left: -5px;
+        min-width: auto;
+        font-weight: normal;
+      }
 
-    mat-icon {
-      width: 20px;
-    }
-  `]
+      mat-icon {
+        width: 20px !important;
+      }
+    `],
+    standalone: false
 })
 export class SplitButtonComponent {
   @Input() public disabled = false;

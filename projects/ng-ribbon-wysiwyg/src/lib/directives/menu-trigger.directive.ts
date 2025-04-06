@@ -3,7 +3,8 @@ import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay"
 import {TemplatePortal} from "@angular/cdk/portal";
 
 @Directive({
-  selector: '[menuTriggerFor]'
+    selector: '[menuTriggerFor]',
+    standalone: false
 })
 export class MenuTriggerDirective implements OnDestroy {
   @Input() public menuTriggerFor: TemplateRef<any>;

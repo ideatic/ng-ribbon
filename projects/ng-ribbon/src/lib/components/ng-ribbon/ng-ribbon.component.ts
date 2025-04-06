@@ -4,8 +4,8 @@ import {NgRibbonSettings} from "./ng-ribbon-settings";
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
 
 @Component({
-  selector: 'ng-ribbon',
-  template: `
+    selector: 'ng-ribbon',
+    template: `
     <div class="contexts" [ngStyle]="{borderColor: selectedTab?.context.color || '#dadbdc'}">
       <div class="context" *ngFor="let context of contexts; first as firstContext" [ngStyle]="{backgroundColor: context.color}">
         <div *ngIf="settings.useContexts" class="context-header">
@@ -30,7 +30,8 @@ import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.c
       <ng-content></ng-content>
     </div>
   `,
-  styleUrls: ['ng-ribbon.component.less']
+    styleUrls: ['ng-ribbon.component.less'],
+    standalone: false
 })
 export class NgRibbonComponent {
   @Input() public settings = new NgRibbonSettings();

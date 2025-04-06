@@ -2,12 +2,13 @@ import {Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Optional
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
 
 @Component({
-  selector: 'ng-ribbon-tab',
-  template: '<ng-content></ng-content>',
-  host: {
-    role: 'tabpanel'
-  },
-  styleUrls: ['ng-ribbon-tab.component.less']
+    selector: 'ng-ribbon-tab',
+    template: '<ng-content></ng-content>',
+    host: {
+        role: 'tabpanel'
+    },
+    styleUrls: ['ng-ribbon-tab.component.less'],
+    standalone: false
 })
 export class NgRibbonTabComponent implements OnInit, OnDestroy {
   // Bindings

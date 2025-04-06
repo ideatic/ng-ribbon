@@ -9,9 +9,10 @@ import {DomUtilsService} from "../../services/dom-utils.service";
 import {IconsService} from "../../services/icons.service";
 
 @Component({
-  selector: 'ng-ribbon-wysiwyg',
-  templateUrl: './ng-ribbon-wysiwyg.component.html',
-  styleUrls: ['ng-ribbon-wysiwyg.component.less']
+    selector: 'ng-ribbon-wysiwyg',
+    templateUrl: './ng-ribbon-wysiwyg.component.html',
+    styleUrls: ['ng-ribbon-wysiwyg.component.less'],
+    standalone: false
 })
 export class NgRibbonWysiwygComponent implements OnChanges {
   @Input() public editor: NgRibbonTextAreaComponent;

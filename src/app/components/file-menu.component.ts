@@ -1,8 +1,8 @@
 import {Component, HostListener} from '@angular/core';
 
 @Component({
-  template: '<p>File menu</p>',
-  styles: [`
+    template: '<p>File menu</p>',
+    styles: [`
     :host {
       display: block;
       background: white;
@@ -10,7 +10,8 @@ import {Component, HostListener} from '@angular/core';
       width: 615px;
       border: 1px solid #c9d5e7;
     }
-  `]
+  `],
+    standalone: false
 })
 export class FileMenuComponent {
 

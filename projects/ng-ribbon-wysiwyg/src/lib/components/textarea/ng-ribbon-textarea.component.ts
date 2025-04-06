@@ -19,9 +19,9 @@ import 'tinymce/plugins/searchreplace';
 import 'tinymce/plugins/code';
 
 @Component({
-  selector: 'ng-ribbon-textarea',
-  template: '',
-  styles: [`
+    selector: 'ng-ribbon-textarea',
+    template: '',
+    styles: [`
     :host {
       display: block;
       outline: none;
@@ -36,13 +36,14 @@ import 'tinymce/plugins/code';
       border: none !important;
     }
   `],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NgRibbonTextAreaComponent),
-      multi: true
-    }
-  ]
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NgRibbonTextAreaComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() public editorCSS: string;

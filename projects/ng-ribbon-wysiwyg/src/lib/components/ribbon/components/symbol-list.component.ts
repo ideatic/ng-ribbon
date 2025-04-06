@@ -1,15 +1,15 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-symbol-list',
-  template: `
+    selector: 'app-symbol-list',
+    template: `
     <div *ngFor="let category of symbols">
       <h3>{{ category.name }}</h3>
       <button *ngFor="let symbol of category.symbols"
               mat-button (click)="symbolSelected.emit(symbol)" [disabled]="disabled">{{ symbol }}</button>
     </div>
   `,
-  styles: [`
+    styles: [`
     :host {
       display: block;
       max-height: 75px;
@@ -39,7 +39,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
       width: 40px;
       max-width: 40px;
     }
-  `]
+  `],
+    standalone: false
 })
 export class SymbolListComponent {
   @Input() public disabled = false;

@@ -6,7 +6,8 @@ import {IconsService} from "../../../services/icons.service";
 @Component({
     selector: 'ng-ribbon-home-tab',
     templateUrl: './ng-ribbon-home-tab.component.html',
-    styleUrls: ['./ng-ribbon-home-tab.component.less']
+    styleUrls: ['./ng-ribbon-home-tab.component.less'],
+    standalone: false
 })
 export class NgRibbonHomeTabComponent {
     public backColor = 'yellow';

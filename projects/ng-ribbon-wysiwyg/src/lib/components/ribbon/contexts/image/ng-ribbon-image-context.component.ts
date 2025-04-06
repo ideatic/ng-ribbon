@@ -11,12 +11,13 @@ enum ImagePosition {
 }
 
 @Component({
-  templateUrl: 'ng-ribbon-image-context.component.html',
-  styles: [
-      `:host {
+    templateUrl: 'ng-ribbon-image-context.component.html',
+    styles: [
+        `:host {
       display: block;
     }`
-  ]
+    ],
+    standalone: false
 })
 export class NgRibbonImageContextComponent implements NgRibbonWysiwygContext {
   @Input() public ribbon: NgRibbonWysiwygComponent;

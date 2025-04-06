@@ -3,13 +3,14 @@ import {NgRibbonComponent} from "../ng-ribbon/ng-ribbon.component";
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 
 @Component({
-  selector: 'ng-ribbon-context',
-  template: '<ng-content></ng-content>',
-  styles: [
-      `:host {
+    selector: 'ng-ribbon-context',
+    template: '<ng-content></ng-content>',
+    styles: [
+        `:host {
       display: block;
     }`
-  ]
+    ],
+    standalone: false
 })
 export class NgRibbonContextComponent implements OnInit, OnDestroy {
   @Input() public name: string;

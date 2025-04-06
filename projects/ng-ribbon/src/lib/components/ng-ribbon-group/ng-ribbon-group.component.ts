@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
-  selector: 'ng-ribbon-group',
-  template: `
+    selector: 'ng-ribbon-group',
+    template: `
     <ng-content></ng-content>
     <div class="title">
       {{ name }}
@@ -14,7 +14,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
       </button>
     </div>
   `,
-  styleUrls: ['ng-ribbon-group.component.less']
+    styleUrls: ['ng-ribbon-group.component.less'],
+    standalone: false
 })
 export class NgRibbonGroupComponent {
   // Bindings

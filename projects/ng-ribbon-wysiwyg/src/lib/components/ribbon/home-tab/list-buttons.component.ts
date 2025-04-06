@@ -3,8 +3,8 @@ import {EditorCommands} from "../../textarea/editor-commands";
 import {NgRibbonHomeTabComponent} from "./ng-ribbon-home-tab.component";
 
 @Component({
-  selector: 'app-list-buttons',
-  template: `
+    selector: 'app-list-buttons',
+    template: `
     <!-- Listas desordenadas -->
     <app-split-button
       matTooltip="Lista" i18n-matTooltip class="sm"
@@ -74,7 +74,7 @@ import {NgRibbonHomeTabComponent} from "./ng-ribbon-home-tab.component";
       </ng-template>
     </app-split-button>
   `,
-  styles: [`
+    styles: [`
     .list-type-menu {
       background: white;
       padding: 4px;
@@ -88,7 +88,8 @@ import {NgRibbonHomeTabComponent} from "./ng-ribbon-home-tab.component";
       width: 48px;
       height: 48px;
     }
-  `]
+  `],
+    standalone: false
 })
 export class ListButtonsComponent {
   // Importar tipos
