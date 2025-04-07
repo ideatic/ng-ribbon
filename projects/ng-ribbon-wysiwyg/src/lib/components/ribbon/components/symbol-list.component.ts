@@ -2,19 +2,19 @@ import {Component, output, input} from '@angular/core';
 import {MatButton} from '@angular/material/button';
 
 @Component({
-  selector: 'app-symbol-list',
+  selector: 'symbol-list',
+  imports: [MatButton],
   template: `
     @for (category of symbols; track category) {
       <div>
         <h3>{{ category.name }}</h3>
         @for (symbol of category.symbols; track symbol) {
-          <button
-          mat-button (click)="symbolSelected.emit(symbol)" [disabled]="disabled()">{{ symbol }}</button>
+          <button mat-button (click)="symbolSelected.emit(symbol)" [disabled]="disabled()">{{ symbol }}</button>
         }
       </div>
     }
-    `,
-  styles: [`
+  `,
+  styles: `
     :host {
       display: block;
       max-height: 75px;
@@ -44,14 +44,13 @@ import {MatButton} from '@angular/material/button';
       width: 40px;
       max-width: 40px;
     }
-  `],
-  imports: [MatButton]
+  `
 })
 export class SymbolListComponent {
   public readonly disabled = input(false);
   public readonly symbolSelected = output<string>();
 
-  public readonly symbols = [
+  protected readonly symbols = [
     {
       name: $localize`Letras griegas`,
       symbols: ["α", "β", "Γ", "γ", "Δ", "δ", "ε", "ζ", "η", "Θ", "θ", "ι", "κ", "Λ", "λ", "μ", "ν", "Ξ", "Xi", "ο", "Π", "π", "ρ", "Σ", "σ", "τ", "υ", "Φ", "φ", "χ", "Ψ", "ψ", "Ω", "ω"]

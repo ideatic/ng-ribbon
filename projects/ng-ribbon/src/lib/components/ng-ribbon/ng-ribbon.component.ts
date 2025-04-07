@@ -1,15 +1,16 @@
-import {Component, HostListener, output, input} from '@angular/core';
+import {Component, HostListener, input, output} from '@angular/core';
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 import {NgRibbonSettings} from "./ng-ribbon-settings";
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
-import {NgStyle, NgTemplateOutlet} from '@angular/common';
+import {NgTemplateOutlet} from '@angular/common';
 
 @Component({
   selector: 'ng-ribbon',
+  imports: [NgTemplateOutlet],
   template: `
-    <div class="contexts" [ngStyle]="{borderColor: selectedTab?.context().color() || '#dadbdc'}">
+    <div class="contexts" [style.border-color]="selectedTab?.context().color() ?? '#dadbdc'">
       @for (context of contexts; track context; let firstContext = $first) {
-        <div class="context" [ngStyle]="{backgroundColor: context.color()}">
+        <div class="context" [style.background-color]="context.color()">
           @if (settings().useContexts) {
             <div class="context-header">
               @if (context.headerTemplate()) {
@@ -41,20 +42,21 @@ import {NgStyle, NgTemplateOutlet} from '@angular/common';
       <ng-content></ng-content>
     </div>
   `,
-  styleUrls: ['ng-ribbon.component.less'],
-  imports: [NgStyle, NgTemplateOutlet]
+  styleUrls: ['ng-ribbon.component.less']
 })
 export class NgRibbonComponent {
+  // Bindings
   public readonly settings = input(new NgRibbonSettings());
   public readonly tabSelected = output<NgRibbonTabComponent>();
 
+  // Estado
   public contexts: NgRibbonContextComponent[] = [];
 
   public selectedTab: NgRibbonTabComponent;
 
   public selectTab(tab: NgRibbonTabComponent) {
     // Enable tab
-    tab.showed = true;
+    tab.showed.set(true);
     this.contexts.forEach(c => c.tabs.forEach(t => t.active.set(t == tab)));
     this.selectedTab = tab;
 

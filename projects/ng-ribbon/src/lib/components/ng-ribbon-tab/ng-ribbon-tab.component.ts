@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnDestroy, OnInit, inject, output, input, model} from '@angular/core';
+import {Component, HostBinding, OnDestroy, OnInit, inject, output, input, model, signal} from '@angular/core';
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
 
 @Component({
@@ -9,7 +9,7 @@ import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.c
     '[class.active]': 'active()'
   },
   styles: `
-    @import "../theme";
+    @import "../theme.less";
 
     :host {
       border-bottom: 1px solid @borderColor;
@@ -39,7 +39,7 @@ export class NgRibbonTabComponent implements OnInit, OnDestroy {
   /**
    * Indicates if this tab has been showed
    */
-  public showed = false;
+  public showed = signal(false);
 
   public ngOnInit() {
     const context = this.context();

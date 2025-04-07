@@ -1,69 +1,45 @@
-import {ChangeDetectorRef, Component, ContentChild, OnChanges, SimpleChanges, TemplateRef, ViewChild, inject, OutputRefSubscription, input} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, input, OnChanges, OutputRefSubscription, SimpleChanges, TemplateRef, viewChild, contentChild} from '@angular/core';
 import {NgRibbonTextAreaComponent} from "../textarea/ng-ribbon-textarea.component";
 import {EditorCommands} from "../textarea/editor-commands";
-import {noop, Subscription} from "rxjs";
 import {NgRibbonComponent} from "../../../../../ng-ribbon/src/lib/components/ng-ribbon/ng-ribbon.component";
 import {NgRibbonWysiwygSettings} from "./ng-ribbon-wysiwyg-settings";
 import {NgRibbonContextComponent} from "../../../../../ng-ribbon/src/lib/components/ng-ribbon-context/ng-ribbon-context.component";
-import {DomUtilsService} from "../../services/dom-utils.service";
 import {IconsService} from "../../services/icons.service";
 import {NgTemplateOutlet} from '@angular/common';
 import {NgRibbonTabComponent} from '../../../../../ng-ribbon/src/lib/components/ng-ribbon-tab/ng-ribbon-tab.component';
-import {NgRibbonHomeTabComponent} from './home-tab/ng-ribbon-home-tab.component';
-import {NgRibbonGroupComponent} from '../../../../../ng-ribbon/src/lib/components/ng-ribbon-group/ng-ribbon-group.component';
-import {MatButton} from '@angular/material/button';
-import {MatTooltip} from '@angular/material/tooltip';
-import {MatIcon} from '@angular/material/icon';
-import {SymbolListComponent} from './components/symbol-list.component';
+import {NgRibbonHomeTabComponent} from './tabs/home/ng-ribbon-home-tab.component';
+import {NgRibbonInsertTabComponent} from "./tabs/ng-ribbon-insert-tab.component";
 
 @Component({
   selector: 'ng-ribbon-wysiwyg',
+  imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgRibbonTabComponent, NgRibbonHomeTabComponent, NgRibbonInsertTabComponent],
   templateUrl: './ng-ribbon-wysiwyg.component.html',
-  styleUrls: ['ng-ribbon-wysiwyg.component.less'],
-  imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgRibbonTabComponent, NgRibbonHomeTabComponent, NgRibbonGroupComponent, MatButton, MatTooltip, MatIcon, SymbolListComponent]
+  styleUrls: ['ng-ribbon-wysiwyg.component.less']
 })
 export class NgRibbonWysiwygComponent implements OnChanges {
-  private _cd = inject(ChangeDetectorRef);
-  private _domUtils = inject(DomUtilsService);
+  // Deps
+  private readonly _cdRef = inject(ChangeDetectorRef);
 
-  public readonly editor = input<NgRibbonTextAreaComponent>(undefined);
+  // Bindings
+  public readonly editor = input<NgRibbonTextAreaComponent>();
   public readonly settings = input(new NgRibbonWysiwygSettings());
 
-  @ViewChild(NgRibbonComponent, {static: true}) public ribbon: NgRibbonComponent;
-  @ViewChild('mainContext', {static: true}) public mainContext: NgRibbonContextComponent;
+  public readonly ribbon = viewChild(NgRibbonComponent);
+  public readonly mainContext = viewChild.required<NgRibbonContextComponent>('mainContext');
 
-  @ContentChild('mainContextHeader') public mainContextHeader: TemplateRef<void>;
+  public readonly mainContextHeader = contentChild<TemplateRef<void>>('mainContextHeader');
 
   // Estado
   private _subscription: OutputRefSubscription;
 
-  // Valores
-  public readonly defaultTable = `<table>
-<thead>
-<tr><th></th><th></th></tr>
-</thead>
-<tbody>
-<tr><td></td><td></td></tr>
-<tr><td></td><td></td></tr>
-</tbody>
-</table>`;
-  public readonly defaultQuote = `<blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a ante ut purus aliquam pellentesque. Suspendisse potenti. In sit amet risus quam, et egestas mauris. Nunc feugiat risus ut est facilisis condimentum. Sed et turpis velit, sit amet pharetra lacus.</blockquote>`;
-
-
-  // Importar tipos en la plantilla
-  public readonly Commands = EditorCommands;
 
   constructor() {
-    const iconsSvc = inject(IconsService);
-
-    iconsSvc.configure();
+    inject(IconsService).configure();
   }
 
   public ngOnChanges(change: SimpleChanges) {
     if (change['editor']) {
-      if (this._subscription) {
-        this._subscription.unsubscribe();
-      }
+        this._subscription?.unsubscribe();
 
       // Actualizar estado de los botones cuando cambia el documento
       const editor = this.editor();
@@ -74,34 +50,21 @@ export class NgRibbonWysiwygComponent implements OnChanges {
     }
   }
 
-  public updateUI() {
+  protected updateUI() {
     // Comprobar contextos activos
     // this._defineActiveContexts();
 
     // Detectar cambio
-    this._cd.markForCheck();
+    this._cdRef.markForCheck();
   }
 
   public execute(command: EditorCommands, value?: string) {
     this.editor().execute(command, value);
   }
 
-
   public isDisabled(command: EditorCommands): boolean {
     const editor = this.editor();
     return !editor || !editor.isCommandSupported(command);
-  }
-
-  public insertImage() {
-    this._domUtils.uploadAsDataURL("image/*")
-      .then(
-        (image) => this.execute(EditorCommands.insertHTML, `<img src="${image}" />`),
-        noop
-      );
-  }
-
-  public insertChart() {
-    throw new Error('Not implemented');
   }
 
   /*

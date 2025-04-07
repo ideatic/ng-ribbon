@@ -12,7 +12,7 @@
            [disabled]="isDisabled(Commands.fontName)">
     <mat-autocomplete #fontFamilies>
       @for (family of ribbon.settings().font.families; track family) {
-        <mat-option [value]="family" [ngStyle]="{fontFamily: family}">{{ family }}</mat-option>
+        <mat-option [value]="family" [style.font-family]="family">{{ family }}</mat-option>
       }
     </mat-autocomplete>
 
@@ -107,7 +107,7 @@
       [disabled]="isDisabled(Commands.hiliteColor)">
       <mat-icon svgIcon="highlight-bg-color"/>
       <div class="btn-color-preview">
-        <div [ngStyle]="{background: backColor}"></div>
+        <div [style.background]="backColor"></div>
       </div>
       <ng-template #bgColorMenu>
         <color-sketch style="width: 220px"
@@ -124,7 +124,7 @@
       [disabled]="isDisabled(Commands.foreColor)">
       <mat-icon svgIcon="text-color"/>
       <div class="btn-color-preview">
-        <div [ngStyle]="{background: foreColor}"></div>
+        <div [style.background]="foreColor"></div>
       </div>
       <ng-template #foreColorMenu>
         <color-sketch style="width: 220px"

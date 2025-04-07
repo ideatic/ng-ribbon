@@ -5,17 +5,18 @@ import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 @Component({
   selector: 'ng-ribbon-context',
   template: '<ng-content />',
-  styles: [
-    `:host {
+  styles: `
+    :host {
       display: block;
-    }`
-  ]
+    }
+  `
 })
 export class NgRibbonContextComponent implements OnInit, OnDestroy {
+  protected readonly ribbon = inject(NgRibbonComponent);
+
   // Bindings
   public readonly name = input<string>();
   public readonly color = input<string>();
-  public readonly ribbon = input<NgRibbonComponent>(inject(NgRibbonComponent, {optional: true}));
 
   public readonly headerTemplate = contentChild<TemplateRef<void>>('header');
 
@@ -23,16 +24,7 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
   public tabs: NgRibbonTabComponent[] = [];
 
   public ngOnInit() {
-    const ribbon = this.ribbon();
-    if (!ribbon) {
-      throw new Error(`Parent ribbon not found for context '${this.name()}'`);
-    }
-
-    ribbon.addContext(this);
-  }
-
-  public ngOnDestroy() {
-    this.ribbon().removeContext(this);
+    this.ribbon.addContext(this);
   }
 
   public addTab(tab: NgRibbonTabComponent) {
@@ -41,7 +33,7 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
     this.tabs = this.tabs.sort((a, b) => a.order() - b.order());
 
     if (tab.active()) {
-      this.ribbon().selectTab(tab);
+      this.ribbon.selectTab(tab);
     }
   }
 
@@ -52,11 +44,15 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
       // Seleccionar otra pestaña
       if (tab.active() && this.tabs.length > 1) {
         const newActiveIndex = index === this.tabs.length - 1 ? index - 1 : index + 1;
-        this.ribbon().selectTab(this.tabs[newActiveIndex]);
+        this.ribbon.selectTab(this.tabs[newActiveIndex]);
       }
 
       this.tabs.splice(index, 1);
     }
+  }
+
+  public ngOnDestroy() {
+    this.ribbon.removeContext(this);
   }
 }
 
