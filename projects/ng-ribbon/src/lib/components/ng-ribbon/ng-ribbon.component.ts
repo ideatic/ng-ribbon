@@ -14,8 +14,7 @@ import {NgTemplateOutlet} from '@angular/common';
           @if (settings().useContexts) {
             <div class="context-header">
               @if (context.headerTemplate()) {
-                <ng-template [ngTemplateOutlet]="context.headerTemplate()"
-                ></ng-template>
+                <ng-container [ngTemplateOutlet]="context.headerTemplate()"/>
               } @else {
                 {{ context.name() }}
               }
@@ -28,9 +27,7 @@ import {NgTemplateOutlet} from '@angular/common';
               </li>
             }
             @for (tab of context.tabs; track tab) {
-              <li
-                role="tab" [attr.aria-selected]="tab.active()"
-                [class.active]="tab.active()">
+              <li role="tab" [attr.aria-selected]="tab.active()" [class.active]="tab.active()">
                 <a (click)="selectTab(tab)">{{ tab.name() }}</a>
               </li>
             }
@@ -42,7 +39,7 @@ import {NgTemplateOutlet} from '@angular/common';
       <ng-content></ng-content>
     </div>
   `,
-  styleUrls: ['ng-ribbon.component.less']
+  styleUrl: 'ng-ribbon.component.less'
 })
 export class NgRibbonComponent {
   // Bindings
@@ -64,7 +61,6 @@ export class NgRibbonComponent {
     tab.selected.emit(tab);
     this.tabSelected.emit(tab);
   }
-
 
   public addContext(context: NgRibbonContextComponent) {
     this.contexts.push(context);
@@ -88,7 +84,7 @@ export class NgRibbonComponent {
   }
 
   @HostListener('wheel', ['$event'])
-  public onWheel($event: WheelEvent) {
+  private _onWheel($event: WheelEvent) {
     if (this.settings().mouseWheelTabs) {
       if ($event.deltaY > 0) { // Select next tab
         let selectCurrentTab = false;

@@ -45,10 +45,11 @@ import 'tinymce/plugins/code';
   ]
 })
 export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  private _host = inject<ElementRef<HTMLElement>>(ElementRef);
-  private _locale = inject(LOCALE_ID);
-  private _ngZone = inject(NgZone);
+  // Deps
+  private readonly _host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly _locale = inject(LOCALE_ID);
 
+  // Bindings
   public readonly editorCSS = input<string>(undefined);
   public readonly tinyMceSettings = input<RawEditorSettings>(undefined);
   public readonly updateUI = output();
@@ -80,26 +81,18 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
         this.setDisabledState(this._disabled);
         this.focus();
 
-        this._ngZone.runOutsideAngular(() => {
-          if (self._html) {
-            editor.setContent(self._html);
-          }
+        if (self._html) {
+          editor.setContent(self._html);
+        }
 
-          editor.on('blur', () => this._ngZone.run(() => this._onTouched()));
+        editor.on('blur', () => this._onTouched());
 
-          editor.on('change keyup undo redo', () => {
-            this._ngZone.run(() => {
-              this._html = editor.getContent();
-              this._propagateChange(this._html);
-            });
-          });
-
-          editor.on('NodeChange', () => {
-            this._ngZone.run(() => {
-              this.updateUI.emit();
-            });
-          });
+        editor.on('change keyup undo redo', () => {
+          this._html = editor.getContent();
+          this._propagateChange(this._html);
         });
+
+        editor.on('NodeChange', () => this.updateUI.emit());
       });
 
       if (prevSetup) {
@@ -136,11 +129,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
       ...extraSettings
     };
 
-    this._ngZone.runOutsideAngular(() => tinymce.init(settings));
-  }
-
-  public ngOnDestroy() {
-    this._ngZone.runOutsideAngular(() => tinymce.remove(this._tinyMCE));
+    tinymce.init(settings);
   }
 
   /**
@@ -201,11 +190,12 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
   }
 
   /* Active element */
+
   public get activeElement(): Element {
     return this._tinyMCE?.selection.getNode();
   }
-
   /* Font */
+
   public get fontFamily(): string {
     const fontFamily = this.queryValue(EditorCommands.fontName);
 
@@ -215,7 +205,6 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
       return null;
     }
   }
-
   public set fontFamily(name: string) {
     this.execute(EditorCommands.fontName, name);
   }
@@ -252,5 +241,9 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
     if (this._tinyMCE) {
       this._tinyMCE.setContent(value);
     }
+  }
+
+  public ngOnDestroy() {
+    tinymce.remove(this._tinyMCE);
   }
 }
