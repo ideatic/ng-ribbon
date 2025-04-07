@@ -1,10 +1,11 @@
-import {Component, output, input} from '@angular/core';
-import {MatButton} from "@angular/material/button";
+import {Component, input, output} from '@angular/core';
 
 @Component({
   selector: 'ng-ribbon-group',
   template: `
-    <ng-content/>
+    <div class="group-content">
+      <ng-content/>
+    </div>
     <div class="title">
       {{ name() }}
 

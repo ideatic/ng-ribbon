@@ -1,4 +1,4 @@
-import {Component, Input, inject} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {DomUtilsService} from "../../../../services/dom-utils.service";
 import {noop} from "rxjs";
 import {NgRibbonWysiwygContext} from "../ng-ribbon-wysiwyg-context";
@@ -6,9 +6,9 @@ import {NgRibbonWysiwygComponent} from "../../ng-ribbon-wysiwyg.component";
 import {NgRibbonContextComponent} from '../../../../../../../ng-ribbon/src/lib/components/ng-ribbon-context/ng-ribbon-context.component';
 import {NgRibbonTabComponent} from '../../../../../../../ng-ribbon/src/lib/components/ng-ribbon-tab/ng-ribbon-tab.component';
 import {NgRibbonGroupComponent} from '../../../../../../../ng-ribbon/src/lib/components/ng-ribbon-group/ng-ribbon-group.component';
-import {MatButton} from '@angular/material/button';
-import {MatMenuTrigger, MatMenu, MatMenuItem} from '@angular/material/menu';
+import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {MatIcon} from '@angular/material/icon';
+import {MatRipple} from "@angular/material/core";
 
 enum ImagePosition {
   Inline,
@@ -17,17 +17,19 @@ enum ImagePosition {
 }
 
 @Component({
+  imports: [NgRibbonContextComponent, NgRibbonTabComponent, NgRibbonGroupComponent, MatRipple, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem],
   templateUrl: 'ng-ribbon-image-context.component.html',
-  styles: [
-    `:host {
+  styles: `
+    :host {
       display: block;
-    }`
-  ],
-  imports: [NgRibbonContextComponent, NgRibbonTabComponent, NgRibbonGroupComponent, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem]
+    }
+  `
 })
 export class NgRibbonImageContextComponent implements NgRibbonWysiwygContext {
-  private _domUtils = inject(DomUtilsService);
+  // Deps
+  private readonly _domUtils = inject(DomUtilsService);
 
+  // Bindings
   @Input() public ribbon: NgRibbonWysiwygComponent;
   @Input() public element: HTMLImageElement;
 

@@ -1,4 +1,4 @@
-import {Component, ElementRef, forwardRef, LOCALE_ID, NgZone, OnDestroy, OnInit, inject, output, input} from '@angular/core';
+import {Component, ElementRef, forwardRef, inject, input, LOCALE_ID, OnDestroy, OnInit, output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {noop} from "rxjs";
 import {EditorCommands} from "./editor-commands";

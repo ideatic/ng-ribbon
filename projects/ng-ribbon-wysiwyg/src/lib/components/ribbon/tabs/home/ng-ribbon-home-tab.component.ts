@@ -8,7 +8,6 @@ import {FormsModule} from '@angular/forms';
 import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
 import {MatTooltip} from '@angular/material/tooltip';
 import {DecimalPipe, NgTemplateOutlet} from '@angular/common';
-import {MatButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {MatDivider} from '@angular/material/divider';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
@@ -19,7 +18,7 @@ import {NgRibbonTabComponent} from "../../../../../../../ng-ribbon/src/lib/compo
 
 @Component({
   selector: 'ng-ribbon-home-tab',
-  imports: [NgRibbonGroupComponent, NgTemplateOutlet, MatList, MatInput, FormsModule, MatAutocompleteTrigger, MatTooltip, MatAutocomplete, MatOption, MatButton, MatIcon, MatDivider, MatMenuTrigger, MatMenu, MatMenuItem, SplitButtonComponent, ColorSketchModule, ListButtonsComponent, DecimalPipe, NgRibbonTabComponent],
+  imports: [NgRibbonGroupComponent, NgTemplateOutlet, MatList, MatInput, FormsModule, MatAutocompleteTrigger, MatTooltip, MatAutocomplete, MatOption, MatIcon, MatDivider, MatMenuTrigger, MatMenu, MatMenuItem, SplitButtonComponent, ColorSketchModule, ListButtonsComponent, DecimalPipe, NgRibbonTabComponent],
   templateUrl: './ng-ribbon-home-tab.component.html',
   styleUrl: './ng-ribbon-home-tab.component.less'
 })

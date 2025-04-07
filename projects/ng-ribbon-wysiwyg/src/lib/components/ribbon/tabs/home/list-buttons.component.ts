@@ -4,10 +4,11 @@ import {NgRibbonHomeTabComponent} from "./ng-ribbon-home-tab.component";
 import {SplitButtonComponent} from '../../components/split-button.component';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatIcon} from '@angular/material/icon';
-import {MatButton} from '@angular/material/button';
+import {MatRipple} from "@angular/material/core";
 
 @Component({
   selector: 'app-list-buttons',
+  imports: [SplitButtonComponent, MatTooltip, MatIcon, MatRipple],
   template: `
     <!-- Listas desordenadas -->
     <app-split-button
@@ -20,15 +21,15 @@ import {MatButton} from '@angular/material/button';
       <mat-icon svgIcon="unordered-list" />
       <ng-template #listMenu>
         <div class="list-type-menu">
-          <button mat-button (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'disc'})">
+          <button matRipple (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'disc'})">
             <mat-icon svgIcon="list-bull-default"></mat-icon>
           </button>
 
-          <button mat-button (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'circle'})">
+          <button matRipple (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'circle'})">
             <mat-icon svgIcon="list-bull-circle"></mat-icon>
           </button>
 
-          <button mat-button (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'square'})">
+          <button matRipple (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'square'})">
             <mat-icon svgIcon="list-bull-square"></mat-icon>
           </button>
         </div>
@@ -48,29 +49,29 @@ import {MatButton} from '@angular/material/button';
       <ng-template #orderedListMenu>
         <div class="list-type-menu">
           <div>
-            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'decimal'})">
+            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'decimal'})">
               <mat-icon svgIcon="list-num-default"></mat-icon>
             </button>
 
-            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-alpha'})">
+            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-alpha'})">
               <mat-icon svgIcon="list-num-lower-alpha"></mat-icon>
             </button>
 
-            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-greek'})">
+            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-greek'})">
               <mat-icon svgIcon="list-num-lower-greek"></mat-icon>
             </button>
           </div>
 
           <div>
-            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-roman'})">
+            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-roman'})">
               <mat-icon svgIcon="list-num-lower-roman"></mat-icon>
             </button>
 
-            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'upper-alpha'})">
+            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'upper-alpha'})">
               <mat-icon svgIcon="list-num-upper-alpha"></mat-icon>
             </button>
 
-            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'upper-roman'})">
+            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'upper-roman'})">
               <mat-icon svgIcon="list-num-upper-roman"></mat-icon>
             </button>
           </div>
@@ -78,7 +79,7 @@ import {MatButton} from '@angular/material/button';
       </ng-template>
     </app-split-button>
   `,
-  styles: [`
+  styles: `
     .list-type-menu {
       background: white;
       padding: 4px;
@@ -92,8 +93,7 @@ import {MatButton} from '@angular/material/button';
       width: 48px;
       height: 48px;
     }
-  `],
-  imports: [SplitButtonComponent, MatTooltip, MatIcon, MatButton]
+  `
 })
 export class ListButtonsComponent {
   homeTab = inject(NgRibbonHomeTabComponent);

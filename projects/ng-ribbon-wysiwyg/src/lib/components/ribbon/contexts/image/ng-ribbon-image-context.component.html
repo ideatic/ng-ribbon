@@ -2,7 +2,7 @@
   <ng-ribbon-tab name="Formato" i18n-name>
     <ng-ribbon-group name="Ajustar" i18n-name>
       <!-- Posición -->
-      <button class="xl" mat-button [matMenuTriggerFor]="positionMenu"
+      <button class="xl" matRipple [matMenuTriggerFor]="positionMenu"
               title="Zoom aplicado a la chuleta" i18n-title>
         <img src="{{ ribbon.settings.assetsURL }}/images/contexts/image/position.png"/>
         <div i18n>Posición</div>
@@ -30,14 +30,14 @@
       </button>
 
       <!-- Posición -->
-      <button class="xl" mat-button (click)="replace()"
+      <button class="xl" matRipple (click)="replace()"
               title="Cambia la imagen seleccionada por una diferente" i18n-title>
         <img src="{{ ribbon.settings.assetsURL }}/images/contexts/image/replace.png"/>
         <div i18n>Reemplazar</div>
       </button>
 
       <!-- Borrar -->
-      <button class="xl" mat-button (click)="delete()"
+      <button class="xl" matRipple (click)="delete()"
               title="Elimina la imagen del documento" i18n-title>
         <img src="{{ ribbon.settings.assetsURL }}/images/contexts/image/delete.png"/>
         <div i18n>Borrar</div>
