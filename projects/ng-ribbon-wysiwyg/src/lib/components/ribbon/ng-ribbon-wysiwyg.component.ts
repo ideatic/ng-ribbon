@@ -6,15 +6,39 @@ import {NgRibbonWysiwygSettings} from "./ng-ribbon-wysiwyg-settings";
 import {NgRibbonContextComponent} from "../../../../../ng-ribbon/src/lib/components/ng-ribbon-context/ng-ribbon-context.component";
 import {IconsService} from "../../services/icons.service";
 import {NgTemplateOutlet} from '@angular/common';
-import {NgRibbonTabComponent} from '../../../../../ng-ribbon/src/lib/components/ng-ribbon-tab/ng-ribbon-tab.component';
 import {NgRibbonHomeTabComponent} from './tabs/home/ng-ribbon-home-tab.component';
 import {NgRibbonInsertTabComponent} from "./tabs/ng-ribbon-insert-tab.component";
+import {ComponentInput} from "../../../../../../../ng-shared/libs/types";
 
 @Component({
   selector: 'ng-ribbon-wysiwyg',
-  imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgRibbonTabComponent, NgRibbonHomeTabComponent, NgRibbonInsertTabComponent],
-  templateUrl: './ng-ribbon-wysiwyg.component.html',
-  styleUrls: ['ng-ribbon-wysiwyg.component.less']
+  imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgRibbonHomeTabComponent, NgRibbonInsertTabComponent],
+  template: `
+    <ng-ribbon [settings]="settings()">
+      <ng-ribbon-context #mainContext>
+        <!-- Cabecera del ribbon -->
+        <ng-template #header>
+          @if (settings().useContexts) {
+            <ng-container [ngTemplateOutlet]="mainContextHeader()"/>
+          }
+        </ng-template>
+
+        <!-- Inicio -->
+        @if (settings().showHomeTab && editor()) {
+          <ng-ribbon-home-tab [groupTemplate]="homeGroupTemplate()"/>
+        }
+
+        <!-- Insertar -->
+        @if (settings().showInsertTab) {
+          <ng-ribbon-insert-tab/>
+        }
+
+        <!-- Otras pestañas -->
+        <ng-content/>
+      </ng-ribbon-context>
+    </ng-ribbon>
+  `,
+  styleUrl: './ng-ribbon-wysiwyg.component.less'
 })
 export class NgRibbonWysiwygComponent implements OnChanges {
   // Deps
@@ -28,10 +52,10 @@ export class NgRibbonWysiwygComponent implements OnChanges {
   public readonly mainContext = viewChild.required<NgRibbonContextComponent>('mainContext');
 
   public readonly mainContextHeader = contentChild<TemplateRef<void>>('mainContextHeader');
+  public readonly homeGroupTemplate = contentChild<ComponentInput<NgRibbonHomeTabComponent, 'groupTemplate'>>('homeGroupTemplate');
 
   // Estado
   private _subscription: OutputRefSubscription;
-
 
   constructor() {
     inject(IconsService).configure();
@@ -39,7 +63,7 @@ export class NgRibbonWysiwygComponent implements OnChanges {
 
   public ngOnChanges(change: SimpleChanges) {
     if (change['editor']) {
-        this._subscription?.unsubscribe();
+      this._subscription?.unsubscribe();
 
       // Actualizar estado de los botones cuando cambia el documento
       const editor = this.editor();
@@ -55,7 +79,7 @@ export class NgRibbonWysiwygComponent implements OnChanges {
     // this._defineActiveContexts();
 
     // Detectar cambio
-    this._cdRef.markForCheck();
+    this._cdRef.detectChanges();
   }
 
   public execute(command: EditorCommands, value?: string) {
