@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, TemplateRef, inject, contentChild, input} from '@angular/core';
+import {Component, contentChild, inject, input, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {NgRibbonComponent} from "../ng-ribbon/ng-ribbon.component";
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 

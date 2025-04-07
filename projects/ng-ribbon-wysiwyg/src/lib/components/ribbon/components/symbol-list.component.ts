@@ -1,15 +1,15 @@
-import {Component, output, input} from '@angular/core';
-import {MatButton} from '@angular/material/button';
+import {Component, input, output} from '@angular/core';
+import {MatRipple} from "@angular/material/core";
 
 @Component({
   selector: 'symbol-list',
-  imports: [MatButton],
+  imports: [MatRipple],
   template: `
     @for (category of symbols; track category) {
       <div>
         <h3>{{ category.name }}</h3>
         @for (symbol of category.symbols; track symbol) {
-          <button mat-button (click)="symbolSelected.emit(symbol)" [disabled]="disabled()">{{ symbol }}</button>
+          <button matRipple (click)="symbolSelected.emit(symbol)" [disabled]="disabled()">{{ symbol }}</button>
         }
       </div>
     }

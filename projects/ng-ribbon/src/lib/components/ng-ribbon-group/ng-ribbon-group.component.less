@@ -2,18 +2,24 @@
 
 :host {
   display: flex;
+  flex-direction: column;
+}
+
+.group-content {
+  display: flex;
   align-items: center;
   align-content: center;
   position: relative;
-  padding: 0 4px 20px;
+  padding: 0 4px 0;
   border-right: 1px solid @borderColor;
   min-width: 55px;
-  flex-shrink: 0;
+  flex-shrink: 1;
   flex-wrap: nowrap;
-  height: 100%;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
-:host.column, :host ::ng-deep .column {
+:host.column .group-content, :host ::ng-deep .column {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -23,7 +29,51 @@
 }
 
 :host ::ng-deep {
-  .vertical-divider {
+  button, .button {
+    box-sizing: border-box;
+    position: relative;
+    background: transparent;
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    color: inherit;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    min-width: 64px;
+    line-height: 36px;
+    padding: 0 16px;
+    border-radius: 4px;
+    overflow: hidden;
+    align-content: center;
+    text-overflow: ellipsis;
+    transition: background-color 200ms cubic-bezier(0.35, 0, 0.25, 1);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    &:hover:disabled {
+      background: transparent;
+    }
+  }
+
+  input, select, mat-select {
+    background: white;
+    border: 1px solid #c6c6c6;
+    outline: none;
+    padding: 3px;
+
+    &:hover, &:focus {
+      border-color: #969696;
+    }
+  }
+
+  mat-divider {
     display: inline-block;
     border-color: #d2d2d2;
     height: 80%;
@@ -34,24 +84,10 @@
     }
   }
 
-  input, select, mat-select {
-    background: white;
-    border: 1px solid #c6c6c6;
-    outline: none;
-    margin: 0 5px;
-    padding: 3px;
-
-    &:hover, &:focus {
-      border-color: #969696;
-    }
-  }
 
   mat-icon {
     vertical-align: middle;
-    margin: 0 !important;
-  }
-
-  .mat-mdc-button > .mat-icon {
+    margin: 0;
     height: 24px;
     width: 24px;
   }
@@ -59,10 +95,8 @@
 
 .title {
   display: block;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  position: relative;
+  flex-shrink: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 24px;
@@ -74,11 +108,16 @@
 
   button {
     position: absolute;
-    right: 0;
+    right: 5px;
     top: 3px;
     background: transparent;
     border: none;
     outline: none;
+    line-height: 20px;
+    height: 20px;
+    width: 20px;
+    min-width: auto;
+    padding: 0;
 
     &:active, &:hover {
       background-color: #c6c6c6;

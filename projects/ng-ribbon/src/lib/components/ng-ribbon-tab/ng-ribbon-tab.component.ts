@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnDestroy, OnInit, inject, output, input, model, signal} from '@angular/core';
+import {Component, inject, input, model, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
 
 @Component({
@@ -18,6 +18,7 @@ import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.c
       overflow-x: auto;
       flex-wrap: nowrap;
       scrollbar-width: thin;
+      display: none;
 
       &.active {
         display: block;
