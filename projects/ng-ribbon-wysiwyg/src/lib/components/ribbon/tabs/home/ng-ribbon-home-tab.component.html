@@ -1,5 +1,4 @@
 <ng-ribbon-tab name="Inicio" i18n-name [active]="true" [order]="1">
-
   <ng-container [ngTemplateOutlet]="groupTemplate()" [ngTemplateOutletContext]="{index : 0}"/>
 
   <!-- Fuente -->
@@ -43,14 +42,14 @@
         <mat-icon class="font-size-arrow">arrow_drop_down</mat-icon>
       </button>
 
-      <mat-divider  [vertical]="true"/>
+      <mat-divider [vertical]="true"/>
 
       <!-- Borrar Formato -->
       <button matTooltip="Borrar formato" i18n-matTooltip class="sm" matRipple (click)="execute(Commands.removeFormat)" [disabled]="isDisabled(Commands.removeFormat)">
         <mat-icon svgIcon="remove-formatting"></mat-icon>
       </button>
 
-      <mat-divider  [vertical]="true"/>
+      <mat-divider [vertical]="true"/>
 
       <!-- Cambiar mayúsculas -->
       <button matRipple [matMenuTriggerFor]="caseMenu" class="sm" [disabled]="isDisabled(Commands.mceLowerCase)">
@@ -99,7 +98,7 @@
         <mat-icon svgIcon="superscript"></mat-icon>
       </button>
 
-      <mat-divider  [vertical]="true"/>
+      <mat-divider [vertical]="true"/>
 
       <!-- Color de fondo -->
       <app-split-button
@@ -157,7 +156,7 @@
         </mat-menu>
       </app-split-button>
 
-      <mat-divider  [vertical]="true"/>
+      <mat-divider [vertical]="true"/>
 
       <!-- Listas -->
       <app-list-buttons/>
@@ -190,7 +189,7 @@
         <mat-icon svgIcon="align-justify"></mat-icon>
       </button>
 
-      <mat-divider  [vertical]="true"/>
+      <mat-divider [vertical]="true"/>
 
       <!-- Identación -->
       <button matTooltip="Disminuir sangría" i18n-matTooltip class="sm" matRipple (click)="execute(Commands.outdent)"
@@ -209,18 +208,15 @@
   <!-- Edición -->
   <ng-ribbon-group name="Edición" i18n-name>
     <div class="column">
-      <button matRipple class="sm flex-center" style="line-height: 28px"
-              (click)="execute(Commands.copy)" [disabled]="isDisabled(Commands.copy)">
+      <button matRipple class="sm flex-center" (click)="execute(Commands.copy)" [disabled]="isDisabled(Commands.copy)">
         <mat-icon svgIcon="copy" class="sm"></mat-icon>
         <span i18n>Copiar</span>
       </button>
-      <button matRipple class="sm flex-center" style="line-height: 28px"
-              (click)="execute(Commands.cut)" [disabled]="isDisabled(Commands.cut)">
+      <button matRipple class="sm flex-center" (click)="execute(Commands.cut)" [disabled]="isDisabled(Commands.cut)">
         <mat-icon svgIcon="cut" class="sm"></mat-icon>
         <span i18n>Cortar</span>
       </button>
-      <button matRipple class="sm flex-center" style="line-height: 28px"
-              (click)="execute(Commands.paste)" [disabled]="isDisabled(Commands.paste)">
+      <button matRipple class="sm flex-center" (click)="execute(Commands.paste)" [disabled]="isDisabled(Commands.paste)">
         <mat-icon svgIcon="paste" class="sm"></mat-icon>
         <span i18n>Pegar</span>
       </button>
@@ -233,8 +229,7 @@
 
       <!-- Deshacer / rehacer -->
       <div style="white-space: nowrap">
-        <button matTooltip="Deshacer" i18n-matTooltip class="sm undo" matRipple
-                (click)="execute(Commands.undo)" [disabled]="isDisabled(Commands.undo)">
+        <button matTooltip="Deshacer" i18n-matTooltip class="sm undo" matRipple (click)="execute(Commands.undo)" [disabled]="isDisabled(Commands.undo)">
           <mat-icon svgIcon="undo"></mat-icon>
         </button>
         <button matTooltip="Rehacer" i18n-matTooltip class="sm redo" matRipple

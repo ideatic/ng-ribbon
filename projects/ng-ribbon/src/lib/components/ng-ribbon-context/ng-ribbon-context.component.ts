@@ -12,6 +12,7 @@ import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
   `
 })
 export class NgRibbonContextComponent implements OnInit, OnDestroy {
+  // Deps
   protected readonly ribbon = inject(NgRibbonComponent);
 
   // Bindings
