@@ -1,4 +1,5 @@
-import {Component, input, output} from '@angular/core';
+import {Component, inject, input, output} from '@angular/core';
+import {NgRibbonComponent, NgRibbonTabComponent} from "../../../public-api";
 
 @Component({
   selector: 'ng-ribbon-group',

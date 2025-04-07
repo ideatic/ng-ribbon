@@ -15,10 +15,11 @@ import {SplitButtonComponent} from '../../components/split-button.component';
 import {ColorSketchModule} from 'ngx-color/sketch';
 import {ListButtonsComponent} from './list-buttons.component';
 import {NgRibbonTabComponent} from "../../../../../../../ng-ribbon/src/lib/components/ng-ribbon-tab/ng-ribbon-tab.component";
+import {MatRipple} from "@angular/material/core";
 
 @Component({
   selector: 'ng-ribbon-home-tab',
-  imports: [NgRibbonGroupComponent, NgTemplateOutlet, MatList, MatInput, FormsModule, MatAutocompleteTrigger, MatTooltip, MatAutocomplete, MatOption, MatIcon, MatDivider, MatMenuTrigger, MatMenu, MatMenuItem, SplitButtonComponent, ColorSketchModule, ListButtonsComponent, DecimalPipe, NgRibbonTabComponent],
+  imports: [NgRibbonGroupComponent, NgTemplateOutlet, MatList, MatInput, FormsModule, MatAutocompleteTrigger, MatTooltip, MatAutocomplete, MatOption, MatIcon, MatDivider, MatMenuTrigger, MatMenu, MatMenuItem, SplitButtonComponent, ColorSketchModule, ListButtonsComponent, DecimalPipe, NgRibbonTabComponent, MatRipple],
   templateUrl: './ng-ribbon-home-tab.component.html',
   styleUrl: './ng-ribbon-home-tab.component.less'
 })

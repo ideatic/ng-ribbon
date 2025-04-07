@@ -6,6 +6,7 @@
   .flex-center {
     display: flex !important;
     align-items: center;
+    gap: 3px;
   }
 
   button, .button, [mat-button] {
@@ -38,7 +39,7 @@
       }
 
 
-      img, mat-icon {
+      & > img, & > mat-icon, & > svg {
         margin: 5px auto;
         width: 32px;
         height: 32px;
@@ -49,12 +50,13 @@
 
     &[disabled] {
       filter: grayscale(100%);
+      color: rgba(0, 0, 0, .26);
     }
 
     &.active {
       background-color: #c6c6c6;
 
-      &:hover{
+      &:hover {
         background-color: #b3b3b3;
       }
     }
