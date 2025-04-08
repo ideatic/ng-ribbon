@@ -18,6 +18,8 @@ import 'tinymce/plugins/quickbars';
 import 'tinymce/plugins/searchreplace';
 import 'tinymce/plugins/code';
 
+declare const ngDevMode: boolean;
+
 @Component({
   selector: 'ng-ribbon-textarea',
   template: '',
@@ -88,8 +90,22 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
         editor.on('blur', () => this._onTouched());
 
         editor.on('change keyup undo redo', () => {
+          if (ngDevMode) {
+            console.time('Get HTML content');
+          }
+
           this._html = editor.getContent();
+
+          if (ngDevMode) {
+            console.timeEnd('Get HTML content');
+            console.time('Propagate HTML content');
+          }
+
           this._propagateChange(this._html);
+
+          if (ngDevMode) {
+            console.timeEnd('Propagate HTML content');
+          }
         });
 
         editor.on('NodeChange', () => this.updateUI.emit());
