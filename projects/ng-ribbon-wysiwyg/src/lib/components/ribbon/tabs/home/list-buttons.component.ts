@@ -5,10 +5,11 @@ import {SplitButtonComponent} from '../../components/split-button.component';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatIcon} from '@angular/material/icon';
 import {MatRipple} from "@angular/material/core";
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-list-buttons',
-  imports: [SplitButtonComponent, MatTooltip, MatIcon, MatRipple],
+  imports: [SplitButtonComponent, MatTooltip, MatIcon, MatButton],
   template: `
     <!-- Listas desordenadas -->
     <app-split-button
@@ -21,15 +22,15 @@ import {MatRipple} from "@angular/material/core";
       <mat-icon svgIcon="unordered-list" />
       <ng-template #listMenu>
         <div class="list-type-menu">
-          <button matRipple (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'disc'})">
+          <button mat-button (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'disc'})">
             <mat-icon svgIcon="list-bull-default"></mat-icon>
           </button>
 
-          <button matRipple (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'circle'})">
+          <button mat-button (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'circle'})">
             <mat-icon svgIcon="list-bull-circle"></mat-icon>
           </button>
 
-          <button matRipple (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'square'})">
+          <button mat-button (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'square'})">
             <mat-icon svgIcon="list-bull-square"></mat-icon>
           </button>
         </div>
@@ -49,29 +50,29 @@ import {MatRipple} from "@angular/material/core";
       <ng-template #orderedListMenu>
         <div class="list-type-menu">
           <div>
-            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'decimal'})">
+            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'decimal'})">
               <mat-icon svgIcon="list-num-default"></mat-icon>
             </button>
 
-            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-alpha'})">
+            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-alpha'})">
               <mat-icon svgIcon="list-num-lower-alpha"></mat-icon>
             </button>
 
-            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-greek'})">
+            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-greek'})">
               <mat-icon svgIcon="list-num-lower-greek"></mat-icon>
             </button>
           </div>
 
           <div>
-            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-roman'})">
+            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'lower-roman'})">
               <mat-icon svgIcon="list-num-lower-roman"></mat-icon>
             </button>
 
-            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'upper-alpha'})">
+            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'upper-alpha'})">
               <mat-icon svgIcon="list-num-upper-alpha"></mat-icon>
             </button>
 
-            <button matRipple (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'upper-roman'})">
+            <button mat-button (click)="homeTab.execute(Commands.insertOrderedList, {'list-style-type': 'upper-roman'})">
               <mat-icon svgIcon="list-num-upper-roman"></mat-icon>
             </button>
           </div>
@@ -92,6 +93,10 @@ import {MatRipple} from "@angular/material/core";
       display: block;
       width: 48px;
       height: 48px;
+    }
+
+    button{
+      margin: 5px 0;
     }
   `
 })
