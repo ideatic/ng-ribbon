@@ -2,8 +2,8 @@
   <ng-container [ngTemplateOutlet]="groupTemplate()" [ngTemplateOutletContext]="{index : 0}"/>
 
   <!-- Fuente -->
-  <ng-ribbon-group name="Fuente" i18n-name class="column">
-    <mat-list>
+  <ng-ribbon-group name="Fuente" i18n-name="Referido a la tipografía de una letra" class="column">
+    <div class="row">
       <input type="text"
              [(ngModel)]="ribbon.editor().fontFamily"
              matTooltip="Fuente" i18n-matTooltip
@@ -58,14 +58,16 @@
           <mat-icon style="width: 15px;margin-left: -10px;vertical-align: sub;">arrow_drop_down</mat-icon>
         </div>
         <mat-menu #caseMenu>
-          <button mat-menu-item (click)="execute(Commands.mceLowerCase)" i18n>Minúsculas</button>
-          <button mat-menu-item (click)="execute(Commands.mceUpperCase)" i18n>Mayúsculas</button>
-          <button mat-menu-item (click)="execute(Commands.mceTitleCase)" i18n>Título</button>
+          <ng-template matMenuContent>
+            <button mat-menu-item (click)="execute(Commands.mceLowerCase)" i18n>Minúsculas</button>
+            <button mat-menu-item (click)="execute(Commands.mceUpperCase)" i18n>Mayúsculas</button>
+            <button mat-menu-item (click)="execute(Commands.mceTitleCase)" i18n>Título</button>
+          </ng-template>
         </mat-menu>
       </button>
-    </mat-list>
+    </div>
 
-    <mat-list>
+    <div class="row">
       <!-- Formato -->
       <button matTooltip="Negrita" i18n-matTooltip class="sm" matRipple tabindex="-1"
               (click)="execute(Commands.bold)"
@@ -107,7 +109,7 @@
         [dropDownMenu]="bgColorMenu"
         [disabled]="isDisabled(Commands.hiliteColor)">
         <mat-icon svgIcon="highlight-bg-color"/>
-        <div class="btn-color-preview">
+        <div class="btn-color-prxeview">
           <div [style.background]="backColor"></div>
         </div>
         <ng-template #bgColorMenu>
@@ -133,27 +135,30 @@
                         (onChangeComplete)="foreColor =  $event.color.hex; execute(Commands.foreColor, foreColor)"/>
         </ng-template>
       </app-split-button>
-    </mat-list>
+    </div>
   </ng-ribbon-group>
 
   <ng-container [ngTemplateOutlet]="groupTemplate()" [ngTemplateOutletContext]="{index : 1}"/>
 
   <!-- Párrafo -->
   <ng-ribbon-group name="Párrafo" i18n-name class="column">
-    <mat-list>
+    <div class="row">
+      @let currentBlock = queryValue(Commands.formatBlock);
       <app-split-button
         (mainBtnClick)="execute(Commands.formatBlock,'h2')"
         [dropDownMenu]="titleMenu"
+        [isActive]="['h1','h2','h3'].includes(currentBlock)"
         [disabled]="isDisabled(Commands.formatBlock)"
       >
         <mat-icon>text_fields</mat-icon>
         <span i18n>Título</span>
         <mat-menu #titleMenu>
-          @let currentBlock = queryValue(Commands.formatBlock);
-          <button mat-menu-item (click)="execute(Commands.formatBlock,'h1')" [class.active]="currentBlock == 'h1'" i18n>Título principal</button>
-          <button mat-menu-item (click)="execute(Commands.formatBlock,'h2')" [class.active]="currentBlock == 'h2'" i18n>Título secundario</button>
-          <button mat-menu-item (click)="execute(Commands.formatBlock,'h3')" [class.active]="currentBlock == 'h3'" i18n>Subtítulo</button>
-          <button mat-menu-item (click)="execute(Commands.formatBlock, 'p')" [class.active]="currentBlock == 'p'" i18n>Párrafo</button>
+          <ng-template matMenuContent>
+            <button mat-menu-item (click)="execute(Commands.formatBlock,'h1')" [class.active]="currentBlock == 'h1'" i18n>Título principal</button>
+            <button mat-menu-item (click)="execute(Commands.formatBlock,'h2')" [class.active]="currentBlock == 'h2'" i18n>Título secundario</button>
+            <button mat-menu-item (click)="execute(Commands.formatBlock,'h3')" [class.active]="currentBlock == 'h3'" i18n>Subtítulo</button>
+            <button mat-menu-item (click)="execute(Commands.formatBlock, 'p')" [class.active]="currentBlock == 'p'" i18n>Párrafo</button>
+          </ng-template>
         </mat-menu>
       </app-split-button>
 
@@ -161,9 +166,9 @@
 
       <!-- Listas -->
       <app-list-buttons/>
-    </mat-list>
+    </div>
 
-    <mat-list>
+    <div class="row">
       <!-- Alineado -->
       <button matTooltip="Alinear texto a la izquierda" i18n-matTooltip class="sm" matRipple
               (click)="execute(Commands.justifyLeft)"
@@ -199,7 +204,7 @@
       <button matTooltip="Aumentar sangría" i18n-matTooltip class="sm" matRipple (click)="execute(Commands.indent)" [disabled]="isDisabled(Commands.indent)">
         <mat-icon svgIcon="indent"></mat-icon>
       </button>
-    </mat-list>
+    </div>
   </ng-ribbon-group>
 
   <ng-container [ngTemplateOutlet]="groupTemplate()" [ngTemplateOutletContext]="{index : 2}"/>

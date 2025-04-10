@@ -6,7 +6,7 @@ import {getLocaleDirection} from "@angular/common";
 // Import TinyMCE
 import {Editor, RawEditorSettings} from 'tinymce';
 import tinymce from 'tinymce/tinymce';
-import 'tinymce/themes/silver';
+//import 'tinymce/themes/silver';
 import 'tinymce/icons/default';
 import 'tinymce/plugins/lists';
 import 'tinymce/plugins/link';
