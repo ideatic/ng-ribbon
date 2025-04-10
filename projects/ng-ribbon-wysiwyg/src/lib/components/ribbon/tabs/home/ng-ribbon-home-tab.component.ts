@@ -45,6 +45,10 @@ export class NgRibbonHomeTabComponent {
     return this.ribbon.editor().queryBooleanValue(command);
   }
 
+  public queryValue(command: EditorCommands): string {
+    return this.ribbon.editor().queryValue(command);
+  }
+
   public isDisabled(command: EditorCommands): boolean {
     return !this.ribbon.editor().isCommandSupported(command);
   }

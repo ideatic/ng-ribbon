@@ -221,6 +221,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
       return null;
     }
   }
+
   public set fontFamily(name: string) {
     this.execute(EditorCommands.fontName, name);
   }

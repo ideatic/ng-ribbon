@@ -149,10 +149,11 @@
         <mat-icon>text_fields</mat-icon>
         <span i18n>Título</span>
         <mat-menu #titleMenu>
-          <button mat-menu-item (click)="execute(Commands.formatBlock,'h1')" i18n>Título principal</button>
-          <button mat-menu-item (click)="execute(Commands.formatBlock,'h2')" i18n>Título secundario</button>
-          <button mat-menu-item (click)="execute(Commands.formatBlock,'h3')" i18n>Subtítulo</button>
-          <button mat-menu-item (click)="execute(Commands.formatBlock, 'p')" i18n>Párrafo</button>
+          @let currentBlock = queryValue(Commands.formatBlock);
+          <button mat-menu-item (click)="execute(Commands.formatBlock,'h1')" [class.active]="currentBlock == 'h1'" i18n>Título principal</button>
+          <button mat-menu-item (click)="execute(Commands.formatBlock,'h2')" [class.active]="currentBlock == 'h2'" i18n>Título secundario</button>
+          <button mat-menu-item (click)="execute(Commands.formatBlock,'h3')" [class.active]="currentBlock == 'h3'" i18n>Subtítulo</button>
+          <button mat-menu-item (click)="execute(Commands.formatBlock, 'p')" [class.active]="currentBlock == 'p'" i18n>Párrafo</button>
         </mat-menu>
       </app-split-button>
 
@@ -192,12 +193,10 @@
       <mat-divider [vertical]="true"/>
 
       <!-- Identación -->
-      <button matTooltip="Disminuir sangría" i18n-matTooltip class="sm" matRipple (click)="execute(Commands.outdent)"
-              [disabled]="isDisabled(Commands.outdent)">
+      <button matTooltip="Disminuir sangría" i18n-matTooltip class="sm" matRipple (click)="execute(Commands.outdent)" [disabled]="isDisabled(Commands.outdent)">
         <mat-icon svgIcon="outdent"></mat-icon>
       </button>
-      <button matTooltip="Aumentar sangría" i18n-matTooltip class="sm" matRipple (click)="execute(Commands.indent)"
-              [disabled]="isDisabled(Commands.indent)">
+      <button matTooltip="Aumentar sangría" i18n-matTooltip class="sm" matRipple (click)="execute(Commands.indent)" [disabled]="isDisabled(Commands.indent)">
         <mat-icon svgIcon="indent"></mat-icon>
       </button>
     </mat-list>

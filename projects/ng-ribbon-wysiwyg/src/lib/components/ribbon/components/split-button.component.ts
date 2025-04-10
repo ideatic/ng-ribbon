@@ -23,6 +23,11 @@ import {MatRipple} from "@angular/material/core";
     }
   `,
   styles: `
+    :host{
+      white-space: nowrap;
+      display: inline-block;
+    }
+
     .split-button {
       padding: 0 5px 0 0;
       margin-left: -5px;

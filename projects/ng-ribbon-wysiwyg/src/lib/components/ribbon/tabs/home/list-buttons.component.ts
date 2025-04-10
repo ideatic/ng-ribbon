@@ -101,8 +101,8 @@ import {MatButton} from "@angular/material/button";
   `
 })
 export class ListButtonsComponent {
-  homeTab = inject(NgRibbonHomeTabComponent);
+  protected readonly homeTab = inject(NgRibbonHomeTabComponent);
 
   // Importar tipos
-  public readonly Commands = EditorCommands;
+  protected readonly Commands = EditorCommands;
 }
