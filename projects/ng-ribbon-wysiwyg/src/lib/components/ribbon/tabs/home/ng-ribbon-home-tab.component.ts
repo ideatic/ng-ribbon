@@ -10,7 +10,7 @@ import {MatTooltip} from '@angular/material/tooltip';
 import {DecimalPipe, NgTemplateOutlet} from '@angular/common';
 import {MatIcon} from '@angular/material/icon';
 import {MatDivider} from '@angular/material/divider';
-import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
+import {MatMenu, MatMenuContent, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {SplitButtonComponent} from '../../components/split-button.component';
 import {ColorSketchModule} from 'ngx-color/sketch';
 import {ListButtonsComponent} from './list-buttons.component';
@@ -19,7 +19,7 @@ import {MatRipple} from "@angular/material/core";
 
 @Component({
   selector: 'ng-ribbon-home-tab',
-  imports: [NgRibbonGroupComponent, NgTemplateOutlet, MatList, MatInput, FormsModule, MatAutocompleteTrigger, MatTooltip, MatAutocomplete, MatOption, MatIcon, MatDivider, MatMenuTrigger, MatMenu, MatMenuItem, SplitButtonComponent, ColorSketchModule, ListButtonsComponent, DecimalPipe, NgRibbonTabComponent, MatRipple],
+  imports: [NgRibbonGroupComponent, NgTemplateOutlet, MatInput, FormsModule, MatAutocompleteTrigger, MatTooltip, MatAutocomplete, MatOption, MatIcon, MatDivider, MatMenuTrigger, MatMenu, MatMenuItem, SplitButtonComponent, ColorSketchModule, ListButtonsComponent, DecimalPipe, NgRibbonTabComponent, MatRipple, MatMenuContent],
   templateUrl: './ng-ribbon-home-tab.component.html',
   styleUrl: './ng-ribbon-home-tab.component.less'
 })
