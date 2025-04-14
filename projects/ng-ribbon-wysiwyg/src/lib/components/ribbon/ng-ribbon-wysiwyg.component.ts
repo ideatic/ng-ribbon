@@ -54,9 +54,6 @@ import {ComponentInput} from "../../../../../../../ng-shared/libs/types";
   styleUrl: './ng-ribbon-wysiwyg.component.less'
 })
 export class NgRibbonWysiwygComponent {
-  // Deps
-  private readonly _cdRef = inject(ChangeDetectorRef);
-
   // Bindings
   public readonly editor = input<NgRibbonTextAreaComponent>();
   public readonly settings = input(new NgRibbonWysiwygSettings());
