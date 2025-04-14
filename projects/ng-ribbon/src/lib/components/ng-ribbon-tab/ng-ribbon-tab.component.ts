@@ -1,8 +1,9 @@
-import {Component, inject, input, model, OnDestroy, OnInit, output, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, input, model, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
 
 @Component({
   selector: 'ng-ribbon-tab',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content />',
   host: {
     role: 'tabpanel',

@@ -1,4 +1,16 @@
-import {ChangeDetectorRef, Component, contentChild, inject, input, OnChanges, OutputRefSubscription, SimpleChanges, TemplateRef, viewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  contentChild,
+  inject,
+  input,
+  OnChanges,
+  OutputRefSubscription,
+  SimpleChanges,
+  TemplateRef,
+  viewChild
+} from '@angular/core';
 import {NgRibbonTextAreaComponent} from "../textarea/ng-ribbon-textarea.component";
 import {EditorCommands} from "../textarea/editor-commands";
 import {NgRibbonComponent} from "../../../../../ng-ribbon/src/lib/components/ng-ribbon/ng-ribbon.component";
@@ -12,6 +24,7 @@ import {ComponentInput} from "../../../../../../../ng-shared/libs/types";
 
 @Component({
   selector: 'ng-ribbon-wysiwyg',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgRibbonHomeTabComponent, NgRibbonInsertTabComponent],
   template: `
     <ng-ribbon [settings]="settings()">

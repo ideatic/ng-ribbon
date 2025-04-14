@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatIcon} from '@angular/material/icon';
 import {NgRibbonGroupComponent} from "../../../../../../ng-ribbon/src/lib/components/ng-ribbon-group/ng-ribbon-group.component";
@@ -12,6 +12,7 @@ import {MatRipple} from "@angular/material/core";
 
 @Component({
   selector: 'ng-ribbon-insert-tab',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatRipple,
     MatIcon,
