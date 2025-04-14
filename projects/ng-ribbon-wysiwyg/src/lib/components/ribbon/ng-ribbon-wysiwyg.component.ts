@@ -52,7 +52,7 @@ import {NgRibbonInsertTabComponent} from "./tabs/ng-ribbon-insert-tab.component"
   `,
   styleUrl: './ng-ribbon-wysiwyg.component.less'
 })
-export class NgRibbonWysiwygComponent implements OnChanges {
+export class NgRibbonWysiwygComponent {
   // Deps
   private readonly _cdRef = inject(ChangeDetectorRef);
 
@@ -66,32 +66,8 @@ export class NgRibbonWysiwygComponent implements OnChanges {
   public readonly mainContextHeader = contentChild<TemplateRef<void>>('mainContextHeader');
   public readonly homeGroupTemplate = contentChild<TemplateRef<{ index: number }>>('homeGroupTemplate');
 
-  // Estado
-  private _subscription: OutputRefSubscription;
-
   constructor() {
     inject(IconsService).configure();
-  }
-
-  public ngOnChanges(change: SimpleChanges) {
-    if (change['editor']) {
-      this._subscription?.unsubscribe();
-
-      // Actualizar estado de los botones cuando cambia el documento
-      const editor = this.editor();
-      if (editor) {
-        this._subscription = editor.updateUI.subscribe(() => this.updateUI());
-        this.updateUI();
-      }
-    }
-  }
-
-  protected updateUI() {
-    // Comprobar contextos activos
-    // this._defineActiveContexts();
-
-    // Detectar cambio
-    this._cdRef.detectChanges();
   }
 
   public execute(command: EditorCommands, value?: string) {

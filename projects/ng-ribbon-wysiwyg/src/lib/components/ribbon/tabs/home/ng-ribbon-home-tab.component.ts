@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, input, TemplateRef} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, inject, input, OnDestroy, OutputRefSubscription, TemplateRef} from '@angular/core';
 import {NgRibbonWysiwygComponent} from "../../ng-ribbon-wysiwyg.component";
 import {EditorCommands} from "../../../textarea/editor-commands";
 import {NgRibbonGroupComponent} from '../../../../../../../ng-ribbon/src/lib/components/ng-ribbon-group/ng-ribbon-group.component';
@@ -23,9 +23,10 @@ import {MatRipple} from "@angular/material/core";
   templateUrl: './ng-ribbon-home-tab.component.html',
   styleUrl: './ng-ribbon-home-tab.component.less'
 })
-export class NgRibbonHomeTabComponent {
+export class NgRibbonHomeTabComponent implements  OnDestroy{
   // Deps
   protected readonly ribbon = inject(NgRibbonWysiwygComponent);
+  private readonly _cdRef = inject(ChangeDetectorRef);
 
   // Bindings
   public readonly groupTemplate = input<TemplateRef<{ index: number }>>();
@@ -33,9 +34,20 @@ export class NgRibbonHomeTabComponent {
   // Estado
   protected backColor = 'yellow';
   protected foreColor = 'red';
+  private _updateUiSubscription: OutputRefSubscription;
 
   // Importar tipos
   protected readonly Commands = EditorCommands;
+
+  constructor() {
+    // Actualizar estado de los botones cuando cambia el documento
+    effect(() => {
+      if (this.ribbon.editor()) {
+        this._updateUiSubscription?.unsubscribe();
+        this._updateUiSubscription = this.ribbon.editor().updateUI.subscribe(() => this._cdRef.detectChanges());
+      }
+    });
+  }
 
   public execute(command: EditorCommands, value?: any) {
     this.ribbon.editor().execute(command, value);
@@ -51,5 +63,9 @@ export class NgRibbonHomeTabComponent {
 
   public isDisabled(command: EditorCommands): boolean {
     return !this.ribbon.editor().isCommandSupported(command);
+  }
+
+  public ngOnDestroy() {
+    this._updateUiSubscription?.unsubscribe();
   }
 }
