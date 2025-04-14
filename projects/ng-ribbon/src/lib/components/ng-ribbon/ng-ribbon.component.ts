@@ -1,4 +1,4 @@
-import {Component, HostListener, input, output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostListener, input, output} from '@angular/core';
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 import {NgRibbonSettings} from "./ng-ribbon-settings";
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
@@ -6,6 +6,7 @@ import {NgTemplateOutlet} from '@angular/common';
 
 @Component({
   selector: 'ng-ribbon',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgTemplateOutlet],
   template: `
     <div class="contexts" [style.border-color]="selectedTab?.context().color() ?? '#dadbdc'">

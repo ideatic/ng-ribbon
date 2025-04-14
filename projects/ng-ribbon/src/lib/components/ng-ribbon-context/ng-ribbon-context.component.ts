@@ -1,9 +1,10 @@
-import {Component, contentChild, inject, input, OnDestroy, OnInit, TemplateRef} from '@angular/core';
+import {ChangeDetectionStrategy, Component, contentChild, inject, input, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {NgRibbonComponent} from "../ng-ribbon/ng-ribbon.component";
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 
 @Component({
   selector: 'ng-ribbon-context',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content />',
   styles: `
     :host {

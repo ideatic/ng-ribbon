@@ -1,4 +1,4 @@
-import {Component, input, output, TemplateRef} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input, output, TemplateRef} from '@angular/core';
 import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
 import {MatIcon} from '@angular/material/icon';
 import {MenuTriggerDirective} from '../../../directives/menu-trigger.directive';
@@ -6,6 +6,7 @@ import {MatRipple} from "@angular/material/core";
 
 @Component({
   selector: 'app-split-button',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatRipple, MatMenuTrigger, MatIcon, MenuTriggerDirective],
   template: `
     <button class="sm" matRipple (click)="mainBtnClick.emit($event)" [class.active]="isActive()" [disabled]="disabled()">
@@ -23,7 +24,7 @@ import {MatRipple} from "@angular/material/core";
     }
   `,
   styles: `
-    :host{
+    :host {
       white-space: nowrap;
       display: inline-block;
     }

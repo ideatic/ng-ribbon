@@ -1,8 +1,8 @@
-import {Component, inject, input, output} from '@angular/core';
-import {NgRibbonComponent, NgRibbonTabComponent} from "../../../public-api";
+import {ChangeDetectionStrategy, Component, input, output} from '@angular/core';
 
 @Component({
   selector: 'ng-ribbon-group',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="group-content">
       <ng-content/>

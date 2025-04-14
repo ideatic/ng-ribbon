@@ -1,8 +1,9 @@
-import {Component, ElementRef, forwardRef, inject, input, LOCALE_ID, OnDestroy, OnInit, output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, LOCALE_ID, OnDestroy, OnInit, output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {noop} from "rxjs";
 import {EditorCommands} from "./editor-commands";
 import {getLocaleDirection} from "@angular/common";
+
 // Import TinyMCE
 import {Editor, RawEditorSettings} from 'tinymce';
 import tinymce from 'tinymce/tinymce';
@@ -22,8 +23,9 @@ declare const ngDevMode: boolean;
 
 @Component({
   selector: 'ng-ribbon-textarea',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: '',
-  styles: [`
+  styles: `
     :host {
       display: block;
       outline: none;
@@ -37,7 +39,7 @@ declare const ngDevMode: boolean;
     :host ::ng-deep .tox-tinymce {
       border: none !important;
     }
-  `],
+  `,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -210,6 +212,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
   public get activeElement(): Element {
     return this._tinyMCE?.selection.getNode();
   }
+
   /* Font */
 
   public get fontFamily(): string {

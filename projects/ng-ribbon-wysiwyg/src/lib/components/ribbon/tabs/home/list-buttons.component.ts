@@ -1,14 +1,14 @@
-import {Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {EditorCommands} from "../../../textarea/editor-commands";
 import {NgRibbonHomeTabComponent} from "./ng-ribbon-home-tab.component";
 import {SplitButtonComponent} from '../../components/split-button.component';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatIcon} from '@angular/material/icon';
-import {MatRipple} from "@angular/material/core";
 import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-list-buttons',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SplitButtonComponent, MatTooltip, MatIcon, MatButton],
   template: `
     <!-- Listas desordenadas -->
@@ -19,7 +19,7 @@ import {MatButton} from "@angular/material/button";
       [isActive]="homeTab.isActive(Commands.insertUnorderedList)"
       [disabled]="homeTab.isDisabled(Commands.insertUnorderedList)"
     >
-      <mat-icon svgIcon="unordered-list" />
+      <mat-icon svgIcon="unordered-list"/>
       <ng-template #listMenu>
         <div class="list-type-menu">
           <button mat-button (click)="homeTab.execute(Commands.insertUnorderedList, {'list-style-type': 'disc'})">
@@ -46,7 +46,7 @@ import {MatButton} from "@angular/material/button";
       [isActive]="homeTab.isActive(Commands.insertOrderedList)"
       [disabled]="homeTab.isDisabled(Commands.insertOrderedList)"
     >
-      <mat-icon svgIcon="ordered-list" />
+      <mat-icon svgIcon="ordered-list"/>
       <ng-template #orderedListMenu>
         <div class="list-type-menu">
           <div>
@@ -95,7 +95,7 @@ import {MatButton} from "@angular/material/button";
       height: 48px;
     }
 
-    button{
+    button {
       margin: 5px 0;
     }
   `

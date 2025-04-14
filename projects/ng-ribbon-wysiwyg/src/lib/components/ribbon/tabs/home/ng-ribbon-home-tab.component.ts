@@ -1,8 +1,7 @@
-import {Component, inject, input, TemplateRef} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, input, TemplateRef} from '@angular/core';
 import {NgRibbonWysiwygComponent} from "../../ng-ribbon-wysiwyg.component";
 import {EditorCommands} from "../../../textarea/editor-commands";
 import {NgRibbonGroupComponent} from '../../../../../../../ng-ribbon/src/lib/components/ng-ribbon-group/ng-ribbon-group.component';
-import {MatList} from '@angular/material/list';
 import {MatInput} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
@@ -19,6 +18,7 @@ import {MatRipple} from "@angular/material/core";
 
 @Component({
   selector: 'ng-ribbon-home-tab',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgRibbonGroupComponent, NgTemplateOutlet, MatInput, FormsModule, MatAutocompleteTrigger, MatTooltip, MatAutocomplete, MatOption, MatIcon, MatDivider, MatMenuTrigger, MatMenu, MatMenuItem, SplitButtonComponent, ColorSketchModule, ListButtonsComponent, DecimalPipe, NgRibbonTabComponent, MatRipple, MatMenuContent],
   templateUrl: './ng-ribbon-home-tab.component.html',
   styleUrl: './ng-ribbon-home-tab.component.less'
@@ -28,7 +28,7 @@ export class NgRibbonHomeTabComponent {
   protected readonly ribbon = inject(NgRibbonWysiwygComponent);
 
   // Bindings
-  public readonly groupTemplate=input<TemplateRef<{index : number}>>();
+  public readonly groupTemplate = input<TemplateRef<{ index: number }>>();
 
   // Estado
   protected backColor = 'yellow';
