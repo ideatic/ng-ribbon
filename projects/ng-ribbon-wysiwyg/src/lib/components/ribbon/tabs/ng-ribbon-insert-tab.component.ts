@@ -52,7 +52,7 @@ import {MatRipple} from "@angular/material/core";
         <button class="xl" matRipple (click)="ribbon.execute(Commands.insertHTML, defaultQuote)" [disabled]="ribbon.isDisabled(Commands.insertHTML)"
                 matTooltip="Inserta una cita en el documento." i18n-matTooltip>
           <img src="{{ ribbon.settings().assetsURL }}/images/quote.png"/>
-          <div i18n>Cita</div>
+          <div i18n="Referida a una mención, quote en inglés">Cita</div>
         </button>
       </ng-ribbon-group>
       @if (ribbonTab.showed()) {
