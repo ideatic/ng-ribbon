@@ -1,6 +1,6 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, OnInit, inject, Injector} from '@angular/core';
 import {NgRibbonWysiwygSettings} from "../../../projects/ng-ribbon-wysiwyg/src/lib/components/ribbon/ng-ribbon-wysiwyg-settings";
-import {ConnectionPositionPair, Overlay} from "@angular/cdk/overlay";
+import {ConnectionPositionPair, createBlockScrollStrategy, createFlexibleConnectedPositionStrategy, createOverlayRef, Overlay} from "@angular/cdk/overlay";
 import {ComponentPortal} from "@angular/cdk/portal";
 import {FileMenuComponent} from "./file-menu.component";
 import {Title} from "@angular/platform-browser";
@@ -96,7 +96,7 @@ import {NgRibbonContextComponent, NgRibbonGroupComponent, NgRibbonTabComponent} 
   ]
 })
 export class AppComponent implements OnInit {
-  private _overlaySvc = inject(Overlay);
+  private _injector = inject(Injector);
   private _titleSvc = inject(Title);
 
   public documentTitle = $localize`Demo`;
@@ -164,15 +164,14 @@ export class AppComponent implements OnInit {
   }
 
   private _showFileMenu(element: HTMLElement) {
-    const overlayRef = this._overlaySvc.create({
+    const overlayRef = createOverlayRef(this._injector, {
         hasBackdrop: true,
-        positionStrategy: this._overlaySvc.position()
-          .flexibleConnectedTo(element)
+        positionStrategy: createFlexibleConnectedPositionStrategy(this._injector, element)
           .withPositions([
             new ConnectionPositionPair({originX: 'start', originY: 'bottom'}, {overlayX: 'start', overlayY: 'top'}),
             new ConnectionPositionPair({originX: 'start', originY: 'top'}, {overlayX: 'start', overlayY: 'bottom'})
           ]),
-        scrollStrategy: this._overlaySvc.scrollStrategies.block(),
+        scrollStrategy: createBlockScrollStrategy(this._injector),
       }
     );
     overlayRef.backdropClick().subscribe(() => overlayRef.dispose());

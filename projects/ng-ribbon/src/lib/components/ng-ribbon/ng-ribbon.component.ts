@@ -85,7 +85,7 @@ export class NgRibbonComponent {
   }
 
   @HostListener('wheel', ['$event'])
-  private _onWheel($event: WheelEvent) {
+  protected onWheel($event: WheelEvent) {
     if (this.settings().mouseWheelTabs) {
       if ($event.deltaY > 0) { // Select next tab
         let selectCurrentTab = false;
