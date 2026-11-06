@@ -1,13 +1,11 @@
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 
 export enum ReadAs {
   dataUri,
   string,
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class DomUtilsService {
 
   constructor() {

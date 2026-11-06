@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, inject, input, OnDestroy, OutputRefSubscription, TemplateRef} from '@angular/core';
+import {ChangeDetectorRef, Component, effect, inject, input, OnDestroy, OutputRefSubscription, TemplateRef} from '@angular/core';
 import {NgRibbonWysiwygComponent} from "../../ng-ribbon-wysiwyg.component";
 import {EditorCommands} from "../../../textarea/editor-commands";
 import {NgRibbonGroupComponent} from '../../../../../../../ng-ribbon/src/lib/components/ng-ribbon-group/ng-ribbon-group.component';
@@ -18,7 +18,6 @@ import {MatRipple} from "@angular/material/core";
 
 @Component({
   selector: 'ng-ribbon-home-tab',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgRibbonGroupComponent, NgTemplateOutlet, MatInput, FormsModule, MatAutocompleteTrigger, MatTooltip, MatAutocomplete, MatOption, MatIcon, MatDivider, MatMenuTrigger, MatMenu, MatMenuItem, SplitButtonComponent, ColorSketchModule, ListButtonsComponent, DecimalPipe, NgRibbonTabComponent, MatRipple, MatMenuContent],
   templateUrl: './ng-ribbon-home-tab.component.html',
   styleUrl: './ng-ribbon-home-tab.component.less'

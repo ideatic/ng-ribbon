@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, Component, input, output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {MatRipple} from "@angular/material/core";
 
 @Component({
   selector: 'symbol-list',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatRipple],
   template: `
     @for (category of symbols; track category) {

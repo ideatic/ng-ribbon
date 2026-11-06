@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {EditorCommands} from "../../../textarea/editor-commands";
 import {NgRibbonHomeTabComponent} from "./ng-ribbon-home-tab.component";
 import {SplitButtonComponent} from '../../components/split-button.component';
@@ -8,7 +8,6 @@ import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-list-buttons',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SplitButtonComponent, MatTooltip, MatIcon, MatButton],
   template: `
     <!-- Listas desordenadas -->

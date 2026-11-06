@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, input, LOCALE_ID, OnDestroy, OnInit, output} from '@angular/core';
+import {Component, ElementRef, forwardRef, inject, input, LOCALE_ID, OnDestroy, OnInit, output, signal} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {noop} from "rxjs";
 import {EditorCommands} from "./editor-commands";
@@ -23,7 +23,6 @@ declare const ngDevMode: boolean;
 
 @Component({
   selector: 'ng-ribbon-textarea',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: '',
   styles: `
     :host {
@@ -65,6 +64,11 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
   private _onTouched: () => void = noop;
 
   private _disabled: boolean;
+  /**
+   * Cambia cuando cambia el estado del editor (selección, deshacer, modo...). Las consultas lo leen para que las
+   * plantillas que las usan se actualicen solas: sin zone.js, los eventos de TinyMCE no lanzan la detección de cambios
+   */
+  private readonly _uiState = signal(0);
 
   public ngOnInit() {
     // Configurar TinyMCE
@@ -110,7 +114,12 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
           }
         });
 
-        editor.on('NodeChange', () => this.updateUI.emit());
+        const bumpUIState = () => this._uiState.update(version => version + 1);
+        editor.on('NodeChange', () => {
+          bumpUIState();
+          this.updateUI.emit();
+        });
+        editor.on('change undo redo', bumpUIState);
       });
 
       if (prevSetup) {
@@ -184,14 +193,17 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
   }
 
   public queryValue(command: EditorCommands): string {
+    this._uiState();
     return this._tinyMCE?.queryCommandValue(command) as string;
   }
 
   public queryBooleanValue(command: EditorCommands): boolean {
+    this._uiState();
     return this._tinyMCE?.queryCommandState(command);
   }
 
   public isCommandSupported(command: EditorCommands): boolean {
+    this._uiState();
     if (this._disabled) {
       return false;
     } else if (this._tinyMCE) {
@@ -210,6 +222,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
   /* Active element */
 
   public get activeElement(): Element {
+    this._uiState();
     return this._tinyMCE?.selection.getNode();
   }
 
@@ -250,6 +263,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
 
   public setDisabledState(isDisabled: boolean): void {
     this._disabled = isDisabled;
+    this._uiState.update(version => version + 1);
 
     if (this._tinyMCE) {
       this._tinyMCE.setMode(isDisabled ? 'readonly' : 'design');

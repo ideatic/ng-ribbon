@@ -1,11 +1,9 @@
-import {inject, Injectable, LOCALE_ID} from '@angular/core';
+import {inject, Service, LOCALE_ID} from '@angular/core';
 import {getLocaleDirection} from "@angular/common";
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from "@angular/platform-browser";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class IconsService {
   private _locale = inject(LOCALE_ID);
   private _iconRegistry = inject(MatIconRegistry);

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   contentChild,
@@ -23,7 +22,6 @@ import {NgRibbonInsertTabComponent} from "./tabs/ng-ribbon-insert-tab.component"
 
 @Component({
   selector: 'ng-ribbon-wysiwyg',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgRibbonHomeTabComponent, NgRibbonInsertTabComponent],
   template: `
     <ng-ribbon [settings]="settings()">
