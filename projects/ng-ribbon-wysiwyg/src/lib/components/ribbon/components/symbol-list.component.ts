@@ -21,8 +21,8 @@ import {MatRipple} from "@angular/material/core";
       min-width: 200px;
       max-width: 700px;
       overflow-y: scroll;
-      background: #fafbfc;
-      border: 1px solid #dbdcdd;
+      background: var(--ribbon-panel-bg, #fafbfc);
+      border: 1px solid var(--ribbon-border-color, #dbdcdd);
       padding: 5px;
     }
 
@@ -31,10 +31,10 @@ import {MatRipple} from "@angular/material/core";
     }
 
     h3 {
-      color: rgba(0, 0, 0, .54);
+      color: var(--ribbon-muted-color, rgba(0, 0, 0, .54));
       font-size: 14px;
       margin: 0 0 5px 0;
-      border-bottom: 1px solid rgba(0, 0, 0, .14);
+      border-bottom: 1px solid var(--ribbon-divider-color, rgba(0, 0, 0, .14));
     }
 
     button {

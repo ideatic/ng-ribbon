@@ -28,7 +28,7 @@ declare const ngDevMode: boolean;
     :host {
       display: block;
       outline: none;
-      background: white;
+      background: var(--bg-color, white);
       overflow: hidden;
       width: 100%;
       height: 100%;

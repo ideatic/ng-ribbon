@@ -50,14 +50,14 @@
 
     &[disabled] {
       filter: grayscale(100%);
-      color: rgba(0, 0, 0, .26);
+      color: var(--ribbon-disabled-color, rgba(0, 0, 0, .26));
     }
 
     &.active {
-      background-color: #c6c6c6;
+      background-color: var(--ribbon-active-bg, #c6c6c6);
 
       &:hover {
-        background-color: #b3b3b3;
+        background-color: var(--ribbon-active-hover-bg, #b3b3b3);
       }
     }
   }

@@ -3,7 +3,7 @@
 :host {
   display: block;
   user-select: none; // Así no se pierde la selección del editor principal
-  background: white;
+  background: @bgTabsColor;
   padding-top: 5px;
 }
 
@@ -69,7 +69,7 @@ li {
   }
 
   &.active > a {
-    color: #555;
+    color: @activeTabColor;
     cursor: default;
     background-color: @bgColor;
     border: 1px solid @borderColor;

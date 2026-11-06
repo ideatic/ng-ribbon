@@ -8,7 +8,7 @@ import {NgTemplateOutlet} from '@angular/common';
   selector: 'ng-ribbon',
   imports: [NgTemplateOutlet],
   template: `
-    <div class="contexts" [style.border-color]="selectedTab?.context().color() ?? '#dadbdc'">
+    <div class="contexts" [style.border-color]="selectedTab?.context().color() ?? 'var(--ribbon-border-color, #dadbdc)'">
       @for (context of contexts; track context; let firstContext = $first) {
         <div class="context" [style.background-color]="context.color()">
           @if (settings().useContexts) {

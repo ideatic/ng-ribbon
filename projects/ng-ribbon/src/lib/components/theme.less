@@ -1,8 +1,18 @@
-@borderColor: #dadbdc;
-@bgColor: #f5f6f7;
+// Cada color se puede cambiar con una propiedad CSS (por ejemplo, para un tema oscuro). El valor de respaldo es el tema claro
+@borderColor: var(--ribbon-border-color, #dadbdc);
+@bgColor: var(--ribbon-bg-color, #f5f6f7);
 
-@tabHoverBg: #fdfdff;
-@tabHoverBorder: #ebecec;
+@tabHoverBg: var(--ribbon-tab-hover-bg, #fdfdff);
+@tabHoverBorder: var(--ribbon-tab-hover-border, #ebecec);
 
 @mainTabBg: #0066b4;
 @mainTabHoverBg: #007ddd;
+
+@bgTabsColor: var(--bg-color, white);
+@activeTabColor: var(--ribbon-active-tab-color, #555);
+@hoverBg: var(--ribbon-hover-bg, rgba(0, 0, 0, 0.04));
+@activeBg: var(--ribbon-active-bg, #c6c6c6);
+@inputBg: var(--bg-color, white);
+@inputBorder: var(--ribbon-input-border-color, #c6c6c6);
+@inputHoverBorder: var(--ribbon-input-hover-border-color, #969696);
+@dividerColor: var(--ribbon-divider-color, #d2d2d2);

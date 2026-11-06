@@ -81,9 +81,9 @@ import {MatButton} from "@angular/material/button";
   `,
   styles: `
     .list-type-menu {
-      background: white;
+      background: var(--bg-color, white);
       padding: 4px;
-      border: 1px solid #ccc;
+      border: 1px solid var(--ribbon-input-border-color, #ccc);
       border-radius: 3px;
       box-shadow: 0 4px 8px 0 rgba(34, 47, 62, .1);
     }
