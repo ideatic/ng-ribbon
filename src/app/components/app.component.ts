@@ -1,4 +1,4 @@
-import {Component, OnInit, inject, Injector} from '@angular/core';
+import {Component, OnInit, inject, Injector, signal} from '@angular/core';
 import {NgRibbonWysiwygSettings} from "../../../projects/ng-ribbon-wysiwyg/src/lib/components/ribbon/ng-ribbon-wysiwyg-settings";
 import {ConnectionPositionPair, createBlockScrollStrategy, createFlexibleConnectedPositionStrategy, createOverlayRef, Overlay} from "@angular/cdk/overlay";
 import {ComponentPortal} from "@angular/cdk/portal";
@@ -18,30 +18,32 @@ import {NgRibbonContextComponent, NgRibbonGroupComponent, NgRibbonTabComponent} 
   template: `
     <!-- Ribbon -->
     <ng-ribbon-wysiwyg #ribbon [settings]="ribbonSettings" [editor]="editor">
-      @if (mainContextVisible) {
+      @if (mainContextVisible()) {
         <ng-template #mainContextHeader>
-          <div contenteditable [textContent]="documentTitle"
-               (input)="documentTitle = $any($event.target).textContent; onTitleUpdated();"
+          <div contenteditable [textContent]="documentTitle()"
+               (input)="documentTitle.set($any($event.target).textContent); onTitleUpdated();"
                style="outline: none"></div>
         </ng-template>
       }
 
 
-      <ng-container ngProjectAs="homeTabGroup3">
-        <ng-ribbon-group name="Demo">
-          <button class="xl animate-pulse" mat-button (click)="mainContextVisible = !mainContextVisible">
-            <img src="{{ environment.assetsURL }}/images/toggle.png"/>
-            <div i18n>Toggle main context</div>
-          </button>
-          <button class="xl animate-pulse" mat-button (click)="showImageContext = !showImageContext">
-            <img src="{{ environment.assetsURL }}/images/toggle.png"/>
-            <div i18n>Toggle image context</div>
-          </button>
-        </ng-ribbon-group>
-      </ng-container>
+      <ng-template #homeGroupTemplate let-index="index">
+        @if (index === 3) {
+          <ng-ribbon-group name="Demo">
+            <button class="xl animate-pulse" mat-button (click)="mainContextVisible.set(!mainContextVisible())">
+              <img src="{{ environment.assetsURL }}/images/toggle.png"/>
+              <div i18n>Toggle main context</div>
+            </button>
+            <button class="xl animate-pulse" mat-button (click)="showImageContext.set(!showImageContext())">
+              <img src="{{ environment.assetsURL }}/images/toggle.png"/>
+              <div i18n>Toggle image context</div>
+            </button>
+          </ng-ribbon-group>
+        }
+      </ng-template>
 
-      @if (showImageContext) {
-        <ng-ribbon-context name="Imagen" i18n-name color="#f0f182" [ribbon]="ribbon.ribbon">
+      @if (showImageContext()) {
+        <ng-ribbon-context name="Imagen" i18n-name color="#f0f182" [ribbon]="ribbon.ribbon()">
           <ng-ribbon-tab name="Formato" i18n-name>
             <ng-ribbon-group name="Ajustar" i18n-name>
               <!-- Posición -->
@@ -99,8 +101,8 @@ export class AppComponent implements OnInit {
   private _injector = inject(Injector);
   private _titleSvc = inject(Title);
 
-  public documentTitle = $localize`Demo`;
-  public html = `<h1>Welcome to <em>NgRibbon</em></h1>
+  public documentTitle = signal($localize`Demo`);
+  public html = signal(`<h1>Welcome to <em>NgRibbon</em></h1>
 <h3>Windows-like ribbon interface for Angular apps + WYSIWYG implementation using TinyMCE</h3>
 
 <h4>Usage</h4>
@@ -136,10 +138,10 @@ export class AppComponent implements OnInit {
 </li>
 <li>Run <code>ng serve</code> for a dev server</li>
 <li>Navigate to http://localhost:4200/</li>
-</ol>`;
+</ol>`);
 
-  public mainContextVisible = true;
-  public showImageContext = false;
+  public mainContextVisible = signal(true);
+  public showImageContext = signal(false);
 
   public ribbonSettings = new NgRibbonWysiwygSettings({
     mainTabName: $localize`Archivo`,
@@ -154,13 +156,13 @@ export class AppComponent implements OnInit {
   public readonly environment = environment;
 
   public ngOnInit() {
-    setTimeout(() => this.showImageContext = true, 1000);
+    setTimeout(() => this.showImageContext.set(true), 1000);
 
     this.onTitleUpdated();
   }
 
   public onTitleUpdated() {
-    this._titleSvc.setTitle(`${this.documentTitle} - NgRibbon`);
+    this._titleSvc.setTitle(`${this.documentTitle()} - NgRibbon`);
   }
 
   private _showFileMenu(element: HTMLElement) {

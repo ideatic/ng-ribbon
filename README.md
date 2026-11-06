@@ -44,4 +44,4 @@ Windows-like ribbon interface for Angular apps + WYSIWYG implementation using Ti
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build` to build the demo into `demo/`. Then move `demo/index.html` to the root `index.html`: GitHub Pages serves the `main` branch root.

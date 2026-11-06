@@ -3,12 +3,12 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [
-      "tinymce"
+      "tinymce",
+      "@angular/localize"
     ]
   },
   "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
+    "src/main.ts"
   ],
   "include": [
     "src/**/*.d.ts"

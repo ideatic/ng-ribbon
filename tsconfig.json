@@ -1,35 +1,25 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "module": "preserve",
     "importHelpers": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
     "target": "ES2022",
     "lib": [
-      "es2018",
+      "es2022",
       "dom"
     ],
-    "paths": {
-      "ng-ribbon": [
-        "dist/ng-ribbon/ng-ribbon",
-        "dist/ng-ribbon"
-      ],
-      "ng-ribbon-wysiwyg": [
-        "dist/ng-ribbon-wysiwyg/ng-ribbon-wysiwyg",
-        "dist/ng-ribbon-wysiwyg"
-      ]
-    },
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "preserveWhitespaces": false,
-    "fullTemplateTypeCheck": true,
     "strictTemplates": true,
     "strictInjectionParameters": true
   }

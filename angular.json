@@ -15,15 +15,18 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "demo",
+            "outputPath": {
+              "base": "demo",
+              "browser": ""
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "@angular/localize/init"
+            ],
             "tsConfig": "tsconfig.app.json",
             "preserveSymlinks": true,
-            "aot": true,
             "localize": false,
             "assets": [
               "src/favicon.ico",
@@ -52,7 +55,12 @@
             "styles": [
               "src/styles/styles.less"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts",
+            "inlineStyleLanguage": "less",
+            "allowedCommonJsDependencies": [
+              "tinymce"
+            ]
           },
           "configurations": {
             "production": {
@@ -62,16 +70,9 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "baseHref": "/ng-ribbon/demo/",
               "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "commonChunk": false,
-              "buildOptimizer": true,
-              "deployUrl": "/ng-ribbon/demo/",
               "budgets": [
                 {
                   "type": "initial",
@@ -83,49 +84,35 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                },
+                "fonts": false
+              }
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "buildTarget": "ng-ribbon-example:build"
-          },
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "ng-ribbon-example:build:production"
+            },
+            "development": {
+              "buildTarget": "ng-ribbon-example:build:development"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "ng-ribbon-example:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ng-ribbon-example:serve"
           },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ng-ribbon-example:serve:production"
-            }
-          }
+          "defaultConfiguration": "development"
         }
       }
     },
