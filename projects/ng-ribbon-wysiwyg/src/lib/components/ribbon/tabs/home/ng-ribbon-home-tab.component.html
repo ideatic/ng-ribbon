@@ -1,4 +1,4 @@
-<ng-ribbon-tab name="Inicio" i18n-name [active]="true" [order]="1">
+<ng-ribbon-tab name="Inicio" i18n-name="Nombre de la pestaña principal de la cinta de opciones, como en Microsoft Word" [active]="true" [order]="1">
   <ng-container [ngTemplateOutlet]="groupTemplate()" [ngTemplateOutletContext]="{index : 0}"/>
 
   <!-- Fuente -->
@@ -59,8 +59,8 @@
         </div>
         <mat-menu #caseMenu>
           <ng-template matMenuContent>
-            <button mat-menu-item (click)="execute(Commands.mceLowerCase)" i18n>Minúsculas</button>
-            <button mat-menu-item (click)="execute(Commands.mceUpperCase)" i18n>Mayúsculas</button>
+            <button mat-menu-item (click)="execute(Commands.mceLowerCase)" i18n="Opción para convertir el texto seleccionado a minúsculas">Minúsculas</button>
+            <button mat-menu-item (click)="execute(Commands.mceUpperCase)" i18n="Opción para convertir el texto seleccionado a mayúsculas">Mayúsculas</button>
             <button mat-menu-item (click)="execute(Commands.mceTitleCase)" i18n>Título</button>
           </ng-template>
         </mat-menu>
@@ -210,7 +210,7 @@
   <ng-container [ngTemplateOutlet]="groupTemplate()" [ngTemplateOutletContext]="{index : 2}"/>
 
   <!-- Edición -->
-  <ng-ribbon-group name="Edición" i18n-name>
+  <ng-ribbon-group name="Edición" i18n-name="Nombre de un grupo de botones de la cinta de opciones con acciones de edición: copiar, cortar, pegar, buscar, deshacer y rehacer">
     <div class="column">
       <button matRipple class="sm flex-center" (click)="execute(Commands.copy)" [disabled]="isDisabled(Commands.copy)">
         <mat-icon svgIcon="copy" class="sm"></mat-icon>

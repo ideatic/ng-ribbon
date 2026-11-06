@@ -52,23 +52,23 @@ export class SymbolListComponent {
 
   protected readonly symbols = [
     {
-      name: $localize`Letras griegas`,
+      name: $localize`:|Categoría de símbolos para insertar en el documento:Letras griegas`,
       symbols: ["α", "β", "Γ", "γ", "Δ", "δ", "ε", "ζ", "η", "Θ", "θ", "ι", "κ", "Λ", "λ", "μ", "ν", "Ξ", "Xi", "ο", "Π", "π", "ρ", "Σ", "σ", "τ", "υ", "Φ", "φ", "χ", "Ψ", "ψ", "Ω", "ω"]
     },
     {
-      name: $localize`Matemáticas`,
+      name: $localize`:|Categoría de símbolos para insertar en el documento (no la asignatura):Matemáticas`,
       symbols: ["¹", "²", "³", "ⁿ", "‰", "∂", "∫", "∆", "∑", "∏", "√", "∞", "∩", "⅞", "≈", "≠", "≤", "≥", "÷", "½", "⅓", "⅔", "¼", "¾", "⅛", "⅜", "⅝"]
     },
     {
-      name: $localize`Flechas`,
+      name: $localize`:|Categoría de símbolos para insertar en el documento:Flechas`,
       symbols: ["←", "↑", "→", "↓", "↔", "↕"]
     },
     {
-      name: $localize`Varios`,
+      name: $localize`:|Categoría de símbolos para insertar en el documento, símbolos variados (viñetas, notas musicales, ©, ®...):Varios`,
       symbols: ["•", "♪", "♫", "♀", "♂", "♠", "♣", "♥", "♦", "©", "®", "™", "¬"]
     },
     {
-      name: $localize`Divisas`,
+      name: $localize`:|Categoría de símbolos para insertar en el documento, símbolos de monedas:Divisas`,
       symbols: ["€", "$", "£", "¢", "¥", "¤", "₧", "₨", "￦"]
     },
   ]

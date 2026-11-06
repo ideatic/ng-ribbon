@@ -12,7 +12,7 @@ import {MatButton} from "@angular/material/button";
   template: `
     <!-- Listas desordenadas -->
     <app-split-button
-      matTooltip="Lista" i18n-matTooltip class="sm"
+      matTooltip="Lista" i18n-matTooltip="Botón para insertar una lista con viñetas (sin numerar)" class="sm"
       (mainBtnClick)="homeTab.execute(Commands.insertUnorderedList)"
       [dropDownMenu]="listMenu"
       [isActive]="homeTab.isActive(Commands.insertUnorderedList)"
