@@ -47,7 +47,7 @@ export enum EditorCommands {
   /**  Inserta una regla horizontal en el punto de inserción (borra la selección).*/
   insertHorizontalRule = 'insertHorizontalRule',
   /** Inserta una cadena HTML en el punto de inserción (borra la selección). Requiere una cadena HTML válido que se ha pasado como un valor de argumento. (No es compatible con Internet Explorer.)*/
-  insertHTML = 'mceInsertRawHTML',
+  insertHTML = 'mceInsertContent',
   /** Inserta una imagen en el punto de inserción (borra la selección). Requiere la cadena de imagen SRC URI que se pasa como un argumento de valor. El URI debe contener al menos un solo carácter, que puede ser un espacio en blanco. (Internet Explorer creará un enlace con un nulo valor URI.)*/
   insertImage = 'insertImage',
   insertDefinitionList = 'InsertDefinitionList',

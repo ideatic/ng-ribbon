@@ -2,24 +2,30 @@ import {Component, ElementRef, forwardRef, inject, input, LOCALE_ID, OnDestroy, 
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {noop} from "rxjs";
 import {EditorCommands} from "./editor-commands";
+import {cleanHtml} from "./clean-html";
 import {getLocaleDirection} from "@angular/common";
 
 // Import TinyMCE
-import {Editor, RawEditorSettings} from 'tinymce';
+import type {Editor, RawEditorOptions} from 'tinymce';
 import tinymce from 'tinymce/tinymce';
 //import 'tinymce/themes/silver';
+import 'tinymce/models/dom';
 import 'tinymce/icons/default';
 import 'tinymce/plugins/lists';
 import 'tinymce/plugins/link';
 import 'tinymce/plugins/image';
-import 'tinymce/plugins/paste';
 import 'tinymce/plugins/table';
-import 'tinymce/plugins/imagetools';
 import 'tinymce/plugins/quickbars';
 import 'tinymce/plugins/searchreplace';
 import 'tinymce/plugins/code';
 
 declare const ngDevMode: boolean;
+
+/**
+ * Fichero de idioma de TinyMCE 6 (paquete tinymce-i18n, carpeta langs6) de los locales cuyo código no coincide con el
+ * nombre del fichero. TinyMCE 6 no tiene pt_PT: se usa pt_BR
+ */
+const TINYMCE_LANGUAGES: Record<string, string> = {pt: 'pt_BR', fr: 'fr_FR', ko: 'ko_KR'};
 
 @Component({
   selector: 'ng-ribbon-textarea',
@@ -54,7 +60,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
 
   // Bindings
   public readonly editorCSS = input<string>(undefined);
-  public readonly tinyMceSettings = input<RawEditorSettings>(undefined);
+  public readonly tinyMceSettings = input<RawEditorOptions>(undefined);
   public readonly updateUI = output();
 
   // Estado
@@ -79,6 +85,8 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
     // Método setup
     const prevSetup = extraSettings.setup;
     extraSettings.setup = (editor) => {
+      protectFromUnpatchedXss(editor);
+
       editor.on('init', () => {
         if (this._tinyMCE) {
           return;
@@ -128,31 +136,31 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
     };
 
     // Configuraciones
-    const settings: (RawEditorSettings & {
-      contextmenu: boolean,
+    const settings: (RawEditorOptions & {
       quickbars_insert_toolbar: boolean,
       quickbars_selection_toolbar: string
     }) = {
       target: this._host.nativeElement.appendChild(document.createElement('textarea')),
       base_url: '/assets/ribbon/vendor/tinymce',
-      language: (this._locale == 'pt' ? 'pt_PT' : this._locale).replace('-', '_'),
+      language: TINYMCE_LANGUAGES[this._locale] ?? this._locale.replace('-', '_'),
       directionality: getLocaleDirection(this._locale),
       content_style: this.editorCSS(),
       browser_spellcheck: true,
       height: '100%',
       width: '100%',
-      contextmenu: false as any, // Usar menú del navegador
+      contextmenu: false, // Usar menú del navegador
       custom_ui_selector: 'ng-ribbon', // Evitar que pierda la selección al seleccionar este elemento
-      plugins: 'lists link image table paste imagetools quickbars searchreplace code',
+      plugins: 'lists link image table quickbars searchreplace code',
       menubar: false,
       statusbar: false,
       branding: false,
       paste_data_images: true,
       toolbar: false,
-      imagetools_cors_hosts: [window.location.hostname],
+      // Convierte <object> y <embed> en <img>, <video>, <audio> o <iframe> (GHSA-5359-pvf2-pw78; por defecto desde TinyMCE 7)
+      convert_unsafe_embeds: true,
       // Tooltips contextuales
       quickbars_insert_toolbar: false, // No mostrar barra contextual en nuevas líneas
-      quickbars_selection_toolbar: 'bold italic underline | formatselect | backcolor forecolor',
+      quickbars_selection_toolbar: 'bold italic underline | blocks | backcolor forecolor',
       ...extraSettings
     };
 
@@ -194,6 +202,10 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
 
   public queryValue(command: EditorCommands): string {
     this._uiState();
+    if (command == EditorCommands.formatBlock) {
+      // TinyMCE 6 ya no pregunta al navegador por el bloque actual: se busca con los formatos de bloque del editor
+      return this._tinyMCE?.formatter.closest(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre', 'div', 'address', 'blockquote']) ?? '';
+    }
     return this._tinyMCE?.queryCommandValue(command) as string;
   }
 
@@ -266,7 +278,7 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
     this._uiState.update(version => version + 1);
 
     if (this._tinyMCE) {
-      this._tinyMCE.setMode(isDisabled ? 'readonly' : 'design');
+      this._tinyMCE.mode.set(isDisabled ? 'readonly' : 'design');
     }
   }
 
@@ -280,4 +292,42 @@ export class NgRibbonTextAreaComponent implements OnInit, OnDestroy, ControlValu
   public ngOnDestroy() {
     tinymce.remove(this._tinyMCE);
   }
+}
+
+/**
+ * Protege el editor de fallos XSS de TinyMCE 6.8.x que solo se corrigen en TinyMCE 7.x, una versión con licencia GPL.
+ * El contenido puede venir de otra persona (documentos compartidos o buscados), así que se limpia antes de cargarlo
+ */
+function protectFromUnpatchedXss(editor: Editor) {
+  editor.on('PreInit', () => {
+    // GHSA-q742-qvgc-gc2f: un data-mce-href, data-mce-src o data-mce-style del contenido sustituye al atributo real al
+    // serializar, sin validar la URL. Se quitan al analizar el HTML, igual que hace TinyMCE 7.9.3
+    editor.parser.addAttributeFilter('data-mce-src,data-mce-href,data-mce-style', (nodes, name) => {
+      nodes.forEach(node => node.attr(name, null));
+    });
+
+    // GHSA-mh5m-5hw4-5c69: con elementos <svg> anidados, el sanitizador cree que sigue dentro de un SVG y deja todos los
+    // atributos (por ejemplo onerror) en los elementos HTML que vienen detrás. Se quitan los <svg> antes de que TinyMCE
+    // analice el contenido, porque el fallo está en el propio análisis. Todo el HTML que entra en el editor (cargar,
+    // insertar, pegar), con eventos o sin ellos, pasa por este analizador
+    const parse = editor.parser.parse.bind(editor.parser);
+    editor.parser.parse = (html, args) => parse(removeSvgElements(html), args);
+  });
+}
+
+/**
+ * Quita todos los elementos <svg> del HTML. Un documento de chuletas no los necesita
+ */
+function removeSvgElements(html: string): string {
+  // Sin la etiqueta en el texto no puede haber ningún elemento <svg>: se evita analizar el HTML en el caso normal
+  if (!/<svg/i.test(html)) {
+    return html;
+  }
+
+  // Se analiza igual que TinyMCE, dentro de un body
+  return cleanHtml(html, true, document => {
+    const svgElements = document.querySelectorAll('svg');
+    svgElements.forEach(svg => svg.remove());
+    return svgElements.length > 0;
+  });
 }

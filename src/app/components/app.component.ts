@@ -5,7 +5,7 @@ import {ComponentPortal} from "@angular/cdk/portal";
 import {FileMenuComponent} from "./file-menu.component";
 import {Title} from "@angular/platform-browser";
 import {environment} from "../../environments/environment";
-import {RawEditorSettings} from "tinymce";
+import type {RawEditorOptions} from "tinymce";
 import {NgRibbonWysiwygComponent} from '../../../projects/ng-ribbon-wysiwyg/src/lib/components/ribbon/ng-ribbon-wysiwyg.component';
 import {NgRibbonTextAreaComponent} from '../../../projects/ng-ribbon-wysiwyg/src/lib/components/textarea/ng-ribbon-textarea.component';
 import {FormsModule} from '@angular/forms';
@@ -125,7 +125,7 @@ export class AppComponent implements OnInit {
               },
               {
                 "glob": "**/*",
-                "input": "./node_modules/tinymce-i18n/langs5",
+                "input": "./node_modules/tinymce-i18n/langs6",
                 "output": "./assets/ribbon/vendor/tinymce/langs"
               },
               {
@@ -149,7 +149,7 @@ export class AppComponent implements OnInit {
     onMainTabActive: (element) => this._showFileMenu(element)
   });
 
-  public tinyMceSettings: RawEditorSettings = {
+  public tinyMceSettings: RawEditorOptions = {
     base_url: environment.assetsURL + '/ribbon/vendor/tinymce'
   };
 

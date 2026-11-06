@@ -18,15 +18,14 @@
     "@angular/platform-browser": "^22.2.4",
     "ngx-color": "^10.0.0",
     "rxjs": "~7.8.2",
-    "tinymce": "^5.10.9",
-    "tinymce-i18n": "^20.4.4",
+    "tinymce": "^6.8.6",
+    "tinymce-i18n": "^26.11.2",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular/build": "^22.2.6",
     "@angular/cli": "^22.2.6",
     "@angular/compiler-cli": "^22.2.4",
-    "@types/tinymce": "^4.6.0",
     "less": "^4.2.0",
     "typescript": "^6.0.3"
   },

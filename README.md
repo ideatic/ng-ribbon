@@ -1,6 +1,6 @@
 # NgRibbon & NgRibbon WYSIWYG
 
-A Microsoft Office-like ribbon toolbar for Angular, plus a rich text editor (TinyMCE 5) with a ready-made ribbon.
+A Microsoft Office-like ribbon toolbar for Angular, plus a rich text editor (TinyMCE 6) with a ready-made ribbon.
 
 **[Live demo](https://ideatic.github.io/ng-ribbon/)**
 
@@ -17,7 +17,7 @@ The [`src/`](src) folder is the demo app.
 
 - Angular 22, Angular Material and CDK 22
 - `@angular/localize`
-- For `ng-ribbon-wysiwyg`: `tinymce` 5.10, `tinymce-i18n` and `ngx-color` 10
+- For `ng-ribbon-wysiwyg`: `tinymce` 6.8, `tinymce-i18n` and `ngx-color` 10
 
 All components are standalone and use signals. They work with or without zone.js.
 
@@ -32,7 +32,7 @@ git submodule add https://github.com/ideatic/ng-ribbon libs/ng-ribbon
 Install the dependencies of your app:
 
 ```bash
-npm install @angular/material @angular/cdk @angular/localize tinymce@^5.10 tinymce-i18n ngx-color
+npm install @angular/material @angular/cdk @angular/localize tinymce@^6.8 tinymce-i18n ngx-color
 ```
 
 Load `@angular/localize/init` in the `polyfills` of your `angular.json`. Then copy the TinyMCE files and the ribbon images to your assets:
@@ -51,7 +51,7 @@ Load `@angular/localize/init` in the `polyfills` of your `angular.json`. Then co
   },
   {
     "glob": "**/*",
-    "input": "./node_modules/tinymce-i18n/langs5",
+    "input": "./node_modules/tinymce-i18n/langs6",
     "output": "./assets/ribbon/vendor/tinymce/langs"
   },
   {
@@ -62,7 +62,7 @@ Load `@angular/localize/init` in the `polyfills` of your `angular.json`. Then co
 ]
 ```
 
-The TinyMCE plugins and icons are bundled with the code, so you do not copy them.
+The TinyMCE model, plugins and icons are bundled with the code, so you do not copy them.
 
 If you serve the assets from another URL, set `assetsURL` in the ribbon settings and `base_url` in `tinyMceSettings` (see the example below).
 
