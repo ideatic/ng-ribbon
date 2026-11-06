@@ -49,7 +49,7 @@ export class NgRibbonComponent {
   public readonly settings = input(new NgRibbonSettings());
   public readonly tabSelected = output<NgRibbonTabComponent>();
 
-  // Estado
+  // State
   public contexts: NgRibbonContextComponent[] = [];
 
   public selectedTab: NgRibbonTabComponent;
@@ -67,7 +67,7 @@ export class NgRibbonComponent {
 
   public addContext(context: NgRibbonContextComponent) {
     this.contexts.push(context);
-    // Sin zone.js, un contexto añadido después del primer render (p. ej. dentro de un @if) no se pinta sin esto
+    // Without zone.js, a context added after the first render (e.g. inside an @if) is not painted without this
     this._cdr.markForCheck();
 
     if (this.contexts.length === 1 && context.tabs.length) {

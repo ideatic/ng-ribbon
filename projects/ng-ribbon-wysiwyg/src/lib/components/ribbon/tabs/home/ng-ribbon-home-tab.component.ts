@@ -30,16 +30,16 @@ export class NgRibbonHomeTabComponent implements  OnDestroy{
   // Bindings
   public readonly groupTemplate = input<TemplateRef<{ index: number }>>();
 
-  // Estado
+  // State
   protected backColor = 'yellow';
   protected foreColor = 'red';
   private _updateUiSubscription: OutputRefSubscription;
 
-  // Importar tipos
+  // Import types
   protected readonly Commands = EditorCommands;
 
   constructor() {
-    // Actualizar estado de los botones cuando cambia el documento
+    // Update the state of the buttons when the document changes
     effect(() => {
       if (this.ribbon.editor()) {
         this._updateUiSubscription?.unsubscribe();

@@ -26,24 +26,24 @@ import {NgRibbonInsertTabComponent} from "./tabs/ng-ribbon-insert-tab.component"
   template: `
     <ng-ribbon [settings]="settings()">
       <ng-ribbon-context #mainContext>
-        <!-- Cabecera del ribbon -->
+        <!-- Ribbon header -->
         <ng-template #header>
           @if (settings().useContexts) {
             <ng-container [ngTemplateOutlet]="mainContextHeader()"/>
           }
         </ng-template>
 
-        <!-- Inicio -->
+        <!-- Home -->
         @if (settings().showHomeTab && editor()) {
           <ng-ribbon-home-tab [groupTemplate]="homeGroupTemplate()"/>
         }
 
-        <!-- Insertar -->
+        <!-- Insert -->
         @if (settings().showInsertTab) {
           <ng-ribbon-insert-tab/>
         }
 
-        <!-- Otras pestañas -->
+        <!-- Other tabs -->
         <ng-content/>
       </ng-ribbon-context>
     </ng-ribbon>
@@ -86,7 +86,7 @@ interface PortalConfig<T extends NgRibbonWysiwygContext> {
 
    public activeContexts: PortalConfig<any>[] = [];
    private _defineActiveContexts() {
-     // Elegir contextos activos
+     // Choose the active contexts
     const contexts = [];
      let node = this.editor.activeElement;
      while (node) {
@@ -108,7 +108,7 @@ interface PortalConfig<T extends NgRibbonWysiwygContext> {
        node = node.parentElement;
      }
 
-     // Configurar contextos (crearlos si no existen, o actualizarlos si ya existen)
+     // Configure contexts (create them if they do not exist, or update them if they do)
      const activeContexts = [];
      for (const context of contexts) {
        let portal: PortalConfig<NgRibbonWysiwygContext> = this.activeContexts.find(c => c.type == context.type);

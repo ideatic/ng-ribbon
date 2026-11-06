@@ -20,12 +20,12 @@ export class IconsService {
     const localeDirection = getLocaleDirection(this._locale);
 
     Object.keys(this.icons).forEach(iconName => {
-      // Ajustar  iconos RTL
+      // Adjust RTL icons
       if (localeDirection == 'rtl' && this.icons[`${iconName}-rtl`]) {
         iconName = `${iconName}-rtl`;
       }
 
-      // Registrar icono
+      // Register icon
       this._iconRegistry.addSvgIconLiteral(iconName, this._sanitizer.bypassSecurityTrustHtml(this.icons[iconName]))
     });
 
@@ -57,7 +57,7 @@ export class IconsService {
   };
 
 
-  // Obtenidos de tinymce.js
+  // Taken from tinymce.js
   public readonly icons = {
     //   'accessibility-check': '<svg width="24" height="24"><path d="M12 2a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2c0-1.1.9-2 2-2zm8 7h-5v12c0 .6-.4 1-1 1a1 1 0 0 1-1-1v-5c0-.6-.4-1-1-1a1 1 0 0 0-1 1v5c0 .6-.4 1-1 1a1 1 0 0 1-1-1V9H4a1 1 0 1 1 0-2h16c.6 0 1 .4 1 1s-.4 1-1 1z" fill-rule="nonzero"/></svg>',
     // 'action-next': '<svg width="24" height="24"><path fill-rule="nonzero" d="M5.7 7.3a1 1 0 0 0-1.4 1.4l7.7 7.7 7.7-7.7a1 1 0 1 0-1.4-1.4L12 13.6 5.7 7.3z"/></svg>',

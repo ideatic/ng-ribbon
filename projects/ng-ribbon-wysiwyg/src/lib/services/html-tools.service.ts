@@ -17,19 +17,19 @@ export class HtmlToolsService {
   }
 
   /*public highlight(html: string) {
-    // Saltos de línea antes de <p> y <div>
+    // Line breaks before <p> and <div>
     html = html.replace(new RegExp("<(p|div|h1|h2|h3|h4|h5|h6|ul|li|table)>", 'g'), "\n$&");
 
-    // Escapar identidades HTML
+    // Escape HTML entities
     html = this.escape(html);
 
-    // Nombre de los tags
+    // Tag names
     html = html.replace(new RegExp("(&lt;/|&lt;)(\\w+)", 'g'), "$1<span style='color:#A31515'>$2</span>");
 
-    // Atributos
+    // Attributes
     html = html.replace(new RegExp("(\\w+)(=&quot;.*?&quot;)", 'g'), "<span style='color:red'>$1</span><span style='color:blue'>$2</span>");
 
-    // Simbolos de inicio y cierre de etiquetas (</ /> < >)
+    // Opening and closing tag symbols (</ /> < >)
     html == html.replace(new RegExp("&lt;/|/&gt;|&lt;|&gt;", 'g'), "<span style='color:blue'>$0</span>");
 
     return '<pre style="white-space: pre-wrap">' + html + '</pre>';

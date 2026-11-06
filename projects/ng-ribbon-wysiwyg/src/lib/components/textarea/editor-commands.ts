@@ -1,95 +1,95 @@
 // https://www.tiny.cloud/docs/advanced/editor-command-identifiers/
 
 
-// Obtenido de https://developer.mozilla.org/es/docs/Web/API/Document/execCommand utilizando el comando
+// Taken from https://developer.mozilla.org/es/docs/Web/API/Document/execCommand using the command
 // Array.from($0.querySelectorAll('dt')).map(n=>"/** "+n.nextElementSibling.innerText+"*/\n"+n.innerText+"='"+n.innerText+"'").join(",\n")
 
 
 export enum EditorCommands {
-  /**  Cambia el color de fondo del documento. En el modo styleWithCss, afecta el color de fondo del bloque que contiene. Esto requiere una cadena con el valor del color de fondo que se pasa como un valor de argumento. (Internet Explorer utiliza esta opción para definir el color de fondo del texto.)*/
+  /** Changes the background color of the document. In styleWithCss mode, it affects the background color of the containing block. This requires a string with the background color value, passed as an argument value. (Internet Explorer uses this option to set the text background color.)*/
   backColor = 'HiliteColor',
-  /** Pone las negritas o las quita para la selección o en el punto de inserción. (Internet Explorer utiliza la etiqueta STRONG en lugar de B.)*/
+  /** Sets or removes bold for the selection or at the insertion point. (Internet Explorer uses the STRONG tag instead of B.)*/
   bold = 'bold',
-  /** Hace que el documento de contenido, ya sea de sólo lectura o editable. Esto requiere un booleano verdadero / falso que se pasa como un valor de argumento. (No es compatible con Internet Explorer.)*/
+  /** Makes the content document either read-only or editable. This requires a true/false boolean passed as an argument value. (Not supported by Internet Explorer.)*/
   contentReadOnly = 'contentReadOnly',
-  /** Copia la selección actual en el portapapeles. Capacidad del Portapapeles debe estar habilitado en el archivo de preferencias user.js. Vea*/
+  /** Copies the current selection to the clipboard. The clipboard capability must be enabled in the user.js preferences file. See*/
   copy = 'copy',
-  /** Corta la selección y lo copia en el portapapeles actual. Capacidad del Portapapeles debe estar habilitado en el archivo de preferencias user.js. Vea*/
+  /** Cuts the selection and copies it to the clipboard. The clipboard capability must be enabled in the user.js preferences file. See*/
   cut = 'cut',
-  /** Añade una etiqueta SMALL alrededor de la selección o en el punto de inserción. (No es compatible con Internet Explorer.)*/
+  /** Adds a SMALL tag around the selection or at the insertion point. (Not supported by Internet Explorer.)*/
   decreaseFontSize = 'decreaseFontSize',
-  /** Elimina la selección actual.*/
+  /** Deletes the current selection.*/
   delete = 'delete',
-  /** Activa o desactiva la fila de la tabla y los controles de inserción y supresión de columna. (No es compatible con Internet Explorer.)*/
+  /** Enables or disables the table row and column insertion and deletion controls. (Not supported by Internet Explorer.)*/
   enableInlineTableEditing = 'enableInlineTableEditing',
-  /** Activa o desactiva los controladores de tamaño en imágenes y otros objetos de tamaño variable. (No es compatible con Internet Explorer.)*/
+  /** Enables or disables the resize handles on images and other resizable objects. (Not supported by Internet Explorer.)*/
   enableObjectResizing = 'enableObjectResizing',
-  /** Cambia el nombre de la fuente para la selección o en el punto de inserción. Esto requiere una cadena de nombre de la fuente ("Arial", por ejemplo) que se pasa como un valor de argumento.*/
+  /** Changes the font name for the selection or at the insertion point. This requires a font name string ("Arial", for example) passed as an argument value.*/
   fontName = 'fontName',
-  /** Cambia el tamaño de fuente para la selección o en el punto de inserción. Esto requiere un tamaño de fuente HTML (1-7) que se pasa como un valor de argumento.*/
+  /** Changes the font size for the selection or at the insertion point. This requires an HTML font size (1-7) passed as an argument value.*/
   fontSize = 'fontSize',
-  /** Cambia un color de fuente para la selección o en el punto de inserción. Esto requiere una cadena de valor de color que se pasa como un valor de argumento.*/
+  /** Changes the font color for the selection or at the insertion point. This requires a color value string passed as an argument value.*/
   foreColor = 'foreColor',
-  /** Añade una etiqueta HTML de estilo bloque alrededor de la línea que contiene la selección actual, reemplazando el elemento de bloque que contiene la línea si existe (en Firefox, BLOCKQUOTE es la excepción - que envolverá cualquier elemento de bloque que contiene). Requiere una cadena de etiqueta-nombre que se pasa como un argumento de valor. Prácticamente todas las etiquetas de estilo bloque se pueden utilizar (por ejemplo. "H1", "P", "DL", "BLOCKQUOTE"). (Internet Explorer sólo admite etiquetas de título H1 - H6, dirección y PRE, que también debe incluir los delimitadores de etiquetas <>, como "<H1>".)*/
+  /** Adds a block-style HTML tag around the line containing the current selection, replacing the block element containing the line if there is one (in Firefox, BLOCKQUOTE is the exception - it will wrap any containing block element). Requires a tag name string passed as an argument value. Virtually all block-style tags can be used (for example "H1", "P", "DL", "BLOCKQUOTE"). (Internet Explorer only supports the heading tags H1 - H6, address and PRE, which must also include the tag delimiters <>, such as "<H1>".)*/
   formatBlock = 'formatBlock',
-  /** Elimina el character delante de la posición del cursor cursor.  Es lo mismo que pulsar la tecla suprimir.*/
+  /** Deletes the character in front of the cursor position. It is the same as pressing the delete key.*/
   forwardDelete = 'forwardDelete',
-  /** Añade una etiqueta de encabezado en torno a una selección, o la línea en el punto de inserción. Requiere la cadena de nombre de etiqueta que se pasa como un valor de argumento (es decir, "H1", "H6"). (No es compatible con Internet Explorer y Safari.)*/
+  /** Adds a heading tag around a selection, or the line at the insertion point. Requires the tag name string passed as an argument value (that is, "H1", "H6"). (Not supported by Internet Explorer and Safari.)*/
   heading = 'heading',
-  /** Cambia el color de fondo para la selección o el punto de inserción. Requiere una cadena de valores de color que se pasa como un valor de argumento. UseCSS debe estar encendido para que esto funcione. (No es compatible con Internet Explorer.)*/
+  /** Changes the background color for the selection or the insertion point. Requires a color value string passed as an argument value. UseCSS must be on for this to work. (Not supported by Internet Explorer.)*/
   hiliteColor = 'HiliteColor',
-  /** Añade una etiqueta BIG alrededor de la selección o en el punto de inserción. (No es compatible con Internet Explorer.)*/
+  /** Adds a BIG tag around the selection or at the insertion point. (Not supported by Internet Explorer.)*/
   increaseFontSize = 'increaseFontSize',
-  /** Indenta la línea que contiene el punto de selección o inserción. En Firefox, si la selección abarca varias líneas en los diferentes niveles de indentación serán indentadas sólo las líneas menos indentadas en la selección.*/
+  /** Indents the line containing the selection or insertion point. In Firefox, if the selection spans several lines at different indentation levels, only the least indented lines in the selection will be indented.*/
   indent = 'indent',
-  /** Controla si la tecla Intro inserta una etiqueta br o divide el elemento de bloque actual en dos. (No es compatible con Internet Explorer.)*/
+  /** Controls whether the Enter key inserts a br tag or splits the current block element in two. (Not supported by Internet Explorer.)*/
   insertBrOnReturn = 'insertBrOnReturn',
-  /**  Inserta una regla horizontal en el punto de inserción (borra la selección).*/
+  /** Inserts a horizontal rule at the insertion point (deletes the selection).*/
   insertHorizontalRule = 'insertHorizontalRule',
-  /** Inserta una cadena HTML en el punto de inserción (borra la selección). Requiere una cadena HTML válido que se ha pasado como un valor de argumento. (No es compatible con Internet Explorer.)*/
+  /** Inserts an HTML string at the insertion point (deletes the selection). Requires a valid HTML string passed as an argument value. (Not supported by Internet Explorer.)*/
   insertHTML = 'mceInsertContent',
-  /** Inserta una imagen en el punto de inserción (borra la selección). Requiere la cadena de imagen SRC URI que se pasa como un argumento de valor. El URI debe contener al menos un solo carácter, que puede ser un espacio en blanco. (Internet Explorer creará un enlace con un nulo valor URI.)*/
+  /** Inserts an image at the insertion point (deletes the selection). Requires the image SRC URI string passed as an argument value. The URI must contain at least a single character, which can be a blank space. (Internet Explorer will create a link with a null URI value.)*/
   insertImage = 'insertImage',
   insertDefinitionList = 'InsertDefinitionList',
-  /** Crea una lista ordenada con números para la selección o en el punto de inserción.*/
+  /** Creates a numbered ordered list for the selection or at the insertion point.*/
   insertOrderedList = 'insertOrderedList',
-  /** Crea una lista desordenada con viñetas para la selección o en el punto de inserción.*/
+  /** Creates a bulleted unordered list for the selection or at the insertion point.*/
   insertUnorderedList = 'insertUnorderedList',
-  /**   Inserta un párrafo en torno a la selección o la línea actual. (Internet Explorer inserta un párrafo en el punto de inserción y elimina la selección.)*/
+  /** Inserts a paragraph around the selection or the current line. (Internet Explorer inserts a paragraph at the insertion point and deletes the selection.)*/
   insertParagraph = 'insertParagraph',
-  /** Inserta el texto plano expedido en el punto de inserción (borra la selección).*/
+  /** Inserts the supplied plain text at the insertion point (deletes the selection).*/
   insertText = 'insertText',
-  /** Alterna cursiva para la selección o el punto de inserción. (Internet Explorer utiliza la etiqueta de EM en lugar de I.)*/
+  /** Toggles italic for the selection or the insertion point. (Internet Explorer uses the EM tag instead of I.)*/
   italic = 'italic',
-  /**  Centra el punto de selección o inserción.*/
+  /** Centers the selection or insertion point.*/
   justifyCenter = 'justifyCenter',
-  /** Justifica el punto de selección o inserción.*/
+  /** Justifies the selection or insertion point.*/
   justifyFull = 'justifyFull',
-  /** Justifica la selección o inserción punto a la izquierda.*/
+  /** Aligns the selection or insertion point to the left.*/
   justifyLeft = 'justifyLeft',
-  /** Justifica la selección o el punto de inserción a la derecha.*/
+  /** Aligns the selection or insertion point to the right.*/
   justifyRight = 'justifyRight',
-  /** Anula la sangría de la línea que contiene la selección o el punto de inserción.*/
+  /** Outdents the line containing the selection or the insertion point.*/
   outdent = 'outdent',
-  /** Pega el contenido del portapapeles en el punto de inserción (reemplaza la selección actual). Capacidad del Portapapeles debe estar habilitado en el archivo de preferencias user.js. Ver*/
+  /** Pastes the clipboard contents at the insertion point (replaces the current selection). The clipboard capability must be enabled in the user.js preferences file. See*/
   paste = 'paste',
-  /** Rehace el anterior comando deshecho.*/
+  /** Redoes the previously undone command.*/
   redo = 'Redo',
-  /** Quita todo el formato de la selección actual.*/
+  /** Removes all formatting from the current selection.*/
   removeFormat = 'removeFormat',
-  /** Selecciona todo el contenido de la región editable.*/
+  /** Selects all the content of the editable region.*/
   selectAll = 'selectAll',
-  /** Alterna tachado para la selección o el punto de inserción.*/
+  /** Toggles strikethrough for the selection or the insertion point.*/
   strikeThrough = 'strikeThrough',
-  /** Alterna subíndice para la selección o el punto de inserción.*/
+  /** Toggles subscript for the selection or the insertion point.*/
   subscript = 'subscript',
-  /** Alterna exponente para la selección o el punto de inserción.*/
+  /** Toggles superscript for the selection or the insertion point.*/
   superscript = 'superscript',
-  /** Alterna subrayado para la selección o el punto de inserción.*/
+  /** Toggles underline for the selection or the insertion point.*/
   underline = 'underline',
-  /** Deshace el último comando ejecutado.*/
+  /** Undoes the last executed command.*/
   undo = 'Undo',
-  /**  Elimina la etiqueta de ancla de un enlace ancla seleccionado.*/
+  /** Removes the anchor tag from a selected anchor link.*/
   unlink = 'unlink',
 
   // TinyMCE
@@ -98,6 +98,6 @@ export enum EditorCommands {
   mceTitleCase = 'mceTitleCase',
   SearchReplace = 'SearchReplace',
   codeEditor = 'mceCodeEditor',
-  /** Crea un vínculo de anclaje a partir de la selección, sólo si hay una selección. Esto requiere la cadena HREF URI que se pasa como un argumento de valor. El URI debe contener al menos un solo carácter, el cual puede ser un espacio en blanco. (Internet Explorer creará un enlace con un nulo valor URI.)*/
+  /** Creates an anchor link from the selection, only if there is a selection. This requires the HREF URI string passed as an argument value. The URI must contain at least a single character, which can be a blank space. (Internet Explorer will create a link with a null URI value.)*/
   createLink = 'mceLink',
 }

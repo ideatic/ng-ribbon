@@ -10,7 +10,7 @@ import {MatButton} from "@angular/material/button";
   selector: 'app-list-buttons',
   imports: [SplitButtonComponent, MatTooltip, MatIcon, MatButton],
   template: `
-    <!-- Listas desordenadas -->
+    <!-- Unordered lists -->
     <app-split-button
       matTooltip="Lista" i18n-matTooltip="Botón para insertar una lista con viñetas (sin numerar)" class="sm"
       (mainBtnClick)="homeTab.execute(Commands.insertUnorderedList)"
@@ -37,7 +37,7 @@ import {MatButton} from "@angular/material/button";
     </app-split-button>
 
 
-    <!-- Listas ordenadas -->
+    <!-- Ordered lists -->
     <app-split-button
       matTooltip="Lista ordenada" i18n-matTooltip class="sm"
       (mainBtnClick)="homeTab.execute(Commands.insertOrderedList)"
@@ -102,6 +102,6 @@ import {MatButton} from "@angular/material/button";
 export class ListButtonsComponent {
   protected readonly homeTab = inject(NgRibbonHomeTabComponent);
 
-  // Importar tipos
+  // Import types
   protected readonly Commands = EditorCommands;
 }

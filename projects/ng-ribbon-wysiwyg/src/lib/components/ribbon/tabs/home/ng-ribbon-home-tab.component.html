@@ -1,7 +1,7 @@
 <ng-ribbon-tab name="Inicio" i18n-name="Nombre de la pestaña principal de la cinta de opciones, como en Microsoft Word" [active]="true" [order]="1">
   <ng-container [ngTemplateOutlet]="groupTemplate()" [ngTemplateOutletContext]="{index : 0}"/>
 
-  <!-- Fuente -->
+  <!-- Font -->
   <ng-ribbon-group name="Fuente" i18n-name="Referido a la tipografía de una letra" class="column">
     <div class="row">
       <input type="text"
@@ -17,7 +17,7 @@
         }
       </mat-autocomplete>
 
-      <!-- Tamaño de fuente -->
+      <!-- Font size -->
       <input type="text"
              [(ngModel)]="ribbon.editor().fontSize"
              matTooltip="Tamaño de la fuente" i18n-matTooltip
@@ -44,14 +44,14 @@
 
       <mat-divider [vertical]="true"/>
 
-      <!-- Borrar Formato -->
+      <!-- Clear formatting -->
       <button matTooltip="Borrar formato" i18n-matTooltip class="sm" matRipple (click)="execute(Commands.removeFormat)" [disabled]="isDisabled(Commands.removeFormat)">
         <mat-icon svgIcon="remove-formatting"></mat-icon>
       </button>
 
       <mat-divider [vertical]="true"/>
 
-      <!-- Cambiar mayúsculas -->
+      <!-- Change case -->
       <button matRipple [matMenuTriggerFor]="caseMenu" class="sm" [disabled]="isDisabled(Commands.mceLowerCase)">
         <div class="flex-center">
           <mat-icon svgIcon="change-case"></mat-icon>
@@ -68,7 +68,7 @@
     </div>
 
     <div class="row">
-      <!-- Formato -->
+      <!-- Format -->
       <button matTooltip="Negrita" i18n-matTooltip class="sm" matRipple tabindex="-1"
               (click)="execute(Commands.bold)"
               [disabled]="isDisabled(Commands.bold)"
@@ -102,7 +102,7 @@
 
       <mat-divider [vertical]="true"/>
 
-      <!-- Color de fondo -->
+      <!-- Background color -->
       <app-split-button
         matTooltip="Color de fondo" i18n-matTooltip
         (mainBtnClick)="execute(Commands.hiliteColor, backColor)"
@@ -119,7 +119,7 @@
         </ng-template>
       </app-split-button>
 
-      <!-- Color del texto -->
+      <!-- Text color -->
       <app-split-button
         matTooltip="Color de fuente" i18n-matTooltip
         (mainBtnClick)="execute(Commands.foreColor, foreColor)"
@@ -140,7 +140,7 @@
 
   <ng-container [ngTemplateOutlet]="groupTemplate()" [ngTemplateOutletContext]="{index : 1}"/>
 
-  <!-- Párrafo -->
+  <!-- Paragraph -->
   <ng-ribbon-group name="Párrafo" i18n-name class="column">
     <div class="row">
       @let currentBlock = queryValue(Commands.formatBlock);
@@ -164,12 +164,12 @@
 
       <mat-divider [vertical]="true"/>
 
-      <!-- Listas -->
+      <!-- Lists -->
       <app-list-buttons/>
     </div>
 
     <div class="row">
-      <!-- Alineado -->
+      <!-- Alignment -->
       <button matTooltip="Alinear texto a la izquierda" i18n-matTooltip class="sm" matRipple
               (click)="execute(Commands.justifyLeft)"
               [class.active]="isActive(Commands.justifyLeft)"
@@ -197,7 +197,7 @@
 
       <mat-divider [vertical]="true"/>
 
-      <!-- Identación -->
+      <!-- Indentation -->
       <button matTooltip="Disminuir sangría" i18n-matTooltip class="sm" matRipple (click)="execute(Commands.outdent)" [disabled]="isDisabled(Commands.outdent)">
         <mat-icon svgIcon="outdent"></mat-icon>
       </button>
@@ -209,7 +209,7 @@
 
   <ng-container [ngTemplateOutlet]="groupTemplate()" [ngTemplateOutletContext]="{index : 2}"/>
 
-  <!-- Edición -->
+  <!-- Editing -->
   <ng-ribbon-group name="Edición" i18n-name="Nombre de un grupo de botones de la cinta de opciones con acciones de edición: copiar, cortar, pegar, buscar, deshacer y rehacer">
     <div class="column">
       <button matRipple class="sm flex-center" (click)="execute(Commands.copy)" [disabled]="isDisabled(Commands.copy)">
@@ -231,7 +231,7 @@
         <span i18n>Buscar</span>
       </button>
 
-      <!-- Deshacer / rehacer -->
+      <!-- Undo / redo -->
       <div style="white-space: nowrap">
         <button matTooltip="Deshacer" i18n-matTooltip class="sm undo" matRipple (click)="execute(Commands.undo)" [disabled]="isDisabled(Commands.undo)">
           <mat-icon svgIcon="undo"></mat-icon>

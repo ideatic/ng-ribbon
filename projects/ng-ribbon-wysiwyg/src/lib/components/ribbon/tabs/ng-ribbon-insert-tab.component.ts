@@ -67,10 +67,10 @@ export class NgRibbonInsertTabComponent {
   protected readonly ribbon = inject(NgRibbonWysiwygComponent);
   private readonly _domUtils = inject(DomUtilsService);
 
-  // Importar tipos en la plantilla
+  // Import types into the template
   protected readonly Commands = EditorCommands;
 
-  // Estado
+  // State
   protected readonly defaultTable = `<table>
 <thead>
 <tr><th></th><th></th></tr>

@@ -46,7 +46,7 @@ import {NgRibbonContextComponent, NgRibbonGroupComponent, NgRibbonTabComponent} 
         <ng-ribbon-context name="Imagen" i18n-name color="#f0f182" [ribbon]="ribbon.ribbon()">
           <ng-ribbon-tab name="Formato" i18n-name>
             <ng-ribbon-group name="Ajustar" i18n-name>
-              <!-- Posición -->
+              <!-- Position -->
               <button class="xl" mat-button
                       title="Cambia la imagen seleccionada por una diferente" i18n-title>
                 <img src="{{ environment.assetsURL }}/images/picture.png"/>

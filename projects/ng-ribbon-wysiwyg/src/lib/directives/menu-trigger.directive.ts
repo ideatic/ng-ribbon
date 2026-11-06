@@ -12,7 +12,7 @@ export class MenuTriggerDirective implements OnDestroy {
   // Bindings
   public readonly menuTriggerFor = input<TemplateRef<any>>(undefined);
 
-  // Estado
+  // State
   private _overlayRef: OverlayRef;
   private _embeddedViewRef: EmbeddedViewRef<any>;
 

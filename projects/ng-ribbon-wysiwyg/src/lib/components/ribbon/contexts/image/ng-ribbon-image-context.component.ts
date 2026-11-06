@@ -33,7 +33,7 @@ export class NgRibbonImageContextComponent implements NgRibbonWysiwygContext {
   @Input() public ribbon: NgRibbonWysiwygComponent;
   @Input() public element: HTMLImageElement;
 
-  // Importar tipos
+  // Import types
   public readonly ImagePosition = ImagePosition;
 
   public get position(): ImagePosition {

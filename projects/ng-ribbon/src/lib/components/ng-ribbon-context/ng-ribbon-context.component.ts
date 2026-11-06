@@ -18,12 +18,12 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
   // Bindings
   public readonly name = input<string>();
   public readonly color = input<string>();
-  // Ribbon explícito, para contextos proyectados dentro de <ng-ribbon-wysiwyg>, donde la inyección no encuentra el <ng-ribbon> interno
+  // Explicit ribbon, for contexts projected inside <ng-ribbon-wysiwyg>, where injection does not find the inner <ng-ribbon>
   public readonly ribbonInput = input<NgRibbonComponent>(undefined, {alias: 'ribbon'});
 
   public readonly headerTemplate = contentChild<TemplateRef<void>>('header');
 
-  // Estado
+  // State
   public tabs: NgRibbonTabComponent[] = [];
 
   protected get ribbon(): NgRibbonComponent {
@@ -52,7 +52,7 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
     const index = this.tabs.indexOf(tab);
 
     if (index >= 0) {
-      // Seleccionar otra pestaña
+      // Select another tab
       if (tab.active() && this.tabs.length > 1) {
         const newActiveIndex = index === this.tabs.length - 1 ? index - 1 : index + 1;
         this.ribbon.selectTab(this.tabs[newActiveIndex]);
