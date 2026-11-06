@@ -1,4 +1,4 @@
-import {Component, HostListener, input, output} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, inject, input, output} from '@angular/core';
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 import {NgRibbonSettings} from "./ng-ribbon-settings";
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
@@ -42,6 +42,9 @@ import {NgTemplateOutlet} from '@angular/common';
   styleUrl: 'ng-ribbon.component.less'
 })
 export class NgRibbonComponent {
+  // Deps
+  private readonly _cdr = inject(ChangeDetectorRef);
+
   // Bindings
   public readonly settings = input(new NgRibbonSettings());
   public readonly tabSelected = output<NgRibbonTabComponent>();
@@ -64,6 +67,8 @@ export class NgRibbonComponent {
 
   public addContext(context: NgRibbonContextComponent) {
     this.contexts.push(context);
+    // Sin zone.js, un contexto añadido después del primer render (p. ej. dentro de un @if) no se pinta sin esto
+    this._cdr.markForCheck();
 
     if (this.contexts.length === 1 && context.tabs.length) {
       this.selectTab(context.tabs[0]);
@@ -75,6 +80,7 @@ export class NgRibbonComponent {
 
     if (index >= 0) {
       this.contexts.splice(index, 1);
+      this._cdr.markForCheck();
 
       const hasActiveTab = this.contexts.find(context => context.tabs.find(t => t.active()));
       if (!hasActiveTab && this.contexts.length && this.contexts[0].tabs.length) {

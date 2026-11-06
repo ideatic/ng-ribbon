@@ -13,16 +13,26 @@ import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 })
 export class NgRibbonContextComponent implements OnInit, OnDestroy {
   // Deps
-  protected readonly ribbon = inject(NgRibbonComponent);
+  private readonly _parentRibbon = inject(NgRibbonComponent, {optional: true});
 
   // Bindings
   public readonly name = input<string>();
   public readonly color = input<string>();
+  // Ribbon explícito, para contextos proyectados dentro de <ng-ribbon-wysiwyg>, donde la inyección no encuentra el <ng-ribbon> interno
+  public readonly ribbonInput = input<NgRibbonComponent>(undefined, {alias: 'ribbon'});
 
   public readonly headerTemplate = contentChild<TemplateRef<void>>('header');
 
   // Estado
   public tabs: NgRibbonTabComponent[] = [];
+
+  protected get ribbon(): NgRibbonComponent {
+    const ribbon = this.ribbonInput() ?? this._parentRibbon;
+    if (!ribbon) {
+      throw new Error('ng-ribbon-context needs a parent ng-ribbon or a [ribbon] input');
+    }
+    return ribbon;
+  }
 
   public ngOnInit() {
     this.ribbon.addContext(this);
