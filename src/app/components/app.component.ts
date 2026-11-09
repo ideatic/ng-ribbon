@@ -31,11 +31,11 @@ import {NgRibbonContextComponent, NgRibbonGroupComponent, NgRibbonTabComponent} 
         @if (index === 3) {
           <ng-ribbon-group name="Demo">
             <button class="xl animate-pulse" mat-button (click)="mainContextVisible.set(!mainContextVisible())">
-              <img src="{{ environment.assetsURL }}/images/toggle.png"/>
+              <img src="{{ environment.assetsURL }}/images/toggle.svg"/>
               <div i18n>Toggle main context</div>
             </button>
             <button class="xl animate-pulse" mat-button (click)="showImageContext.set(!showImageContext())">
-              <img src="{{ environment.assetsURL }}/images/toggle.png"/>
+              <img src="{{ environment.assetsURL }}/images/toggle.svg"/>
               <div i18n>Toggle image context</div>
             </button>
           </ng-ribbon-group>
@@ -49,7 +49,7 @@ import {NgRibbonContextComponent, NgRibbonGroupComponent, NgRibbonTabComponent} 
               <!-- Position -->
               <button class="xl" mat-button
                       title="Cambia la imagen seleccionada por una diferente" i18n-title>
-                <img src="{{ environment.assetsURL }}/images/picture.png"/>
+                <img src="{{ environment.assetsURL }}/images/picture.svg"/>
                 <div i18n>Reemplazar</div>
               </button>
             </ng-ribbon-group>

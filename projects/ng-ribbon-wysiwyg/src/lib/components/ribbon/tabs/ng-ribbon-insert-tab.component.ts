@@ -30,27 +30,27 @@ import {MatRipple} from "@angular/material/core";
         </button>
         <button class="xl" matRipple (click)="insertImage()" [disabled]="ribbon.isDisabled(Commands.insertHTML)"
                 matTooltip="Incluye una imagen al documento desde un archivo local." i18n-matTooltip>
-          <img src="{{ ribbon.settings().assetsURL }}/images/picture.png"/>
+          <img src="{{ ribbon.settings().assetsURL }}/images/picture.svg"/>
           <div i18n>Imagen</div>
         </button>
         <button class="xl" matRipple (click)="ribbon.execute(Commands.createLink)" [disabled]="ribbon.isDisabled(Commands.createLink)"
                 matTooltip="Crea un vínculo en el documento para el acceso rápido a páginas web y otros archivos." i18n-matTooltip>
-          <img src="{{ ribbon.settings().assetsURL }}/images/link.png"/>
+          <img src="{{ ribbon.settings().assetsURL }}/images/link.svg"/>
           <div i18n>Enlace</div>
         </button>
         <!--  <button class="xl" matRipple (click)="insertChart()"
         matTooltip="Insertar un gráfico donde mostrar y comparar datos usando la API de Google." i18n-matTooltip>
-        <img src="{{ settings.assetsURL }}/images/chart.png"/>
+        <img src="{{ settings.assetsURL }}/images/chart.svg"/>
         <div i18n>Gráfico</div>
       </button> -->
         <button class="xl" matRipple (click)="ribbon.execute(Commands.insertHorizontalRule)" [disabled]="ribbon.isDisabled(Commands.insertHorizontalRule)"
                 matTooltip="Inserta una línea horizontal que separa dos secciones del documento." i18n-matTooltip>
-          <img src="{{ ribbon.settings().assetsURL }}/images/horizontal-line.png"/>
+          <img src="{{ ribbon.settings().assetsURL }}/images/horizontal-line.svg"/>
           <div i18n="Botón para insertar una línea horizontal que separa dos secciones del documento">Separador</div>
         </button>
         <button class="xl" matRipple (click)="ribbon.execute(Commands.insertHTML, defaultQuote)" [disabled]="ribbon.isDisabled(Commands.insertHTML)"
                 matTooltip="Inserta una cita en el documento." i18n-matTooltip>
-          <img src="{{ ribbon.settings().assetsURL }}/images/quote.png"/>
+          <img src="{{ ribbon.settings().assetsURL }}/images/quote.svg"/>
           <div i18n="Referida a una mención, quote en inglés">Cita</div>
         </button>
       </ng-ribbon-group>
