@@ -35,8 +35,8 @@ import {NgRibbonInsertTabComponent} from "./tabs/ng-ribbon-insert-tab.component"
           }
         </ng-template>
 
-        <!-- Home -->
-        @if (settings().showHomeTab && editor()) {
+        <!-- Home (its buttons stay disabled until there is an editor, so the ribbon does not change when the editor loads) -->
+        @if (settings().showHomeTab) {
           <ng-ribbon-home-tab [groupTemplate]="homeGroupTemplate()"/>
         }
 

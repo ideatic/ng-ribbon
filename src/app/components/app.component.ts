@@ -26,7 +26,6 @@ import {NgRibbonContextComponent, NgRibbonGroupComponent, NgRibbonTabComponent} 
         </ng-template>
       }
 
-
       <ng-template #homeGroupTemplate let-index="index">
         @if (index === 3) {
           <ng-ribbon-group name="Demo">

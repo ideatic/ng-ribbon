@@ -5,7 +5,7 @@
   <ng-ribbon-group name="Fuente" i18n-name="Referido a la tipografía de una letra" class="column">
     <div class="row">
       <input type="text"
-             [(ngModel)]="ribbon.editor().fontFamily"
+             [ngModel]="ribbon.editor()?.fontFamily" (ngModelChange)="ribbon.editor().fontFamily = $event"
              matTooltip="Fuente" i18n-matTooltip
              matInput
              style="width: 90px; margin: 0 1px"
@@ -19,7 +19,7 @@
 
       <!-- Font size -->
       <input type="text"
-             [(ngModel)]="ribbon.editor().fontSize"
+             [ngModel]="ribbon.editor()?.fontSize" (ngModelChange)="ribbon.editor().fontSize = $event"
              matTooltip="Tamaño de la fuente" i18n-matTooltip
              matInput
              style="width: 35px"

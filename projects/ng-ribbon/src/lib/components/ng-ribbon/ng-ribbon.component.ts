@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, HostListener, inject, input, output} from '@angular/core';
+import {Component, HostListener, input, output, signal} from '@angular/core';
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 import {NgRibbonSettings} from "./ng-ribbon-settings";
 import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.component";
@@ -8,8 +8,8 @@ import {NgTemplateOutlet} from '@angular/common';
   selector: 'ng-ribbon',
   imports: [NgTemplateOutlet],
   template: `
-    <div class="contexts" [style.border-color]="selectedTab?.context().color() ?? 'var(--ribbon-border-color, #dadbdc)'">
-      @for (context of contexts; track context; let firstContext = $first) {
+    <div class="contexts" [style.border-color]="selectedTab()?.context().color() ?? 'var(--ribbon-border-color, #dadbdc)'">
+      @for (context of contexts(); track context; let firstContext = $first) {
         <div class="context" [style.background-color]="context.color()">
           @if (settings().useContexts) {
             <div class="context-header">
@@ -26,7 +26,7 @@ import {NgTemplateOutlet} from '@angular/common';
                 <a (click)="settings().onMainTabActive(mainTab)">{{ settings().mainTabName }}</a>
               </li>
             }
-            @for (tab of context.tabs; track tab) {
+            @for (tab of context.tabs(); track tab) {
               <li role="tab" [attr.aria-selected]="tab.active()" [class.active]="tab.active()">
                 <a (click)="selectTab(tab)">{{ tab.name() }}</a>
               </li>
@@ -42,23 +42,21 @@ import {NgTemplateOutlet} from '@angular/common';
   styleUrl: 'ng-ribbon.component.less'
 })
 export class NgRibbonComponent {
-  // Deps
-  private readonly _cdr = inject(ChangeDetectorRef);
-
   // Bindings
   public readonly settings = input(new NgRibbonSettings());
   public readonly tabSelected = output<NgRibbonTabComponent>();
 
   // State
-  public contexts: NgRibbonContextComponent[] = [];
+  // Signals: contexts and tabs register themselves after the ribbon is checked, and without zone.js only a signal repaints it
+  public readonly contexts = signal<NgRibbonContextComponent[]>([]);
 
-  public selectedTab: NgRibbonTabComponent;
+  public readonly selectedTab = signal<NgRibbonTabComponent | undefined>(undefined);
 
   public selectTab(tab: NgRibbonTabComponent) {
     // Enable tab
     tab.showed.set(true);
-    this.contexts.forEach(c => c.tabs.forEach(t => t.active.set(t == tab)));
-    this.selectedTab = tab;
+    this.contexts().forEach(c => c.tabs().forEach(t => t.active.set(t == tab)));
+    this.selectedTab.set(tab);
 
     // Fire events
     tab.selected.emit(tab);
@@ -66,25 +64,21 @@ export class NgRibbonComponent {
   }
 
   public addContext(context: NgRibbonContextComponent) {
-    this.contexts.push(context);
-    // Without zone.js, a context added after the first render (e.g. inside an @if) is not painted without this
-    this._cdr.markForCheck();
+    this.contexts.update(contexts => [...contexts, context]);
 
-    if (this.contexts.length === 1 && context.tabs.length) {
-      this.selectTab(context.tabs[0]);
+    if (this.contexts().length === 1 && context.tabs().length) {
+      this.selectTab(context.tabs()[0]);
     }
   }
 
   public removeContext(context: NgRibbonContextComponent) {
-    const index = this.contexts.indexOf(context);
+    if (this.contexts().includes(context)) {
+      this.contexts.update(contexts => contexts.filter(c => c !== context));
 
-    if (index >= 0) {
-      this.contexts.splice(index, 1);
-      this._cdr.markForCheck();
-
-      const hasActiveTab = this.contexts.find(context => context.tabs.find(t => t.active()));
-      if (!hasActiveTab && this.contexts.length && this.contexts[0].tabs.length) {
-        this.selectTab(this.contexts[0].tabs[0]);
+      const contexts = this.contexts();
+      const hasActiveTab = contexts.find(context => context.tabs().find(t => t.active()));
+      if (!hasActiveTab && contexts.length && contexts[0].tabs().length) {
+        this.selectTab(contexts[0].tabs()[0]);
       }
     }
   }
@@ -94,8 +88,8 @@ export class NgRibbonComponent {
     if (this.settings().mouseWheelTabs) {
       if ($event.deltaY > 0) { // Select next tab
         let selectCurrentTab = false;
-        this.contexts.forEach(c => c.tabs.forEach(t => {
-          if (t == this.selectedTab) {
+        this.contexts().forEach(c => c.tabs().forEach(t => {
+          if (t == this.selectedTab()) {
             selectCurrentTab = true;
           } else if (selectCurrentTab) {
             this.selectTab(t);
@@ -105,8 +99,8 @@ export class NgRibbonComponent {
       } else if ($event.deltaY < 0) { // Select previous tab
         let prevTab = null;
         let selectTab = null;
-        this.contexts.forEach(c => c.tabs.forEach(t => {
-          if (t == this.selectedTab) {
+        this.contexts().forEach(c => c.tabs().forEach(t => {
+          if (t == this.selectedTab()) {
             selectTab = prevTab;
           }
           prevTab = t;

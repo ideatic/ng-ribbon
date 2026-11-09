@@ -1,4 +1,4 @@
-import {Component, contentChild, inject, input, OnDestroy, OnInit, TemplateRef} from '@angular/core';
+import {Component, contentChild, inject, input, OnDestroy, OnInit, signal, TemplateRef} from '@angular/core';
 import {NgRibbonComponent} from "../ng-ribbon/ng-ribbon.component";
 import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
 
@@ -24,7 +24,8 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
   public readonly headerTemplate = contentChild<TemplateRef<void>>('header');
 
   // State
-  public tabs: NgRibbonTabComponent[] = [];
+  // Signal: the tab headers of the ribbon repaint when a tab is added or removed after the first render
+  public readonly tabs = signal<NgRibbonTabComponent[]>([]);
 
   protected get ribbon(): NgRibbonComponent {
     const ribbon = this.ribbonInput() ?? this._parentRibbon;
@@ -39,9 +40,7 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
   }
 
   public addTab(tab: NgRibbonTabComponent) {
-    this.tabs.push(tab);
-
-    this.tabs = this.tabs.sort((a, b) => a.order() - b.order());
+    this.tabs.update(tabs => [...tabs, tab].sort((a, b) => a.order() - b.order()));
 
     if (tab.active()) {
       this.ribbon.selectTab(tab);
@@ -49,16 +48,17 @@ export class NgRibbonContextComponent implements OnInit, OnDestroy {
   }
 
   public removeTab(tab: NgRibbonTabComponent) {
-    const index = this.tabs.indexOf(tab);
+    const tabs = this.tabs();
+    const index = tabs.indexOf(tab);
 
     if (index >= 0) {
       // Select another tab
-      if (tab.active() && this.tabs.length > 1) {
-        const newActiveIndex = index === this.tabs.length - 1 ? index - 1 : index + 1;
-        this.ribbon.selectTab(this.tabs[newActiveIndex]);
+      if (tab.active() && tabs.length > 1) {
+        const newActiveIndex = index === tabs.length - 1 ? index - 1 : index + 1;
+        this.ribbon.selectTab(tabs[newActiveIndex]);
       }
 
-      this.tabs.splice(index, 1);
+      this.tabs.update(tabs => tabs.filter(t => t !== tab));
     }
   }
 
