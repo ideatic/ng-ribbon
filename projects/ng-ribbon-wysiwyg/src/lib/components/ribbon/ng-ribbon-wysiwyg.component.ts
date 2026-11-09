@@ -1,28 +1,30 @@
 import {
-  ChangeDetectorRef,
   Component,
+  computed,
   contentChild,
   inject,
   input,
   OnChanges,
-  OutputRefSubscription,
-  SimpleChanges,
   TemplateRef,
+  Type,
   viewChild
 } from '@angular/core';
 import {NgRibbonTextAreaComponent} from "../textarea/ng-ribbon-textarea.component";
+import {NgRibbonWysiwygContext} from "./contexts/ng-ribbon-wysiwyg-context";
 import {EditorCommands} from "../textarea/editor-commands";
 import {NgRibbonComponent} from "../../../../../ng-ribbon/src/lib/components/ng-ribbon/ng-ribbon.component";
 import {NgRibbonWysiwygSettings} from "./ng-ribbon-wysiwyg-settings";
 import {NgRibbonContextComponent} from "../../../../../ng-ribbon/src/lib/components/ng-ribbon-context/ng-ribbon-context.component";
 import {IconsService} from "../../services/icons.service";
-import {NgTemplateOutlet} from '@angular/common';
+import {NgComponentOutlet, NgTemplateOutlet} from '@angular/common';
+import {NgRibbonImageContextComponent} from './contexts/image/ng-ribbon-image-context.component';
+import {NgRibbonTableContextComponent} from './contexts/table/ng-ribbon-table-context.component';
 import {NgRibbonHomeTabComponent} from './tabs/home/ng-ribbon-home-tab.component';
 import {NgRibbonInsertTabComponent} from "./tabs/ng-ribbon-insert-tab.component";
 
 @Component({
   selector: 'ng-ribbon-wysiwyg',
-  imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgRibbonHomeTabComponent, NgRibbonInsertTabComponent],
+  imports: [NgRibbonComponent, NgRibbonContextComponent, NgTemplateOutlet, NgComponentOutlet, NgRibbonHomeTabComponent, NgRibbonInsertTabComponent],
   template: `
     <ng-ribbon [settings]="settings()">
       <ng-ribbon-context #mainContext>
@@ -46,6 +48,11 @@ import {NgRibbonInsertTabComponent} from "./tabs/ng-ribbon-insert-tab.component"
         <!-- Other tabs -->
         <ng-content/>
       </ng-ribbon-context>
+
+      <!-- Contextual tabs (image, table...) of the element selected in the editor -->
+      @for (context of activeContexts(); track context.type) {
+        <ng-container *ngComponentOutlet="context.type; inputs: {ribbon: this, element: context.element}"/>
+      }
     </ng-ribbon>
   `,
   styleUrl: './ng-ribbon-wysiwyg.component.less'
@@ -65,6 +72,27 @@ export class NgRibbonWysiwygComponent {
     inject(IconsService).configure();
   }
 
+  // Contexts of the selected element and its ancestors (an image inside a table activates both)
+  protected readonly activeContexts = computed(() => {
+    const contexts: { type: Type<NgRibbonWysiwygContext>, element: Element }[] = [];
+    // Contextual tabs (image, table...) only when the ribbon uses contexts
+    if (!this.settings().useContexts) {
+      return contexts;
+    }
+
+    for (let node = this.editor()?.activeElement; node; node = node.parentElement) {
+      const tagName = node.tagName.toLowerCase();
+
+      if (tagName == 'img') {
+        contexts.push({type: NgRibbonImageContextComponent, element: node});
+      } else if (tagName == 'table') {
+        contexts.push({type: NgRibbonTableContextComponent, element: node});
+      }
+    }
+
+    return contexts;
+  });
+
   public execute(command: EditorCommands, value?: string) {
     this.editor().execute(command, value);
   }
@@ -73,62 +101,4 @@ export class NgRibbonWysiwygComponent {
     const editor = this.editor();
     return !editor || !editor.isCommandSupported(command);
   }
-
-  /*
-
-interface PortalConfig<T extends NgRibbonWysiwygContext> {
-  type: T,
-  portal: ComponentPortal<T>;
-  configure: (ref: CdkPortalOutletAttachedRef) => void,
-  ref?: ComponentRef<T>
-}
-
-
-   public activeContexts: PortalConfig<any>[] = [];
-   private _defineActiveContexts() {
-     // Choose the active contexts
-    const contexts = [];
-     let node = this.editor.activeElement;
-     while (node) {
-       const currentNode = node;
-       const tagName = ((node as HTMLElement).tagName || '').toLowerCase();
-
-       if (node instanceof HTMLImageElement || tagName == 'img') {
-         contexts.push({
-           type: NgRibbonImageContextComponent,
-           node: currentNode
-         })
-       } else if (node instanceof HTMLTableElement || tagName == 'table') {
-         contexts.push({
-           type: NgRibbonTableContextComponent,
-           node: currentNode
-         })
-       }
-
-       node = node.parentElement;
-     }
-
-     // Configure contexts (create them if they do not exist, or update them if they do)
-     const activeContexts = [];
-     for (const context of contexts) {
-       let portal: PortalConfig<NgRibbonWysiwygContext> = this.activeContexts.find(c => c.type == context.type);
-       if (portal && portal.ref) {
-         portal.ref.instance.editor = this;
-         portal.ref.instance.element = context.node;
-       } else {
-         portal = {
-           type: context.type,
-           portal: new ComponentPortal<any>(context.type),
-           configure: (ref: CdkPortalOutletAttachedRef) => {
-             portal.ref = ref as ComponentRef<any>;
-             portal.ref.instance.editor = this;
-             portal.ref.instance.element = context.node;
-           }
-         }
-       }
-
-       activeContexts.push(portal);
-     }
-     this.activeContexts = activeContexts;
-  }*/
 }

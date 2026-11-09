@@ -59,13 +59,20 @@ export class NgRibbonImageContextComponent implements NgRibbonWysiwygContext {
   public replace() {
     this._domUtils.uploadAsDataURL("image/*")
       .then(
-        (image) => this.element.src = image,
+        (image) => this._transact(() => this.element.src = image),
         noop
       );
   }
 
   public delete() {
-    // this.editor.editor.removeElement(this.element);
+    this._transact(() => this.ribbon.editor().tinyMCE.dom.remove(this.element));
+  }
+
+  // Apply the change inside the editor history so it can be undone and is saved in the document
+  private _transact(change: () => void) {
+    const editor = this.ribbon.editor().tinyMCE;
+    editor.undoManager.transact(change);
+    editor.nodeChanged();
   }
 }
 

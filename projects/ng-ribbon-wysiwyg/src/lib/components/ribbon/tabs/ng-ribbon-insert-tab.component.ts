@@ -6,7 +6,7 @@ import {SymbolListComponent} from "../components/symbol-list.component";
 import {NgRibbonTabComponent} from "../../../../../../ng-ribbon/src/public-api";
 import {noop} from "rxjs";
 import {DomUtilsService} from "../../../services/dom-utils.service";
-import {NgRibbonWysiwygComponent} from "../../../../public-api";
+import {NgRibbonWysiwygComponent} from "../ng-ribbon-wysiwyg.component";
 import {EditorCommands} from "../../textarea/editor-commands";
 import {MatRipple} from "@angular/material/core";
 
